@@ -274,7 +274,8 @@ const HomeProducts = () => {
           product.product_title.toLowerCase().includes(lowerCaseSearchQuery) ||
           product.product_name.toLowerCase().includes(lowerCaseSearchQuery) ||
           product.description?.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.brand?.toLowerCase().includes(lowerCaseSearchQuery)
+          product.brand?.toLowerCase().includes(lowerCaseSearchQuery)||
+          product.client_name?.toLowerCase().includes(lowerCaseSearchQuery)
           // code end by team
       );
 
@@ -380,7 +381,7 @@ const HomeProducts = () => {
     selectedCategory,
     selectedDistance,
   ]);
-
+console.log(products);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -472,13 +473,14 @@ const HomeProducts = () => {
                       </div>
 
                       <div className="product-content d-flex flex-column gap-1 pt-3  px-1">
-                        <div style={{ fontSize: "14px" }}>
-                          {product.category}
+                        <div style={{ fontSize: "14px" ,gap:"2px" ,display:"flex" , justifyContent:"space-between" }}>
+                         <div className="text-sm"> {product.category}</div>
                           {isNewProduct(product.date) && (
                             <span className="ms-4" style={{ color: "#ffc107" }}>
                               New
                             </span>
                           )}
+                          <div>{product.client_name}</div>
                         </div>
                         <a
                           href={`/${product.product_id}`}
