@@ -190,18 +190,20 @@ p, .content, .product-description {
 }
 
 
-
+/* code start by ganesh */
 .catlog-names {
   display: flex;
-  padding-left: 100px;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid red; */
 }
 
 .cat-nav {
-  padding-left: 10px;
+  /* padding-left: 10px; */
   font-size: 12pt;
   /* padding-top: 10px; */
 }
-
+/* end by ganesh */
 /* Styling for the banner */
 /* Base Styles */
 /* Define the keyframe animation for the background color wave effect */
@@ -559,14 +561,14 @@ h2 {
     background-color: #e2e9ad;
   }
 
-
+/* code started by ganesh */
   .cat-nav {
 
-    padding-top: 11px;
+    /* padding-top: 11px; */
     font-size: 8pt;
     /* Reduce font size */
   }
-
+/* code end by ganesh */
   .mobile-search {
     display: flex;
     padding-left: 10px !important;
@@ -1002,17 +1004,17 @@ button:hover {
   .filter-button {
     margin-left: 37rem !important;
   }
-
+/* code by ganesh */
   .catlog-names {
-    padding-left: 0px !important;
+    /* padding-left: 0px !important; */
   }
 }
 
 @media screen and (min-width: 820px) and (max-width: 820px) {
   .catlog {
-    margin-top: 100px !important;
+    /* margin-top: 100px !important; */
   }
-
+/* code end by ganesh */
   .filter-button {
     margin-left: 39rem !important;
   }
@@ -1030,10 +1032,11 @@ button:hover {
 }
 
 @media screen and (min-width: 912px)and (max-width: 912px) {
+  /* code by ganesh */
   .catlog {
-    margin-top: 110px !important;
+    /* margin-top: 110px !important; */
   }
-
+/* code end by ganesh */
   /* .mobile-search {
        margin-left: 158px !important;
      } */
@@ -1056,10 +1059,7 @@ button:hover {
     margin-left: 51rem !important;
   }
 
-  .catlog {
-    margin-top: 70px !important;
-
-  }
+  
 }
 
 /* dropdown arrow */
@@ -1088,18 +1088,56 @@ button:hover {
 }
 
 /* remove distance dropdown in I-pad mini */
+
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
   #distanceDropdownWrapper {
     display: none;
   }
+  /* code started by ganesh */
+  .catlog{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  .inr-catlog{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
+    justify-content: space-between;
+  }
+  .new-catlog{
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content:center;
+  }
+  
 }
 
-@media screen and (min-width: 768px) and (max-width: 1280px) {
+@media screen and (max-width: 768px)  {
   .new-catlog {
     display: none !important;
+
   }
 }
+@media screen and (min-width: 1024px)  {
+  .new-catlog {
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:1rem;
 
+  }
+}
+/* code end by ganesh */
 /* adjust the height of product card img for I-pad */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .product-image img {

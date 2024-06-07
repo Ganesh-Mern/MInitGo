@@ -87,17 +87,30 @@ function AdsCarousel({ products }) {
                       color: "black",
                     }}
                   >
-                    <div className="product-image">
+                    {/* code start by ganesh */}
+                    <div className="product-image" style={{ position: "relative" }}>
                       <img src={product.product_image1} alt="Product 1" />
 
                       <div
-                        className={`offer-tag bg-warning rounded-pill text-center p-1 text-light ${
-                          product.offers === "0" && "invisible"
-                        }`}
-                      >
-                        {product.offers}% Off
+                        className="offer-tag text-center p-1 text-bold mt-2" style={{
+                          position: "absolute",
+                          bottom: "15px",
+                          right: "15px",
+                          fontSize: "0.8rem",
+                          padding: "1rem",
+                          textDecorationColor: "HighlightText",
+                          border: "2px solid",
+                          borderRadius: "50px",
+                          fontWeight: "bold",
+                          backgroundColor: product.offers === "0" ? "" : "#e8d9b7",
+                          opacity: product.offers === "0" ? 0 : 0.5,
+                          
+                      }}>
+                  
+                      {product.offers === "0" ? "No Offer" : `${product.offers}% Off`}
                       </div>
                     </div>
+                    {/* code end by ganesh */}
 
                     <div className="product-content">
                       {product.product_name.length > 15
