@@ -33,6 +33,7 @@ const HomeProducts = () => {
     selectedCategory,
     setSelectedCategory,
     accessoriesCategory,
+    handleSearchInputChange,
     setAccessoriesCategory,
     products,
     selectedPrice,
@@ -121,10 +122,11 @@ const HomeProducts = () => {
 
     return distanceInKm.toFixed(2);
   };
-
+  
   useEffect(() => {
     setAccessoriesCategory("");
     setSelectedCategory("");
+    
 
     // Apply price filtering
     let productsToFilter = products;
@@ -267,9 +269,13 @@ const HomeProducts = () => {
     } else if (lowerCaseSearchQuery.trim() !== "") {
       const filtered = productsToFilter.filter(
         (product) =>
+          // code started by team
           product.category.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.product_tittle.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.product_name.toLowerCase().includes(lowerCaseSearchQuery)
+          product.product_title.toLowerCase().includes(lowerCaseSearchQuery) ||
+          product.product_name.toLowerCase().includes(lowerCaseSearchQuery) ||
+          product.description?.toLowerCase().includes(lowerCaseSearchQuery) ||
+          product.brand?.toLowerCase().includes(lowerCaseSearchQuery)
+          // code end by team
       );
 
       if (filtered.length > 0) {
@@ -445,7 +451,8 @@ const HomeProducts = () => {
                           Live Image
                         </span>
                         <div
-                          className="offer-tag text-center p-1 text-bold mt-2" style={{
+                          className="offer-tag text-center p-1 text-bold mt-2"
+                          style={{
                             position: "absolute",
                             bottom: "15px",
                             right: "15px",
@@ -455,8 +462,10 @@ const HomeProducts = () => {
                             border: "2px solid",
                             borderRadius: "50px",
                             fontWeight: "bold",
-                            backgroundColor: product.offers === "0" ? "" : "#e8d9b7",
-                            opacity: product.offers === "0" ? 0 : 0.5,}}
+                            backgroundColor:
+                              product.offers === "0" ? "" : "#e8d9b7",
+                            opacity: product.offers === "0" ? 0 : 0.5,
+                          }}
                         >
                           {product.offers}% Off
                         </div>
