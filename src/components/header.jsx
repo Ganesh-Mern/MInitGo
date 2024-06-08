@@ -276,7 +276,7 @@ const [weatherData, setWeatherData] = useState(null);
   const phoneNumber = userData ? userData.phoneNumber : null;
 
 
-  function getInitials(fullName) {
+  function getInitials(fullName) {  
     return fullName
       .split(" ")
       .map((name) => name.charAt(0))
@@ -297,9 +297,10 @@ const [weatherData, setWeatherData] = useState(null);
         collapseOnSelect
         expand="lg"
         className="fixed-top bg-light flex-wrap "
+        
       >
         <Container className="justify-content-between ">
-          <Navbar.Brand className="d-flex navbar-brand">
+          <Navbar.Brand className="d-flex  navbar-brand">
             <Link to="/">
               {/* sonali  */}
               <img className="minitgo-logo" src={Logo} style={{ width: "100px", marginLeft:"-10px", marginRight:"10px"}} />
