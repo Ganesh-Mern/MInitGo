@@ -296,8 +296,8 @@ const [weatherData, setWeatherData] = useState(null);
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="fixed-top bg-light flex-wrap "
-        
+        className="fixed-top flex-wrap "
+        style={{background:'#e8d9b7'}}
       >
         <Container className="justify-content-between ">
           <Navbar.Brand className="d-flex  navbar-brand">

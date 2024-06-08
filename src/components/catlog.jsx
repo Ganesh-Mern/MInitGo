@@ -80,9 +80,10 @@ export default function Catlog() {
   return (
     <>
       <div className="catlog filter ">
-        <div className="catlog-names mx-lg-2 info-div text-center mt-1 container-fluid mx-md-5 mr-2 me-md-5 px-md-5 pe-md-5 px-0 pe-0 ">
-          <div className="nav-link cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100 mt-3 mx-5 px-3 pe-5 me-5 new-catlog align-items-center">
-            
+        {/* code start by ganesh  */}
+        <div className="inr-catlog catlog-names  text-center  container-fluid    ">
+          <div className="nav-link cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
+            {/* code end by ganesh */}
             <div className="dropdown ">
               <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <FaLocationDot className="fs-4 p-1 mb-1" />
@@ -115,31 +116,31 @@ export default function Catlog() {
                 pathname: "/mens-category",
                 search: `?category=Men's Fashion`,
               }}
-              style={{ color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             > <span className="mt-1  ">Mens</span></Link>
             <Link
               to={{
                 pathname: "/womens-category",
                 search: `?category=Women's Fashion`,
               }}
-              style={{  color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
+              style={{  color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
             ><span className="mt-1 ">Women's</span></Link>
             <Link
-              style={{ color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             ><span className="mt-1 ">Kids</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{ color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             ><span className="mt-1 ">Other</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{  color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{  color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             >
               <span className="mt-1 ">Best deals</span></Link>
             <Link
@@ -147,7 +148,7 @@ export default function Catlog() {
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{ color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
+              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
             > <span className="mt-1 ">Offers</span></Link>
           {/*  updated till this [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
 
