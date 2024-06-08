@@ -132,7 +132,7 @@ const Login = ({ closeLoginModal }) => {
     }
   }
 
-  // Shubham- Login Functionality ends here
+  //  Login Functionality ends here 
   return (
     <>
       <br></br>
