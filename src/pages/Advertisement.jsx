@@ -99,19 +99,21 @@ const Advertisement = () => {
       {/* ////gap 5 */}
       {/* <div className="d-flex gap-3 ml-3 "> */}
       {/* <div className="col-md-5 d-flex justify-content-center gap-4 flex-wrap-sm "> */}
-      <div className=" w-full h-full d-flex ml-3 gap-3 p-4">
+      <div className="add-app">
+        <div className="d-flex gap-4">
         <img
           src="/appstore.png"
           alt="App Image"
-          className="app-image bg-light border-none mb-4 "
-          style={{ height: "4rem" }}
+          className="app-image bg-light mb-4  "
+          style={{ height: "3rem" }}
         />
         <img
           src="/googlePlay.png"
           alt="App Image"
-          className="app-image mb-4 "
-          style={{ height: "4rem" }}
+          className="app-image mb-4  "
+          style={{ height: "3rem" }}
         />
+        </div>
       </div>
     </div>
   );

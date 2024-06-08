@@ -302,8 +302,9 @@ const [weatherData, setWeatherData] = useState(null);
           <Navbar.Brand className="d-flex navbar-brand">
             <Link to="/">
               {/* sonali  */}
-              <img className="minitgo-logo" src={Logo} style={{ width: "100px", marginLeft:"-10px", marginRight:"10px"}} />
-
+              {/* code start by ganesh */}
+              <img className="minitgo-logo" src={Logo} style={{ width: "100px", marginRight:"10px"}} />
+{/* code end by ganesh */}
               {/* original code */}
               {/* <img className="minitgo-logo" src={Logo} style={{ width: "90px" }} /> */}
             </Link>
