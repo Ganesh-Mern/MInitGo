@@ -208,7 +208,7 @@ const HomeProducts = () => {
 
   return (
     <>
-      <div className="container">
+      {/* <div className="container">
         <h3>
           {" "}
           <BiSolidCategory className="fs-2 p-1" />
@@ -275,9 +275,9 @@ const HomeProducts = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <br></br>
-      <div className="mx-0 mx-md-5 px-0 px-md-5">
+      <div className="nearby">
         <div className="row">
           <div className="col-md-3 col-4 col-xl-3">
             <h3>
