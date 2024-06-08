@@ -363,7 +363,7 @@ const [weatherData, setWeatherData] = useState(null);
             </div>
 
 
-
+{/* cart button */}
             <Link
               to="/cart" style={{ color: "#000" }}>
               <div
@@ -378,9 +378,11 @@ const [weatherData, setWeatherData] = useState(null);
                 />
                 <h6
                   className="QTYValue"
-                  style={{ position: "absolute", top: "0.5rem", left: "1.3rem" }}
+                  style={{ position: "absolute", top: "-0.3rem", left: "0.9rem" }}
+                  
                 >
                   {totalQuantity}
+                  
                 </h6>
               </div>
             </Link>
@@ -599,7 +601,7 @@ const [weatherData, setWeatherData] = useState(null);
                   width: "50px",
                 }}
               >
-                <div className=" w-100 h-100 position-relative d-flex flex-column justify-content-center align-items-center">
+                <div className=" cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
                   <img
                     src={cartIcon}
                     alt="Cart"
