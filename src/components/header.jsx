@@ -1016,7 +1016,7 @@ const [weatherData, setWeatherData] = useState(null);
             <div className="d-flex flex-column justify-content-center align-items-center border rounded  py-4 my-2">
 
               <div
-                className="rounded rounded-circle border border-2 border-primary "
+                className="rounded rounded-circle  border-2 border-primary "
                 style={{
                   display: "flex",
                   justifyContent: "center",
