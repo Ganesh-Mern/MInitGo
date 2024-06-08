@@ -1,5 +1,5 @@
 
-
+/* all the changes are done */
 * {
   margin: 0;
   padding: 0;
@@ -11,14 +11,7 @@
   font-family: 'Roboto', Open Sans; /* Or 'Open Sans', sans-serif */
 }
 /* Sonali changing the h3 to bold */
-h1, h2, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-  
-} 
-h3 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-} 
+
 .spacing{
   gap:15px;
   margin-left: 10px;
@@ -30,10 +23,10 @@ h3 {
 
 
 /* original code */
-/* h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
   
-} */
+}
 
 
 
@@ -42,15 +35,10 @@ h3 {
 }
 
 p, .content, .product-description {
-  /* origial */
-  /* font-family: 'Roboto', sans-serif; /*Or 'Open Sans', sans-serif */
-  /* updated  by sonali*/
-  font-family: 'Roboto', sans-serif; 
-  font-weight:bolder;
-  font-size:x-large;
-
+  /* origial */ 
+   font-family: 'Roboto', sans-serif; /*Or 'Open Sans', sans-serif */
+ 
 }
-
 /* Mobile Header styling here*/
 .mobile-menu-logo {
   /* font-size: 33px; */
@@ -183,7 +171,7 @@ p, .content, .product-description {
 .catlog {
   height: 4rem;
   margin-top: 60px;
-  background-color: #e8d9b7;
+  background-color: #f7eedd;
   display: flex;
   z-index: 1;
 
@@ -867,6 +855,7 @@ h2 {
   margin: 0 5px;
 }
 
+<<<<<<< HEAD
 /* addvertisement */
 /* code start by ganesh */
 .add-app{
@@ -882,6 +871,9 @@ h2 {
 
 
 
+=======
+ 
+>>>>>>> 93d097186f2e5a4c3fe7932c54fa8c7c159312e5
 
 /* Header style starts here */
 @media (min-width: 1000px) and (max-width: 1200px) {

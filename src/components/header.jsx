@@ -276,7 +276,7 @@ const [weatherData, setWeatherData] = useState(null);
   const phoneNumber = userData ? userData.phoneNumber : null;
 
 
-  function getInitials(fullName) {
+  function getInitials(fullName) {  
     return fullName
       .split(" ")
       .map((name) => name.charAt(0))
@@ -296,10 +296,11 @@ const [weatherData, setWeatherData] = useState(null);
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="fixed-top bg-light flex-wrap "
+        className="fixed-top flex-wrap "
+        style={{background:'#e8d9b7'}}
       >
         <Container className="justify-content-between ">
-          <Navbar.Brand className="d-flex navbar-brand">
+          <Navbar.Brand className="d-flex  navbar-brand">
             <Link to="/">
               {/* sonali  */}
               {/* code start by ganesh */}
