@@ -33,15 +33,118 @@ const Login = ({ closeLoginModal }) => {
 
 
 
-  function handleSubmit(e) {
+  // function handleSubmit(e) {
  
+  //   e.preventDefault();
+  //   console.log(userid);
+  //   console.log(password);
+  //   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  //   const phonePattern = /^[0-9]{7}$/;
+  //   if (userid === "" || password === "") {
+  //      if (userid === "" ) {
+  //     toast.error("All fields are required", {
+  //       autoClose: 1000,
+  //       hideProgressBar: true,
+  //     });
+  //     return;
+  //   } else if (!emailPattern.test(userid) && !phonePattern.test(userid)) {
+  //     toast.error("Please enter a valid email or phone number", {
+  //       autoClose: 1000,
+  //       hideProgressBar: true,
+  //     });
+  //     return;
+  //   } else if (password.length < 8 || password.length > 12) {
+  //     toast.error("Password must be between 8 and 12 characters long", {
+  //       autoClose: 1000,
+  //       hideProgressBar: true,
+  //     });
+  //     return;
+  //   } else {
+  //     console.log("USER ID:", userid);
+  //     console.log("PASS:", password);
+
+  //     const data = {
+  //       email: userid,
+  //       password: password,
+  //     };
+  //     axios
+  //       .get("https://minitgo.com/api/fetch_login.php")
+  //       .then((response) => {
+  //         if (response.data && response.data.length > 0) {
+  //           const allUsers = response.data;
+
+  //           const foundUser = allUsers.find(
+  //             (user) => user.email === data.email
+  //           );
+
+  //           if (foundUser) {
+  //             // User with the provided email is found
+  //             if (foundUser.password === data.password) {
+  //               console.log("Login successful");
+  //               closeLoginModal();
+  //               toast.success("Login successfull", {
+  //                 autoClose: 1000,
+  //                 hideProgressBar: true,
+  //               });
+
+  //               const userData = {
+  //                 userId: foundUser.id,
+  //                 fullName: foundUser.full_name,
+  //                 phoneNumber: foundUser.phone_number,
+  //                 email: foundUser.email,
+  //                 address: foundUser.Address,
+  //                 officeAddress: foundUser.office_address,
+  //                 lat: foundUser.lat,
+  //                 log: foundUser.log,
+  //               };
+
+  //               localStorage.setItem("user", JSON.stringify(userData));
+
+  //               console.log("FOUNDUSER,", userData);
+
+  //               setUserID("");
+  //               setPassword("");
+  //             } else {
+  //               toast.error("Invalid Password", {
+  //                 autoClose: 1000,
+  //                 hideProgressBar: true,
+  //               });
+  //               console.log("Invalid password");
+  //             }
+  //           } else {
+  //             toast.error("Invalid Email", {
+  //               autoClose: 1000,
+  //               hideProgressBar: true,
+  //             });
+  //           }
+  //         } else {
+  //           toast.error("Server Error", {
+  //             autoClose: 1000,
+  //             hideProgressBar: true,
+  //           });
+  //         }
+  //         window.location.reload();
+
+  //       })
+  //       .catch((error) => {
+  //         console.error("Failed to fetch user information:", error);
+  //       });
+  //   }
+  // }
+ 
+
+  // code start by younus ansari
+
+  function handleSubmit(e) {
     e.preventDefault();
+   
     console.log(userid);
     console.log(password);
+   
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const phonePattern = /^[0-9]{7}$/;
+    const phonePattern = /^[0-9]{7,15}$/;
+ 
     if (userid === "" || password === "") {
-      // if (userid === "" ) {
       toast.error("All fields are required", {
         autoClose: 1000,
         hideProgressBar: true,
@@ -62,31 +165,33 @@ const Login = ({ closeLoginModal }) => {
     } else {
       console.log("USER ID:", userid);
       console.log("PASS:", password);
-
+ 
       const data = {
-        email: userid,
+        userid: userid,
         password: password,
       };
+ 
       axios
         .get("https://minitgo.com/api/fetch_login.php")
         .then((response) => {
           if (response.data && response.data.length > 0) {
             const allUsers = response.data;
-
+           
+            // Check if the userid is an email or a phone number
             const foundUser = allUsers.find(
-              (user) => user.email === data.email
+              (user) => user.email === data.userid || user.phone_number === data.userid
             );
-
+ 
             if (foundUser) {
-              // User with the provided email is found
+              // User with the provided email or phone number is found
               if (foundUser.password === data.password) {
                 console.log("Login successful");
                 closeLoginModal();
-                toast.success("Login successfull", {
+                toast.success("Login successful", {
                   autoClose: 1000,
                   hideProgressBar: true,
                 });
-
+ 
                 const userData = {
                   userId: foundUser.id,
                   fullName: foundUser.full_name,
@@ -97,11 +202,11 @@ const Login = ({ closeLoginModal }) => {
                   lat: foundUser.lat,
                   log: foundUser.log,
                 };
-
+ 
                 localStorage.setItem("user", JSON.stringify(userData));
-
-                console.log("FOUNDUSER,", userData);
-
+ 
+                console.log("FOUND USER:", userData);
+ 
                 setUserID("");
                 setPassword("");
               } else {
@@ -112,10 +217,11 @@ const Login = ({ closeLoginModal }) => {
                 console.log("Invalid password");
               }
             } else {
-              toast.error("Invalid Email", {
+              toast.error("Invalid Email or Phone Number", {
                 autoClose: 1000,
                 hideProgressBar: true,
               });
+              console.log("Invalid email or phone number");
             }
           } else {
             toast.error("Server Error", {
@@ -124,7 +230,6 @@ const Login = ({ closeLoginModal }) => {
             });
           }
           window.location.reload();
-
         })
         .catch((error) => {
           console.error("Failed to fetch user information:", error);
@@ -132,7 +237,12 @@ const Login = ({ closeLoginModal }) => {
     }
   }
 
+
+  // code end by ansari
+  // Shubham- Login Functionality ends here
+
   //  Login Functionality ends here 
+
   return (
     <>
       <br></br>
@@ -223,5 +333,6 @@ const Login = ({ closeLoginModal }) => {
     </>
   );
 };
+
 
 export default Login;
