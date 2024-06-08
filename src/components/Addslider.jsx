@@ -12,7 +12,7 @@ const Slider = () => {
   return (
     <>
     <div className='container'>
-    <p className='p-2 '>Sponsored <BiInfoCircle className='fa-1'/></p>
+    <p className='p-2 text-xl'>Sponsored <BiInfoCircle className='fa-1'/></p>
     <Row>
     <Link to="/products" className=' '>
         <Col className='col-sm-12 add sponsor d-flex justify-content-center align-items-center'>
