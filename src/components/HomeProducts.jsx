@@ -214,7 +214,7 @@ const HomeProducts = () => {
           <BiSolidCategory className="fs-2 p-1" />
           Top Category's
         </h3>
-        <p className="px-2" style={{ fontSize: 13.5 }}>
+        <p className="px-2" >
           Explore our top category's
         </p>
 

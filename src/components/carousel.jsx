@@ -31,9 +31,9 @@ export default function Carousel() {
       <div className="container ">
         <div className="text-left">
           <h3 className=" ">Trending Section</h3>
-          <span className=" text-muted p-2" style={{ fontSize: 13.5 }}>
+          <p >
             Nearst trending products
-          </span>
+          </p>
           <div className="rounded-full"></div>
         </div>
 

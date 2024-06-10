@@ -41,7 +41,7 @@ export default function Banner() {
               <Button className="find-btn" onClick={handleNavigateToProducts}>
                 Find near me 
               </Button>
-
+              
               <p>
                 {" "}
                 <BiInfoCircle style={{ fontSize: "10pt" }} /> Get the products

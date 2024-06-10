@@ -157,8 +157,8 @@ export default function Catlog() {
 
           {/* Add the image and dropdown for mobile view */}
           {showHyDropdown() && (
-            <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center mb-3 text-black">
-              <div className="dropdown">
+            <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-black">
+              <div className="dropdown ">
                 <button className="btn dropdown-toggle" type="button" id="mobileLocationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                   {dropdownTitle}
                 </button>
