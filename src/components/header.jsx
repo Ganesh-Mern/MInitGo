@@ -243,7 +243,7 @@ function Header() {
   //code for location
   {/*code started by isha */}
   const [locationForWeather, setLocationForWeather] = useState({  latitude: 17.385044, longitude: 78.486671, });
-  const [cityAccordingToLocation, setCityAccordingToLocation] = useState("Hyderabad")
+  const [cityAccordingToLocation, setCityAccordingToLocation] = useState("")
   const [error, setError] = useState(null);
 const API_KEY ="cdbf68f3afc557e674b97c9f52536ab6";
 const [weatherData, setWeatherData] = useState(null);
@@ -1018,7 +1018,7 @@ const [weatherData, setWeatherData] = useState(null);
             <div className="d-flex flex-column justify-content-center align-items-center border rounded  py-4 my-2">
 
               <div
-                className="rounded rounded-circle border border-2 border-primary "
+                className="rounded rounded-circle  border-2 border-primary "
                 style={{
                   display: "flex",
                   justifyContent: "center",
