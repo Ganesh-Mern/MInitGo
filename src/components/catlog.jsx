@@ -82,9 +82,9 @@ export default function Catlog() {
       <div className="catlog filter ">
         {/* code start by ganesh  */}
         <div className="inr-catlog catlog-names  text-center  container-fluid    ">
-          <div className="nav-link cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
+          <div className="nav-link  cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
             {/* code end by ganesh */}
-            <div className="dropdown ">
+            <div className="dropdown  "> 
               <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <FaLocationDot className="fs-4 p-1 mb-1" />
              <span > Deliver To</span>   <span> {addressDisplay}</span>
