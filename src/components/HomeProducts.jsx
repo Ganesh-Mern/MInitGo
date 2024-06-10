@@ -208,7 +208,7 @@ const HomeProducts = () => {
 
   return (
     <>
-      {/* <div className="container">
+      <div className="container">
         <h3>
           {" "}
           <BiSolidCategory className="fs-2 p-1" />
@@ -275,18 +275,20 @@ const HomeProducts = () => {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
       <br></br>
-      <div className="nearby">
+
+      <div className="nearby p-3">
+        {/* row remove */}
         <div className="row">
-          <div className="col-md-3 col-4 col-xl-3">
+          <div className="col-md-3 col-4 col-xl-3 p-0">
             <h3>
               <FaLocationDot className="fs-2 p-1" />
               Nearby
             </h3>
           </div>
 
-          <div className="col-md-3 col-4 col-xl-3 d-lg-none">
+          <div className="col-md-3 col-4 col-xl-3 d-lg-none p-0">
             <div class="select-wrapper" id="distanceDropdownWrapper">
               <select
                 className="form-control rounded  "
@@ -302,12 +304,12 @@ const HomeProducts = () => {
             </div>
           </div>
         </div>
-
+                {/* row remove */}
         <div className="row">
-          <p className="px-2 mx-2" style={{ fontSize: "13.5" }}>
+          <p className="  " style={{ fontSize: "13.5" }}>
             Increase distance for more products!{" "}
           </p>
-          <div className="col-md-2 filter-s ">
+          <div className="col-md-2 filter-s  ">
             <div className="shadow filter-bg">
               <form>
                 <div className="form-group ">
@@ -353,11 +355,12 @@ const HomeProducts = () => {
             </div>
           </div>
 
-          <div className="col-md-10">
+          <div className="col-md-10 p-2">
+            {/* row remove */}
             <div className="row">
               {filteredProducts?.length === 0 ? (
                 <div
-                  className="col-12 py-2 text-center fs-4 fw-semibold"
+                  className="col-6 col-md-3 py-2 text-center fs-4 fw-semibold p-0"
                   id="sections"
                 >
                   No Products Found

@@ -230,7 +230,7 @@ function SignUp() {
   }
   
 
-  const API_KEY ="cdbf68f3afc557e674b97c9f52536ab6";
+ 
 
   const handleUseCurrentLocation = () => {
     return new Promise((resolve, reject) => {
@@ -239,24 +239,29 @@ function SignUp() {
         navigator.geolocation.getCurrentPosition(
           async (position) => {
             const { latitude, longitude } = position.coords;
-            console.log(position.coords)
               resolve({ latitude, longitude });
 
-            try {
-              const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${API_KEY}`
-              ); 
-
-              
-               const data = await response.json();
-               console.log((data?.main?.temp - 273.15).toFixed(2))
-               console.log( "city:", data?.name)
-                
-
-            
-            } catch (error) {
-              reject(error);
-            }
+            // try {
+            //   const response = await fetch(
+            //     `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`
+            //   ); 
+            //   const data = await response.json();
+            //   if (data.results.length > 0) {
+            //     const { components } = data.results[0];
+            //     setAddress(components.road || "");
+            //     setCity(
+            //       components.city || components.town || components.village || ""
+            //     );
+            //     setPincode(components.postcode || "");
+            //     setTownDistrict(components.town || components.district || "");
+            //     setState(components.state || "");
+  
+            //   } else {
+            //     reject(new Error("No results found"));
+            //   }
+            // } catch (error) {
+            //   reject(error);
+            // }
           },
           (error) => {
             reject(error);
@@ -268,25 +273,7 @@ function SignUp() {
     });
   };
   
-  // const handleUseCurrentLocation = () => {
-  //   return new Promise((resolve, reject) => {
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition(
-  //         async (position) => {
-  //           const { latitude, longitude } = position.coords;
-  //           setLatLong({ lat: latitude, log: longitude }); // Update latLong state
-  //           resolve({ latitude, longitude });
-  //         },
-  //         (error) => {
-  //           reject(error);
-  //         }
-  //       );
-  //     } else {
-  //       reject(new Error("Geolocation not supported"));
-  //     }
-  //   });
-  // };
-  
+
   return (
     <>
       {showOTP ? (
