@@ -277,8 +277,9 @@ const HomeProducts = () => {
         </div>
       </div>
       <br></br>
-
-      <div className="nearby p-3">
+                {/* code start by ganesh */}
+      <div className="container p-3 ">
+        {/* code end by ganesh */}
         {/* row remove */}
         <div className="row">
           <div className="col-md-3 col-4 col-xl-3 p-0">

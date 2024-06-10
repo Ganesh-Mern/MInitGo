@@ -158,7 +158,9 @@ export default function Catlog() {
           {/* Add the image and dropdown for mobile view */}
           {showHyDropdown() && (
             <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-black">
-              <div className="dropdown ">
+              {/* // code start by ganesh */}
+              <div className="dropdown d-down  ">
+                {/* code end by ganesh */}
                 <button className="btn dropdown-toggle" type="button" id="mobileLocationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                   {dropdownTitle}
                 </button>
@@ -177,9 +179,11 @@ export default function Catlog() {
 
           {/* Add the filter button for mobile view */}
           {showFilter() && (
-            <div className="nav-link cat-nav d-md-none d-block">
-              <button className="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#filterModal" onClick={() => setMobileView(true)}>Filter</button>
+            // code start by ganesh
+            <div className=" filter-btn ">
+              <button className="btn  rounded-pill" data-bs-toggle="modal" data-bs-target="#filterModal" onClick={() => setMobileView(true)}>Filter</button>
             </div>
+            // code end by ganesh
           )}
         </div>
 

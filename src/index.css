@@ -120,7 +120,12 @@ p, .content, .product-description {
   overflow: hidden;
 
 }
-
+/* code start by ganesh */
+.d-down > button{
+  background-color: #cc6666;
+  margin-left: 0.8rem;
+}
+/* code end by ganesh */
 /* In your CSS file */
 .dropdown .dropdown-menu {
   background-color: #ecedea;
@@ -540,7 +545,7 @@ h2 {
   .catlog {
 
     /* background: #e4d6d2 !important; */
-    margin-top: 110px;
+    /* margin-top: 110px; */
     /* margin-left: 31%; */
     width: 100% !important;
   }
@@ -915,8 +920,11 @@ h2 {
 
 /* code homeproduct */
 .nearby{
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
+  /* border: 1px solid red; */
+  margin-left: 6rem;
+  margin-right: 6rem;
   
   /* border: 1px solid red; */
 }
@@ -1237,11 +1245,11 @@ button:hover {
   }
 }
 .catlog{
-  margin-top: 4.9rem;
+  margin-top: 4.7rem;
 }
 @media screen and (max-width: 992px)  {
   .catlog{
-    margin-top: 6.9rem;
+    margin-top: 6.7rem;
   }
 }
 
@@ -1333,6 +1341,23 @@ button:hover {
       }
 }
 
+.filter-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+ 
+  
+  
+}
+.filter-btn > button{
+  background-color: #cc6666;
+}
+@media screen and (min-width:768px) {
+  .filter-btn {
+    display: none;
+  }
+}
 
 @media screen and (min-width: 430px) and (max-width:430px) {
   .mobile-menu-logo{
