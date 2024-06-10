@@ -349,9 +349,9 @@ const calculateDistance = (startLat, startLng, destLat, destLng) => {
                             textDecoration: "none",
                             color: "black"
                           }}
-
-                          className="fw-semibold"
-
+                          // code start by ganesh
+                          className="fw-semibold clamped-text "
+                          // code end by ganesh
                         >
                           {windowWidth <= 1024
                             ? product.product_name.length > 15
@@ -363,10 +363,11 @@ const calculateDistance = (startLat, startLng, destLat, destLng) => {
 
                            
                         </a>
-
-                        <div className="d-flex align-items-center justify-content-between">
-                        <h5 className="mt-1">
-                        ₹
+                            {/* code start by ganesh */}
+                        <div className="flex-container">
+                        <h5 className="mt-1 flext-item  ">
+                          {/* code end by ganesh */}
+                           ₹
                           {product.product_price}
                           <span className="text-decoration-line-through text-muted fs-6 fw-light">
                             599
@@ -395,9 +396,9 @@ const calculateDistance = (startLat, startLng, destLat, destLng) => {
                             <span className="fw-semibold">Color:</span> <span>{product.product_color1}</span>
                           </div>
                         </div>
-                      
-                          <div className="mt-1" style={{textAlign:'justify'}} >
-
+                            {/* code start by ganesh */}
+                          <div className="mt-1 clamped-text" style={{textAlign:'justify'}} >
+                            {/* code end b ganesh */}
                           {windowWidth <= 576
                             ? product.product_discription.length > 20
                               ? product.product_discription.substring(0, 19) + "..."

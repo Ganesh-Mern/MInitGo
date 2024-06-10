@@ -521,26 +521,25 @@ const HomeProducts = () => {
                             ? product.product_name.substring(0, 23) + "..."
                             : product.product_name}
                         </a>
-
-                        <div className="d-flex align-items-center justify-content-between">
-                          <h5 className="mt-1">
-                            ₹{product.product_price}
-                            {/* Code change start by isha */}
-                            {/* <span className="text-decoration-line-through text-muted fs-6 fw-light"> */}
-                            <span className="text-decoration-line-through text-muted fs-6 fw-light ml-3 priceAmount">
-                              {/* Code change end by isha */}
-                              599
-                            </span>
-                            <span
-                              className="text-muted"
-                              style={{
-                                fontSize: "13px",
-                              }}
-                            >
-                              {" "}
-                              {product.product_stock}
-                            </span>
-                          </h5>
+                            {/* code start by ganesh */}
+                        <div className="flex-container ">
+                        <h5 className="mt-1 flext-item  ">
+                        ₹
+                          {product.product_price}
+                          <span className="text-decoration-line-through text-muted fs-6 fw-light">
+                            599
+                          </span>
+                          <span
+                            className="text-muted"
+                            style={{
+                              fontSize: "13px",
+                            }}
+                          >
+                            {" "}
+                            {product.product_stock}
+                          </span>
+                        </h5>
+                        {/* code end by ganesh */}
                           <div>
                             <span className="fw-semibold">Size:</span>{" "}
                             <span>{product.product_size}</span>
@@ -560,8 +559,9 @@ const HomeProducts = () => {
                             <span>{product.product_color1}</span>
                           </div>
                         </div>
-
-                        <div className="mt-1" style={{ textAlign: "justify" }}>
+                            {/* code start by ganesh */}
+                        <div className="mt-1 clamped-text" style={{ textAlign: "justify" }}>
+                          {/* code end by ganesh */}
                           {windowWidth <= 576
                             ? product.product_discription.length > 20
                               ? product.product_discription.substring(0, 19) +
