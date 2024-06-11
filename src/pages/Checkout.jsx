@@ -9,6 +9,7 @@ import { FaGooglePay } from "react-icons/fa";
 import { SiPaytm } from "react-icons/si";
 import { IoHome } from "react-icons/io5";
 import { HiBuildingOffice } from "react-icons/hi2";
+import axios from "axios";
 
 export const Checkout = () => {
   const cart = useSelector((state) => state.cart.items);
@@ -38,6 +39,33 @@ export const Checkout = () => {
 
     return totalPrice;
   }
+  // code start by ansari
+  const handleConfirmOrder = async () => {
+    const orderDetails = {
+      items: cart,
+      payment_method: paymentMethod,
+      address: selectedAddress,
+      total_amount: calculateTotalPrice() + 350,
+      time: new Date().toISOString(),
+    };
+
+    try {
+      console.log("Order details being sent:", orderDetails);
+      const response = await axios.post('https://minitgo.com/api/insert_order.php', orderDetails);
+      console.log("response",response.data);
+      console.log(response.data.status);
+      if (response.data.status === true) {
+        alert('Order placed successfully!');
+        // You can redirect the user or clear the cart here
+      } else {
+        alert('Failed to place order. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      alert('An error occurred while placing the order. Please try again.');
+    }
+  };
+  // code end by ansari
 
   console.log(cart);
 
@@ -365,6 +393,10 @@ export const Checkout = () => {
                           <button
                             type="button"
                             className="btn btn-primary mx-auto"
+                            // code start by ansari 
+                            // confirm order function
+                            onClick={handleConfirmOrder}
+                            // code end by ansari
                           >
                             Confirm Order
                           </button>

@@ -1351,7 +1351,7 @@ button:hover {
   
 }
 .filter-btn > button{
-  background-color: #cc6666;
+  background-color: #f2785c;
 }
 @media screen and (min-width:768px) {
   .filter-btn {
