@@ -127,7 +127,7 @@ p, .content, .product-description {
 }
 /* code start by ganesh */
 .d-down > button{
-  background-color: #f2785c;
+  background-color: #cc6666;
   margin-left: 0.8rem;
 }
 /* code end by ganesh */
@@ -180,7 +180,7 @@ p, .content, .product-description {
 .catlog {
   height: 4rem;
   margin-top: 60px;
-  background-color: #2e2e2e;
+  background-color: #424242;
   display: flex;
   z-index: 1;
   

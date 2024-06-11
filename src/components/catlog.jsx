@@ -79,7 +79,7 @@ export default function Catlog() {
 
   return (
     <>
-      <div className="catlog filter shadow">
+      <div className="catlog filter ">
         {/* code start by ganesh  */}
         <div className="inr-catlog catlog-names  text-center  container-fluid ">
           <div className="nav-link  cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
@@ -108,48 +108,48 @@ export default function Catlog() {
               </ul>
             </div>
               {/* added [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
-            <Link to={{ pathname: "/accessories", search: `?category=Accessories` }} style={{     fontSize: "16px", textDecoration:"none" ,paddingTop:"2px", fontWeight:"bolder" }}>
-              <span className="mt-3 text-secondary">Fashion</span>
+            <Link to={{ pathname: "/accessories", search: `?category=Accessories` }} style={{   color: "#dfd7d7", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px", fontWeight:"bolder" }}>
+              <span className="mt-3 ">Fashion</span>
             </Link>
             <Link
               to={{
                 pathname: "/mens-category",
                 search: `?category=Men's Fashion`,
               }}
-              style={{   fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
-            > <span className="mt-1  text-secondary">Mens</span></Link>
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+            > <span className="mt-1  ">Mens</span></Link>
             <Link
               to={{
                 pathname: "/womens-category",
                 search: `?category=Women's Fashion`,
               }}
-              style={{  fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
-            ><span className="mt-1 text-secondary ">Women's</span></Link>
+              style={{  color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
+            ><span className="mt-1 ">Women's</span></Link>
             <Link
-              style={{   fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
-            ><span className="mt-1 text-secondary">Kids</span></Link>
-            <Link
-              to={{
-                pathname: "/accessories",
-                search: `?category=Accessories`,
-              }}
-              style={{   fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
-            ><span className="mt-1 text-secondary">Other</span></Link>
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+            ><span className="mt-1 ">Kids</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{   fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+            ><span className="mt-1 ">Other</span></Link>
+            <Link
+              to={{
+                pathname: "/accessories",
+                search: `?category=Accessories`,
+              }}
+              style={{  color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             >
-              <span className="mt-1 text-secondary">Best deals</span></Link>
+              <span className="mt-1 ">Best deals</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{  fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
-            > <span className="mt-1 text-secondary ">Offers</span></Link>
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
+            > <span className="mt-1 ">Offers</span></Link>
           {/*  updated till this [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
 
             {/* Add other links */}
