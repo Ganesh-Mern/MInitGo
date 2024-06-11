@@ -549,7 +549,7 @@ console.log(products);
                       {/* Buttons */}
                       <div className="d-flex justify-content-center align-items-center gap-2">
                         <button
-                          className="btn btn-primary  ms-2"
+                          className="btn btn-secondary  ms-2"
                           onClick={() => handleAddToCart(product, index)}
                         >
                           <img

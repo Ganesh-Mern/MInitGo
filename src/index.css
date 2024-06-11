@@ -93,7 +93,12 @@ p, .content, .product-description {
   border: none;
   box-shadow: 0px 0px 2px #171717;
 }
-
+.btn-secondary{
+  background-color: #f2b057;
+  color: #e2c6c6;
+  border: none;
+  box-shadow: 0px 0px 2px #171717;
+}
 .btn-success {
   border: none;
   box-shadow: 0px 0px 1.5px #171717;
@@ -147,20 +152,19 @@ p, .content, .product-description {
 
 /* Header search engine style*/
 .search-box {
-  border: 2.55px solid #d8dfab;
+  border: 2.55px solid #cbd394;
   border-radius: 10px 0 0 10px;
 }
 
 .search-btn {
   right: 1%;
-   
   position: relative;
   border-radius: 10px;
-  border: 2px solid #e8d9b7;
-  background-color: #e8d9b7;
+  border: 2px solid #f2b057;
+  background-color: #f2b057;
   box-shadow: 0px 0px 4px #30302f;
   font-weight: 600;
-  color: #574b4b;
+  color: #131111;
 }
 
 
@@ -176,9 +180,10 @@ p, .content, .product-description {
 .catlog {
   height: 4rem;
   margin-top: 60px;
-  background-color: #f7eedd;
+  background-color: #2e2e2e;
   display: flex;
   z-index: 1;
+  
 
 }
 
@@ -286,7 +291,7 @@ p, .content, .product-description {
 }
 
 .buynow {
-  background-color: #e8d9b7;
+  background-color: #f2785c;
   width: 136px;
   /* Allow the width to adjust based on content */
   margin-right: 10px;
