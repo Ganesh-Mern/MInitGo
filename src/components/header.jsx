@@ -758,7 +758,9 @@ const [weatherData, setWeatherData] = useState(null);
             <img
               src="/src/components/images/minitgo.png"
               width={100}
-              height={20}
+              // code start by ganesh
+              height={30}
+              // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -1009,7 +1011,9 @@ const [weatherData, setWeatherData] = useState(null);
             <img
               src="/src/components/images/minitgo.png"
               width={100}
-              height={20}
+              // code start by ganesh
+              height={30}
+              // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
