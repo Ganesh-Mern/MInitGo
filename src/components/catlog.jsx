@@ -81,19 +81,19 @@ export default function Catlog() {
     <>
       <div className="catlog filter ">
         {/* code start by ganesh  */}
-        <div className="inr-catlog catlog-names  text-center  container-fluid    ">
+        <div className="inr-catlog catlog-names  text-center  container-fluid ">
           <div className="nav-link  cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
             {/* code end by ganesh */}
-            <div className="dropdown  "> 
+            <div className="dropdown bg-secondary rounded text-white"> 
               <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <FaLocationDot className="fs-4 p-1 mb-1" />
-             <span > Deliver To</span>   <span> {addressDisplay}</span>
+             <span > Delivery Address</span>   <span> {addressDisplay}</span>
               </button>
               <ul className="dropdown-menu" aria-labelledby="locationDropdown">
                 <li>
                   <a className={`dropdown-item ${addressDisplay && selectedAddress === addressStore ? 'active' : ''}`} href="#" onClick={() => handleAddressTypeChange(addressStore)}>
 
-                    <span className="">Home Address</span><br />
+                    <span   >Home Address</span><br />
                     <FaLocationDot className="fs-5 p-1 mb-1" />
                     {addressStore}
                   </a>
@@ -108,7 +108,7 @@ export default function Catlog() {
               </ul>
             </div>
               {/* added [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
-            <Link to={{ pathname: "/accessories", search: `?category=Accessories` }} style={{   color: "black", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px", fontWeight:"bolder" }}>
+            <Link to={{ pathname: "/accessories", search: `?category=Accessories` }} style={{   color: "#dfd7d7", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px", fontWeight:"bolder" }}>
               <span className="mt-3 ">Fashion</span>
             </Link>
             <Link
@@ -116,31 +116,31 @@ export default function Catlog() {
                 pathname: "/mens-category",
                 search: `?category=Men's Fashion`,
               }}
-              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             > <span className="mt-1  ">Mens</span></Link>
             <Link
               to={{
                 pathname: "/womens-category",
                 search: `?category=Women's Fashion`,
               }}
-              style={{  color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
+              style={{  color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
             ><span className="mt-1 ">Women's</span></Link>
             <Link
-              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             ><span className="mt-1 ">Kids</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             ><span className="mt-1 ">Other</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{  color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{  color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
             >
               <span className="mt-1 ">Best deals</span></Link>
             <Link
@@ -148,7 +148,7 @@ export default function Catlog() {
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{ color: "black", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
             > <span className="mt-1 ">Offers</span></Link>
           {/*  updated till this [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
 

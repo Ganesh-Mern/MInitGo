@@ -296,7 +296,7 @@ const [weatherData, setWeatherData] = useState(null);
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="fixed-top flex-wrap "
+        className="fixed-top flex-wrap shadow "
         style={{background:'#e8d9b7'}}
       >
         <Container className="justify-content-between ">
@@ -396,12 +396,13 @@ const [weatherData, setWeatherData] = useState(null);
 
           <Navbar.Collapse id="responsive-navbar-nav">
               
-            <Nav className="me-auto">
+            <Nav className="me-auto  ">
               <NavDropdown
                 title={dropdownTitle}
                 id="collasible-nav-dropdown"
                 // updated sonali
-                style={{ border: "2.6px solid #d8dfab", borderRadius: "13px",marginLeft:"3px" }}
+            
+                style={{ border: "2.6px solid #d8dfab", borderRadius: "13px",marginLeft:"3px", background:"#f2b057" }}
                 // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
               >
                 <NavDropdown.Item
@@ -458,7 +459,7 @@ const [weatherData, setWeatherData] = useState(null);
               //orginal code
               // style={{ margin: "0 0px 0 32px", }}
               type="search"
-              placeholder=" Ex: T-Shirt near me"
+              placeholder="Find near me"
               className=" search-box"
               aria-label="Search"
               value={searchQuery}
