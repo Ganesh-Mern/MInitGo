@@ -410,29 +410,22 @@ const calculateDistance = (startLat, startLng, destLat, destLng) => {
                       </div>
                     </a>
 
-                    <div
-                        className="d-flex align-items-center mt-2 px-2"
-                        id="btns-sections"
-                      >
-                        <div className="  w-100 d-flex justify-content-between">
+                    <div className="d-flex  justify-content-center align-items-center gap-2">
                         <button
-                          className="btn btn-primary  my-2 "
+                          className="btn btn-secondary  ms-2"
                           onClick={() => handleAddToCart(product, index)}
-                         
                         >
                           <img
-                            className="p-0 "
+                            // className="img-fluid"
                             src={cartIcon}
                             style={{ height: "20px" }}
                           />
                         </button>
-                          <button
-                            onClick={() => handleAddToCart(product, index)}
-                            className="btn btn-primary my-2  ms-2"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
+                        <button
+                        onClick={() => handleAddToCart(product, index)}
+                         className="btn btn-primary my-2  ms-2 px-2 py-1">
+                          Add to cart
+                        </button>
                       </div>
                   </div>
                 </div>

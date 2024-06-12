@@ -50,6 +50,7 @@ const HomeProducts = () => {
 
   const handleAddToCart = (product, index) => {
     dispatch(addToCart(product));
+    console.log("product send to cart", product);
     dispatch(showSnackbar({ message: "Product added successfully!", index }));
     setTimeout(() => {
       dispatch(hideSnackbar());
@@ -214,9 +215,7 @@ const HomeProducts = () => {
           <BiSolidCategory className="fs-2 p-1" />
           Top Category's
         </h3>
-        <p className="px-2" >
-          Explore our top category's
-        </p>
+        <p className="px-2">Explore our top category's</p>
 
         <div className="row">
           <div className="col-6 col-md-3">
@@ -277,7 +276,7 @@ const HomeProducts = () => {
         </div>
       </div>
       <br></br>
-                {/* code start by ganesh */}
+      {/* code start by ganesh */}
       <div className="container p-3 ">
         {/* code end by ganesh */}
         {/* row remove */}
@@ -296,7 +295,9 @@ const HomeProducts = () => {
                 id="distanceFilter"
                 onChange="{handleDistanceSelect}"
               >
-                <option value="all" className="">Distance</option>
+                <option value="all" className="">
+                  Distance
+                </option>
                 <option value="5">5 Km</option>
                 <option value="10">10 km</option>
                 <option value="15">15 km</option>
@@ -305,7 +306,7 @@ const HomeProducts = () => {
             </div>
           </div>
         </div>
-                {/* row remove */}
+        {/* row remove */}
         <div className="row">
           <p className="  " style={{ fontSize: "13.5" }}>
             Increase distance for more products!{" "}
@@ -485,7 +486,6 @@ const HomeProducts = () => {
                               : `${product.offers}% Off`}
                           </div>
                         </div>
-                        
                       </div>
 
                       <div className="product-content d-flex flex-column gap-1 pt-3  px-2">
@@ -522,25 +522,24 @@ const HomeProducts = () => {
                             ? product.product_name.substring(0, 23) + "..."
                             : product.product_name}
                         </a>
-                            {/* code start by ganesh */}
+                        {/* code start by ganesh */}
                         <div className="flex-container ">
-                        <h5 className="mt-1 flext-item  ">
-                        ₹
-                          {product.product_price}
-                          <span className="text-decoration-line-through text-muted fs-6 fw-light">
-                            599
-                          </span>
-                          <span
-                            className="text-muted"
-                            style={{
-                              fontSize: "13px",
-                            }}
-                          >
-                            {" "}
-                            {product.product_stock}
-                          </span>
-                        </h5>
-                        {/* code end by ganesh */}
+                          <h5 className="mt-1 flext-item  ">
+                            ₹{product.product_price}
+                            <span className="text-decoration-line-through text-muted fs-6 fw-light">
+                              599
+                            </span>
+                            <span
+                              className="text-muted"
+                              style={{
+                                fontSize: "13px",
+                              }}
+                            >
+                              {" "}
+                              {product.product_stock}
+                            </span>
+                          </h5>
+                          {/* code end by ganesh */}
                           <div>
                             <span className="fw-semibold">Size:</span>{" "}
                             <span>{product.product_size}</span>
@@ -560,8 +559,11 @@ const HomeProducts = () => {
                             <span>{product.product_color1}</span>
                           </div>
                         </div>
-                            {/* code start by ganesh */}
-                        <div className="mt-1 clamped-text" style={{ textAlign: "justify" }}>
+                        {/* code start by ganesh */}
+                        <div
+                          className="mt-1 clamped-text"
+                          style={{ textAlign: "justify" }}
+                        >
                           {/* code end by ganesh */}
                           {windowWidth <= 576
                             ? product.product_discription.length > 20
@@ -609,20 +611,21 @@ const HomeProducts = () => {
                         className="d-flex align-items-center mt-2 px-2"
                         id="btns-sections"
                       >
-                        <div className="  w-100 d-flex justify-content-between">
+                        <div className="  cart-button  w-100 d-flex justify-content-between">
                           <button
                             className={`btn ${
                               wishlistClicked[index]
                                 ? "btn-success"
                                 : "btn-primary"
-                            } w-25 my-2`}
+                            } w-20 my-2`}
+                            // style={{ height: "20px", fill: "white" }}
                             onClick={() => handleWishListToCart(product, index)}
                           >
                             ❤
                           </button>
                           <button
                             onClick={() => handleAddToCart(product, index)}
-                            className="btn btn-primary my-2  ms-2"
+                            className="btn my-2  ms-2"
                           >
                             Add to cart
                           </button>

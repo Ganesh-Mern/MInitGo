@@ -472,15 +472,15 @@ console.log(products);
                         </div>
                       </div>
 
-                      <div className="product-content d-flex flex-column gap-1 pt-3  px-1">
-                        <div style={{ fontSize: "14px" ,gap:"2px" ,display:"flex" , justifyContent:"space-between" }}>
-                         <div className="text-sm"> {product.category}</div>
+                      <div className="product-content d-flex flex-column gap-1 pt-3  px-1 ">
+                        <div className="" style={{ height:"40px",fontSize: "14px" ,gap:"2px" ,display:"flex" , justifyContent:"space-between" }}>
+                         <div className="text-sm line-clamp-1"> {product.category}</div>
                           {isNewProduct(product.date) && (
                             <span className="ms-4" style={{ color: "#ffc107" }}>
                               New
                             </span>
                           )}
-                          <div>{product.client_name}</div>
+                          <div className="line-clamp-1">{product.client_name}</div>
                         </div>
                         <a
                           href={`/${product.product_id}`}
@@ -498,6 +498,7 @@ console.log(products);
                             ? product.product_name.substring(0, 25) + "..."
                             : product.product_name}
                         </a>
+                        
                         <h5 className="mt-1">
                           <sup>&#x20B9;</sup>
                           {product.product_price}
@@ -513,7 +514,7 @@ console.log(products);
                           </span>
                         </h5>
 
-                        <div className="d-flex justify-content-between ">
+                        <div className="d-flex flex-column flex-sm-row justify-content-between ">
                           <h6>
                             Size: <span>{product.product_size}</span>
                           </h6>
@@ -521,8 +522,9 @@ console.log(products);
                             Color: <span>{product.product_color1}</span>
                           </h6>
                         </div>
+                        
 
-                        <div className="">
+                        <div className="clamped-text">
                           {product.product_discription.length > 40
                             ? product.product_discription.slice(0, 40) + "..."
                             : product.product_discription}
@@ -547,13 +549,13 @@ console.log(products);
                       </div>
 
                       {/* Buttons */}
-                      <div className="d-flex justify-content-center align-items-center gap-2">
+                      <div className="d-flex  justify-content-center align-items-center gap-2">
                         <button
                           className="btn btn-secondary  ms-2"
                           onClick={() => handleAddToCart(product, index)}
                         >
                           <img
-                            className="img-fluid"
+                            // className="img-fluid"
                             src={cartIcon}
                             style={{ height: "20px" }}
                           />
