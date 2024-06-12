@@ -466,10 +466,9 @@ h2 {
   
  }
  .cart-button>button{
-  color: red;
   font-size: 1rem;
   padding:5px;
-  background-color: #d9725f;
+  /* background-color: #d9725f; */
   color: #fff;
   border: none;
   box-shadow: 0px 0px 2px #171717;

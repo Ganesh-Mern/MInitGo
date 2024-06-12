@@ -462,23 +462,24 @@ const Accessories = () => {
                       </div>
                     </a>
 
-                    <div className="d-flex  justify-content-center align-items-center gap-2">
-                        <button
-                          className="btn btn-secondary  ms-2"
-                          onClick={() => handleAddToCart(product, index)}
-                        >
-                          <img
-                            // className="img-fluid"
-                            src={cartIcon}
-                            style={{ height: "20px" }}
-                          />
-                        </button>
-                        <button
+                    <div className="d-flex cart-button  justify-content-center align-items-center gap-2">
+                      <button
+                        className="btn btn-secondary  ms-2"
                         onClick={() => handleAddToCart(product, index)}
-                         className="btn btn-primary my-2  ms-2 px-2 py-1">
-                          Add to cart
-                        </button>
-                      </div>
+                      >
+                        <img
+                          // className="img-fluid"
+                          src={cartIcon}
+                          style={{ height: "20px" }}
+                        />
+                      </button>
+                      <button
+                        onClick={() => handleAddToCart(product, index)}
+                        className="btn btn-primary my-2  ms-2 px-2 py-1"
+                      >
+                        Add to cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
