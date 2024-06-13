@@ -25,9 +25,9 @@ export const Checkout = () => {
       setIsMobile(window.innerWidth < 768); // Assuming mobile screen width is less than 768px
     };
     handleResize(); // Initial check
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -40,44 +40,77 @@ export const Checkout = () => {
     return totalPrice;
   }
   // code start by ansari
-  const handleConfirmOrder = async () => {
-    const orderDetails = {
-      items: cart,
-      payment_method: paymentMethod,
-      address: selectedAddress,
-      total_amount: calculateTotalPrice() + 350,
-      time: new Date().toISOString(),
-    };
 
+  // console.log( "orderItems",orderItems);
+  const handleConfirmOrder = async () => {
+    const orderItems = cart.map((item) => {
+      return {
+        product_id: item.product_id,
+        order_id: "78455",
+        product_name: item.product_name,
+        quantity: item.quantity,
+        payment_mode: paymentMethod,
+        transition_id: "1452",
+        payment_status: "1235",
+        cid: item.cid,
+        client_name: item.client_name,
+        client_coordinates: "14555",
+        user_name: item.user_name,
+        user_id: item.user_id,
+        user_coordinates: "12222",
+        user_address: selectedAddress.location,
+        product_color:
+          item.product_color1 ||
+          item.product_color2 ||
+          item.product_color3 ||
+          item.product_color4,
+        product_price: item.product_price,
+        product_image:
+          item.product_image1 ||
+          item.product_image2 ||
+          item.product_image3 ||
+          item.product_image4 ||
+          item.product_image5 ||
+          item.product_image6,
+        date: new Date().toISOString().split("T")[0],
+        time: new Date().toISOString(),
+        user_phonenumber: "1234567890",
+        product_description: item.product_discription,
+        total_amount: calculateTotalPrice() + 350,
+      };
+    });
+    console.log("orderItems", orderItems);
     try {
-      console.log("Order details being sent:", orderDetails);
-      const response = await axios.post('https://minitgo.com/api/insert_order.php', orderDetails);
-      console.log("response",response.data);
-      console.log(response.data.status);
+      const response = await axios.post(
+        "https://minitgo.com/api/insert_order.php",
+        orderItems[0]
+      );
+      console.log("response", response.data);
+      console.log("response.data.status", response.data.status);
       if (response.data.status === true) {
-        alert('Order placed successfully!');
+        alert("Order placed successfully!");
         // You can redirect the user or clear the cart here
       } else {
-        alert('Failed to place order. Please try again.');
+        alert("Failed to place order. Please try again.");
       }
     } catch (error) {
-      console.error('Error placing order:', error);
-      alert('An error occurred while placing the order. Please try again.');
+      console.error("Error placing order:", error);
+      alert("An error occurred while placing the order. Please try again.");
     }
   };
   // code end by ansari
 
-  console.log(cart);
+  console.log("checkout.jsx", cart);
 
   return (
     <>
-
-      <div className="container mt-5 border border-1 p-0" style={{ backgroundColor: "#eee" }}>
+      <div
+        className="container mt-5 border border-1 p-0"
+        style={{ backgroundColor: "#eee" }}
+      >
         <div className="card">
           <div className="card-body">
-
-
-    {/*Shafeeq updated to display order recap section on top in mobile view and in right side in medium screen */}
+            {/*Shafeeq updated to display order recap section on top in mobile view and in right side in medium screen */}
 
             <div className="d-md-none">
               <div
@@ -393,7 +426,7 @@ export const Checkout = () => {
                           <button
                             type="button"
                             className="btn btn-primary mx-auto"
-                            // code start by ansari 
+                            // code start by ansari
                             // confirm order function
                             onClick={handleConfirmOrder}
                             // code end by ansari
@@ -406,17 +439,21 @@ export const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-5 col-xl-4 offset-xl-1 order-md-1"> {/* Order first on medium and up screens */}
+              <div className="col-md-5 col-xl-4 offset-xl-1 order-md-1">
+                {" "}
+                {/* Order first on medium and up screens */}
                 <div className="py-4 d-flex justify-content-end">
                   <h6>
                     <Link to="/cart">Cancel and return to website</Link>
                   </h6>
                 </div>
-
-                
-   {/*Shafeeq added this section to hide the order recap section in bottom of the screen in mobile view*/}
-                <div className={`rounded  d-flex flex-column p-2 ${isMobile ? 'd-none d-sm-block' : ''}`} style={{ backgroundColor: "#f8f9fa" }}>
-
+                {/*Shafeeq added this section to hide the order recap section in bottom of the screen in mobile view*/}
+                <div
+                  className={`rounded  d-flex flex-column p-2 ${
+                    isMobile ? "d-none d-sm-block" : ""
+                  }`}
+                  style={{ backgroundColor: "#f8f9fa" }}
+                >
                   <div className="p-2 me-3">
                     <h4>Order Recap</h4>
                   </div>
@@ -476,4 +513,3 @@ export const Checkout = () => {
 };
 
 export default Checkout;
-

@@ -625,7 +625,7 @@ const HomeProducts = () => {
                           </button>
                           <button
                             onClick={() => handleAddToCart(product, index)}
-                            className="btn my-2  ms-2"
+                            className="btn btn-primary my-2  ms-2"
                           >
                             Add to cart
                           </button>
