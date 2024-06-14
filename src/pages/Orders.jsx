@@ -7,7 +7,7 @@ import { productImages } from "../components/ProductInfo/data";
 import { useContext, useEffect, useState } from "react";
 import myContext from "../components/context/MyContext";
 import axios from "axios";
-
+import { FaRegClock } from 'react-icons/fa'; // Import the timer icon from Font Awesome
 
 const OrdersPage = () => {
   const [orderData, setOrderData] = useState([]);
@@ -45,23 +45,6 @@ const OrdersPage = () => {
   }, [parsedSignInData.userId]);
 
 
-  // for progress bar
-  // const getStatusProgress = (status) => {
-  //   switch (status) {
-  //     case 'rejected':
-  //       return { width: '0%', message: 'Rejected' };
-  //       case 'waiting':
-  //         return { width: '99%', message: 'Waiting for order confirmation' };
-  //     case 'out for delivery':
-  //       return { width: '65%', message: 'Out for delivery' };
-  //     case 'finding delivery boy':
-  //       return { width: '35%', message: 'Finding delivery boy' };
-  //     case 'delivered':
-  //       return { width: '100%', message: 'Delivered' };
-  //     case 'accepted':
-  //       return { width: '10%', message: 'Accepted' };
-  //   }
-  // };
 
   const getStatusProgress = (status) => {
     switch (status.toLowerCase()) {
@@ -82,7 +65,35 @@ const OrdersPage = () => {
     }
   };
 
-  
+  const initialSeconds = localStorage.getItem('timerSeconds') ? parseInt(localStorage.getItem('timerSeconds')) : 5;
+  const [seconds, setSeconds] = useState(initialSeconds);
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    let interval;
+    if (isActive && seconds > 0) {
+      interval = setInterval(() => {
+        setSeconds(prevSeconds => prevSeconds - 1);
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
+
+  useEffect(() => {
+    // Store the seconds in localStorage
+    localStorage.setItem('timerSeconds', seconds.toString());
+  }, [seconds]);
+
+  // Calculate hours, minutes, and seconds
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  // Format the timer display
+  const formattedTime = `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+
   return (
     <div className="border ">
       <div className=" mt-1  ">
@@ -212,50 +223,74 @@ const OrdersPage = () => {
                                         </div>
                                         <div className="col-md-10">
 
-                                         
-                                              <div className="progress" style={{ height: "6px", borderRadius: "16px" }}>
-                                                <div
-                                                  className={`progress-bar ${progress.animate ? 'progress-animated' : ''}`}
-                                                  role="progressbar"
-                                                  style={{
-                                                    width: progress.width,
-                                                    borderRadius: "16px",
-                                                    backgroundColor: "#FFA500",
-                                                  }}
-                                                ></div>
-                                              </div>
-                                              <div className="d-flex justify-content-between mb-1">
-                                                <p className="">{progress.message}</p>
-                                                <p className="">Delivered</p>
-                                              </div>
-                                           
+
+                                          <div className="progress" style={{ height: "6px", borderRadius: "16px" }}>
+                                            <div
+                                              className={`progress-bar ${progress.animate ? 'progress-animated' : ''}`}
+                                              role="progressbar"
+                                              style={{
+                                                width: progress.width,
+                                                borderRadius: "16px",
+                                                backgroundColor: "#FFA500",
+                                              }}
+                                            ></div>
+                                          </div>
+                                          <div className="d-flex justify-content-between mb-1">
+                                            <p className="">{progress.message}</p>
+                                            <p className="">Delivered</p>
+                                          </div>
+
                                           <div className="d-flex justify-content-between pt-2">
                                             <p className="fw-bold mb-0">Order Details</p>
                                             <p className="text-muted mb-0">
                                               <span className="fw-bold me-4">Total</span>
                                               {totalPaid}
                                             </p>
+
+
                                           </div>
 
                                           <div className="d-flex justify-content-between">
                                             <p className="text-muted mb-0">Invoice Date : {order.date}</p>
+
                                           </div>
 
                                           <div className="d-flex justify-content-between mb-5">
                                             <p className="text-muted mb-0">Order ID : {order.order_id}</p>
                                           </div>
+
+                                          {order.product_status.toLowerCase() === 'delivered' &&
+                                            <div className="timer d-flex justify-content-end flex-wrap">
+
+                                              <p className="fs-5"><FaRegClock style={{ marginRight: '10px' }} />{formattedTime}</p>
+
+                                            </div>
+                                          }
                                         </div>
 
                                         <div className="d-flex flex-wrap align-items-center py-3">
-                                          <Link to="/" className="btn btn-primary mx-1" role="button" aria-disabled="">
+                                          {order.product_status.toLowerCase() === 'delivered' ? (
+                                            <Link to="/" className="btn btn-disabled mx-1 disabled" role="button" aria-disabled="">
+                                              Track
+                                            </Link>
+                                          ) : <Link to="/" className="btn btn-primary mx-1" role="button" aria-disabled="">
                                             Track
                                           </Link>
+
+                                          }
+
                                           <Link to="/" className="btn btn-light border rounded-pill mx-1" role="button" aria-disabled="">
                                             Feedback
                                           </Link>
-                                          <Link to="/" className="btn btn-light border rounded-pill mx-1" role="button" aria-disabled="">
+                                          {formattedTime === "00:00:00" ? (
+                                            <Link to="/" className="btn btn-light border rounded-pill mx-1 disabled" role="button" aria-disabled="">
+                                              Return
+                                            </Link>
+                                          ) : <Link to="/" className="btn btn-light border rounded-pill mx-1" role="button" aria-disabled="">
                                             Return
                                           </Link>
+
+                                          }
                                           <Link to="/" className="btn btn-light border rounded-pill mx-1" role="button" aria-disabled="">
                                             Review
                                           </Link>
@@ -298,6 +333,8 @@ const OrdersPage = () => {
           </div>
         </div>
       </div>
+
+
     </div>
   );
 };
