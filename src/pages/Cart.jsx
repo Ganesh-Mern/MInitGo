@@ -98,6 +98,7 @@ const Cart = () => {
   const cartData = cart.items;
   const wishListData = cart.wishList;
   const totalQuantity = useSelector(selectTotalQuantity);
+  console.log("newcart",cart);
 
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart({ product_id: productId }));
@@ -114,7 +115,7 @@ const Cart = () => {
   const handleDeleteFromWishList = (productId) => {
     dispatch(deleteWishList({ product_id: productId }));
   };
-
+  console.log("cartData",cartData);
   return (
     <>
     
@@ -149,10 +150,19 @@ const Cart = () => {
                         </div>
                         <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
                           <p>
-                            <strong>{cart_item.client_name}</strong>
+                            <strong>{cart_item.product_name}</strong>
                           </p>
                           <p>Color: {cart_item.product_color1}</p>
                           <p>Size: {cart_item.product_size}</p>
+                          <div
+                          className="mt-1 line-clamp-1"
+                          style={{ textAlign: "justify" }}
+                         >
+                          {/* code end by ganesh */}
+                         {cart_item.product_discription}
+
+                          
+                        </div>
                           <br></br>
                           <button
                             className="btn btn-danger mx-2"

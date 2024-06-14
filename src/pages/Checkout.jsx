@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
@@ -10,8 +10,25 @@ import { SiPaytm } from "react-icons/si";
 import { IoHome } from "react-icons/io5";
 import { HiBuildingOffice } from "react-icons/hi2";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { BsTrash3 } from "react-icons/bs";
+import { AiOutlineHeart } from "react-icons/ai";
+
+import { useDispatch } from "react-redux";
+import {
+  addQuantity,
+  deleteQuantity,
+  removeFromCart,
+  deleteWishList,
+} from "../components/redux/Slices/CartSlice";
+import { selectTotalQuantity } from "../components/redux/Slices/CartSlice.js";
 
 export const Checkout = () => {
+  const dispatch = useDispatch();
+  const signInData = localStorage.getItem("user");
+  const parsedSignInData = JSON.parse(signInData);
+  console.log("parsedSignInData", parsedSignInData)
+  const navigate=useNavigate()
   const cart = useSelector((state) => state.cart.items);
   const [paymentMethod, setPaymentMethod] = useState("Cash On Delivery");
   const [selectedAddress, setSelectedAddress] = useState({
@@ -39,26 +56,40 @@ export const Checkout = () => {
 
     return totalPrice;
   }
-  // code start by ansari
+  // code start by ganesh
+  const totalQuantity = useSelector(selectTotalQuantity);
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart({ product_id: productId }));
+  };
 
-  // console.log( "orderItems",orderItems);
+  const handleAddQty = (productId) => {
+    dispatch(addQuantity({ product_id: productId }));
+  };
+
+  const DeleteQty = (productId) => {
+    dispatch(deleteQuantity({ product_id: productId }));
+  };
+
+  const handleDeleteFromWishList = (productId) => {
+    dispatch(deleteWishList({ product_id: productId }));
+  };
   const handleConfirmOrder = async () => {
     const orderItems = cart.map((item) => {
       return {
-        product_id: item.product_id,
+        product_id:item.pid,
         order_id: "78455",
         product_name: item.product_name,
         quantity: item.quantity,
         payment_mode: paymentMethod,
         transition_id: "1452",
-        payment_status: "1235",
+        payment_status:  paymentMethod,
         cid: item.cid,
         client_name: item.client_name,
-        client_coordinates: "14555",
-        user_name: item.user_name,
-        user_id: item.user_id,
-        user_coordinates: "12222",
-        user_address: selectedAddress.location,
+        client_coordinates: item.lat+"." + item.log,
+        user_name:parsedSignInData.fullName,
+        user_id:parsedSignInData.userId,
+        user_coordinates: item.coordinates,
+        user_address:parsedSignInData.address,
         product_color:
           item.product_color1 ||
           item.product_color2 ||
@@ -74,9 +105,10 @@ export const Checkout = () => {
           item.product_image6,
         date: new Date().toISOString().split("T")[0],
         time: new Date().toISOString(),
-        user_phonenumber: "1234567890",
+        user_phonenumber:parsedSignInData.phoneNumber,
         product_description: item.product_discription,
         total_amount: calculateTotalPrice() + 350,
+        product_status:"waiting",
       };
     });
     console.log("orderItems", orderItems);
@@ -88,7 +120,12 @@ export const Checkout = () => {
       console.log("response", response.data);
       console.log("response.data.status", response.data.status);
       if (response.data.status === true) {
-        alert("Order placed successfully!");
+        // alert("Order placed successfully!");
+        toast.success("Order successfully", {
+          autoClose: 1000,
+          hideProgressBar: true,
+        });
+        
         // You can redirect the user or clear the cart here
       } else {
         alert("Failed to place order. Please try again.");
@@ -98,9 +135,8 @@ export const Checkout = () => {
       alert("An error occurred while placing the order. Please try again.");
     }
   };
-  // code end by ansari
+  // code end by ganesh
 
-  console.log("checkout.jsx", cart);
 
   return (
     <>
@@ -160,7 +196,7 @@ export const Checkout = () => {
                   </div>
                   <div className="ms-auto">
                     <b className="text-success">
-                      {calculateTotalPrice() + 350} RS
+                    {calculateTotalPrice() + 350} RS
                     </b>
                   </div>
                 </div>
@@ -176,7 +212,96 @@ export const Checkout = () => {
                   </h5>
                   <span className="ps-2">Pay</span>
                 </div>
+                <div className="card mb-4">
+                <div className="card-header py-3 rounded-pill">
+                  <h5 className="mb-0">Cart - {totalQuantity} items</h5>
+                </div>
+                <div className="card-body">
+                  {cart?.map((cart_item, index) => {
+                    return (
+                      <div className="row my-2" key={index}>
+                        <div className="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                          <div className="bg-image rounded hover-zoom hover-overlay">
+                            <img
+                              src={cart_item.product_image1}
+                              className="w-100"
+                              alt="Product"
+                            />
+                            <a href="#!">
+                              <div
+                                className="mask"
+                                style={{
+                                  backgroundColor: "rgba(251, 251, 251, 0.2)",
+                                }}
+                              ></div>
+                            </a>
+                          </div>
+                        </div>
+                        <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                          <p>
+                            <strong>{cart_item.product_name}</strong>
+                          </p>
+                          <p>Color: {cart_item.product_color1}</p>
+                          <p>Size: {cart_item.product_size}</p>
+                          <div
+                          className="mt-1 line-clamp-1"
+                          style={{ textAlign: "justify" }}
+                         >
+                          {/* code end by ganesh */}
+                         {cart_item.product_discription}
 
+                          
+                        </div>
+                          <br></br>
+                          <button
+                            className="btn btn-danger mx-2"
+                            onClick={() =>
+                              handleRemoveFromCart(cart_item.product_id)
+                            }
+                          >
+                            <BsTrash3 />
+                          </button>
+                          <button className="btn btn-secondary">
+                            {" "}
+                            <AiOutlineHeart />
+                          </button>
+                        </div>
+                        <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                          <div
+                            className="d-flex mb-4"
+                            style={{ maxWidth: "300px" }}
+                          >
+                            <button
+                              className="btn btn-primary px-3 me-2"
+                              onClick={() => DeleteQty(cart_item.product_id)}
+                            >
+                              <i className="minus"> - </i>
+                            </button>
+                            <div
+                              className="form-control text-center"
+                              placeholder="Quantity"
+                            >
+                              {cart_item.quantity}
+                            </div>
+                            <button
+                              className="btn btn-primary px-3 ms-2 "
+                              onClick={() => handleAddQty(cart_item.product_id)}
+                            >
+                              <i className="plus"> + </i>
+                            </button>
+                          </div>
+                          <p className="text-start text-md-center">
+                            <strong>
+                              {cart_item.quantity} * {cart_item.product_price}
+                            </strong>
+                          </p>
+                        </div>
+                        <hr className="my-2" />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
                 <div className="pt-2">
                   <div className="d-flex pb-2">
                     <div>
@@ -497,7 +622,7 @@ export const Checkout = () => {
                     </div>
                     <div className="ms-auto">
                       <b className="text-success">
-                        {calculateTotalPrice() + 350} RS
+                        {calculateTotalPrice() } RS
                       </b>
                     </div>
                   </div>

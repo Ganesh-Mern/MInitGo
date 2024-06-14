@@ -47,10 +47,15 @@ const HomeProducts = () => {
 
     setImages(productImages);
   }, [filteredProducts]);
-
+// code start by ganesh
   const handleAddToCart = (product, index) => {
-    dispatch(addToCart(product));
-    console.log("product send to cart", product);
+    const productWithCoordinates = {
+      ...product,
+      coordinates, 
+    };
+    // code end by ganesh
+    dispatch(addToCart(productWithCoordinates));
+    console.log("product send to cart", productWithCoordinates);
     dispatch(showSnackbar({ message: "Product added successfully!", index }));
     setTimeout(() => {
       dispatch(hideSnackbar());
@@ -563,7 +568,7 @@ const HomeProducts = () => {
                         <div
                           className="mt-1 clamped-text"
                           style={{ textAlign: "justify" }}
-                        >
+                         >
                           {/* code end by ganesh */}
                           {windowWidth <= 576
                             ? product.product_discription.length > 20
