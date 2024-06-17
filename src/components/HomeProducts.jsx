@@ -17,6 +17,7 @@ import {
 } from "./redux/Slices/CartSlice";
 import zIndex from "@mui/material/styles/zIndex";
 
+
 const HomeProducts = () => {
   const dispatch = useDispatch();
   const [coordinates, setCoordinates] = useState("");
