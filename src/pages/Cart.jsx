@@ -25,72 +25,7 @@ const Cart = () => {
     return totalPrice;
   }
 
-  const products = [
-    {
-      id: 1,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Organic Shampoo",
-      description: "Seller name",
-      size: "Xl, Sm, M, L",
-      price: "₹299",
-    },
-    {
-      id: 2,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Luxury Handmade Soap",
-      description: "Pamper your skin with our  ",
-      size: "Xl, Sm, M, L",
-      price: "$34.67",
-    },
-    {
-      id: 2,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Luxury Handmade Soap",
-      description: "Pamper your skin with our  ",
-      size: "Xl, Sm, M, L",
-      price: "$34.67",
-    },
-    {
-      id: 3,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Anti-Aging Face Cream",
-      description: "Pamper your skin with our ",
-      size: "Xl, Sm, M, L",
-      price: "$28.67",
-    },
-    {
-      id: 4,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Exfoliating Body Scrub",
-      description: "Pamper your skin with our ",
-      size: "Xl, Sm, M, L",
-      price: "$24.67",
-    },
-    {
-      id: 5,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Hydrating Lip Balm",
-      description: "Pamper your skin with our ",
-      size: "Xl, Sm, M, L",
-      price: "$21.27",
-    },
-    {
-      id: 5,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Hydrating Lip Balm",
-      description: "Pamper your skin with our ",
-      size: "Xl, Sm, M, L",
-      price: "$21.27",
-    },
-    {
-      id: 5,
-      img: "http://localhost:5173/src/components/images/product.png",
-      name: "Hydrating Lip Balm",
-      description: "Pamper your skin with our ",
-      size: "Xl, Sm, M, L",
-      price: "$21.27",
-    },
-  ];
+ 
 
   //redux code start
 
@@ -98,7 +33,6 @@ const Cart = () => {
   const cartData = cart.items;
   const wishListData = cart.wishList;
   const totalQuantity = useSelector(selectTotalQuantity);
-  console.log("newcart",cart);
 
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart({ product_id: productId }));
@@ -115,7 +49,7 @@ const Cart = () => {
   const handleDeleteFromWishList = (productId) => {
     dispatch(deleteWishList({ product_id: productId }));
   };
-  console.log("cartData",cartData);
+
   return (
     <>
     
@@ -150,19 +84,10 @@ const Cart = () => {
                         </div>
                         <div className="col-lg-5 col-md-6 mb-4 mb-lg-0">
                           <p>
-                            <strong>{cart_item.product_name}</strong>
+                            <strong>{cart_item.client_name}</strong>
                           </p>
                           <p>Color: {cart_item.product_color1}</p>
                           <p>Size: {cart_item.product_size}</p>
-                          <div
-                          className="mt-1 line-clamp-1"
-                          style={{ textAlign: "justify" }}
-                         >
-                          {/* code end by ganesh */}
-                         {cart_item.product_discription}
-
-                          
-                        </div>
                           <br></br>
                           <button
                             className="btn btn-danger mx-2"
@@ -372,7 +297,7 @@ const Cart = () => {
                   <h5 className="mb-0">Recommended Items</h5>
                 </div>
                 <div className="d-flex gap-3   overflow-x-auto my-3">
-                  {products.map((prod, index) => (
+                  {cartData.map((prod, index) => (
                     <div
                       key={index}
                       className="d-flex  flex-column justify-content-between bg-light  shadow rounded px-4"
@@ -380,14 +305,20 @@ const Cart = () => {
                     >
                       <img
                         className="w-100 h-50 rounded"
-                        src={prod.img}
+                        src={prod.product_image1}
                         alt={`Image ${prod.id}`}
                       />
                       <div className="d-flex flex-column justify-content-between p-1">
                         <div className="d-flex flex-column">
-                          <h1 className="fs-4">{prod.name}</h1>
-                          <p className="text-muted">{prod.description}</p>
-                          <p className="text-muted">{prod.size}</p>
+                          <h1 className="fs-4">{prod.product_name}</h1>
+                          <p className="text-muted fs-6">  {prod.product_discription.length > 40
+                            ? prod.product_discription.slice(0, 40) + "..."
+                            : prod.product_discription}</p>
+                          <div className="d-flex justify-content-between flex-wrap">
+                          <p className="text-muted">{prod.product_size}</p>
+                          <p className="text-muted">{prod.product_price}</p>
+                          </div>
+                        
                         </div>
                         <div className="d-flex justify-content-center align-items-center fs-4 my-1 pb-1 mt-auto">
                           <button className="btn  btn-dark w-100">❤</button>
