@@ -38,6 +38,9 @@ import Catlog from "./components/catlog.jsx";
 
 const App = () => {
   const location = useLocation();
+  const signInData = localStorage.getItem("user");
+  const parsedSignInData = JSON.parse(signInData);
+  console.log("parsedSignInData", parsedSignInData)
 
   // Function to determine if header should be shown based on route
   const showHeader = () => {
@@ -63,7 +66,8 @@ const App = () => {
         <Route exact path="/" element={<Home />} />
         {/* <Route path="/signin" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
-        <Route path="/orders" element={<OrdersPage />} />
+        {parsedSignInData?<Route path="/orders" element={<OrdersPage />} />:""}
+        {/* <Route path="/orders" element={<OrdersPage />} /> */}
         <Route path="/about" element={<About />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/feedback" element={<Feedback />} />
