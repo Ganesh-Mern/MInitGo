@@ -58,7 +58,9 @@ function Header() {
   const [pincode, setPincode] = useState("");
   const [townDistrict, setTownDistrict] = useState("");
   const [state, setState] = useState("");
-
+  const signInData = localStorage.getItem("user");
+  const parsedSignInData = JSON.parse(signInData);
+  console.log("parsedSignInData", parsedSignInData)
 
   const handleSnackbarClose = () => {
     setShowSnackbar(false);
@@ -583,7 +585,7 @@ const [weatherData, setWeatherData] = useState(null);
 
                 <NavDropdown.Divider />
               </NavDropdown>
-              <Link
+              {parsedSignInData ? <Link
                 to="/orders"
                 //updated//sonali
                 className="nav-link text-decoration-none text-dark my-2"
@@ -591,7 +593,16 @@ const [weatherData, setWeatherData] = useState(null);
                 // className="nav-link text-decoration-none text-dark "
               >
                 Orders
-              </Link>
+              </Link>:""}
+              {/* <Link
+                to="/orders"
+                //updated//sonali
+                className="nav-link text-decoration-none text-dark my-2"
+                //original code
+                // className="nav-link text-decoration-none text-dark "
+              >
+                Orders
+              </Link> */}
 
               {/* <Link to="/cart" className='text-secondary' style={{ fontSize: '33px', margin: '-5.8% 0 0 0' }}><BiCartAlt /></Link> */}
               <Link
