@@ -1640,3 +1640,27 @@ button:hover {
   opacity: 0.6; /* Makes the card look faded */
   pointer-events: none; /* Prevents any interaction */
 }
+
+
+.dot {
+ height: 0.8rem;  
+ width: 0.8rem;
+  background-color: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+      opacity: 1;
+  }
+  25%, 75% {
+      opacity: 0;
+  }
+}
+
+@media screen and (min-width: 344px) and (max-width: 344px) {
+.minitgo-logo{
+  width: 60px !important;
+}
+}

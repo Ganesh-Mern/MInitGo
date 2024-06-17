@@ -1,4 +1,4 @@
- import Dropdown from "react-bootstrap/Dropdown";
+import Dropdown from "react-bootstrap/Dropdown";
 import cartIcon from "../assets/cart-icon.svg";
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
@@ -56,6 +56,29 @@ export default function Catlog() {
     );
   };
 
+  function truncateText(elementId, wordLimit) {
+    console.log('truncateText called');
+    const element = document.getElementById(elementId);
+    if (element) {
+      console.log('Element found:', element);
+      const text = element.innerText;
+      const words = text.split(' ');
+      console.log("words.length",words.length)
+
+      if (words.length >= 5) {
+        console.log("if in")
+        const truncatedText = words.slice(0, 4).join(' ') + '...';
+        element.innerText = truncatedText;
+      }
+    } else {
+      console.log('Element not found:', elementId);
+    }
+  }
+
+  useEffect(() => {
+    truncateText('addressDisplay', 4); 
+  }, [addressDisplay]);
+
 
   // State to manage the dropdown title
   const locationHY = (
@@ -84,10 +107,12 @@ export default function Catlog() {
         <div className="inr-catlog catlog-names  text-center  container-fluid ">
           <div className="nav-link  cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
             {/* code end by ganesh */}
-            <div className="dropdown bg-secondary rounded text-white"> 
+            <div className="dropdown bg-secondary rounded text-white">
               <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <FaLocationDot className="fs-4 p-1 mb-1" />
-             <span > Delivery Address</span>   <span> {addressDisplay}</span>
+                {/* <span > Delivery Address</span> */}
+
+                <span id="addressDisplay">{addressDisplay}</span>
               </button>
               <ul className="dropdown-menu" aria-labelledby="locationDropdown">
                 <li>
@@ -107,8 +132,8 @@ export default function Catlog() {
                 </li>
               </ul>
             </div>
-              {/* added [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
-            <Link to={{ pathname: "/accessories", search: `?category=Accessories` }} style={{   color: "#dfd7d7", fontSize: "16px", textDecoration:"none" ,paddingTop:"2px", fontWeight:"bolder" }}>
+            {/* added [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
+            <Link to={{ pathname: "/accessories", search: `?category=Accessories` }} style={{ color: "#dfd7d7", fontSize: "16px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}>
               <span className="mt-3 ">Fashion</span>
             </Link>
             <Link
@@ -116,31 +141,31 @@ export default function Catlog() {
                 pathname: "/mens-category",
                 search: `?category=Men's Fashion`,
               }}
-              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
             > <span className="mt-1  ">Mens</span></Link>
             <Link
               to={{
                 pathname: "/womens-category",
                 search: `?category=Women's Fashion`,
               }}
-              style={{  color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"  }}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
             ><span className="mt-1 ">Women's</span></Link>
             <Link
-              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
             ><span className="mt-1 ">Kids</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
             ><span className="mt-1 ">Other</span></Link>
             <Link
               to={{
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{  color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"}}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
             >
               <span className="mt-1 ">Best deals</span></Link>
             <Link
@@ -148,11 +173,8 @@ export default function Catlog() {
                 pathname: "/accessories",
                 search: `?category=Accessories`,
               }}
-              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder" }}
+              style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
             > <span className="mt-1 ">Offers</span></Link>
-          {/*  updated till this [fontSize: "16px", textDecoration:"none" ,paddingTop:"2px",fontWeight:"bolder"] by sonali */}
-
-            {/* Add other links */}
           </div>
 
           {/* Add the image and dropdown for mobile view */}
@@ -188,38 +210,38 @@ export default function Catlog() {
         </div>
 
 
-      
 
 
 
 
-      {/* filter modal */}
-      <div
-        className="modal fade bottom"
-        id="filterModal"
-        tabIndex="-1"
-        aria-labelledby="filterModal"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable filter-modal">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="filterModal">
-                Filter
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <Filter mobileView={mobileView} />
+
+        {/* filter modal */}
+        <div
+          className="modal fade bottom"
+          id="filterModal"
+          tabIndex="-1"
+          aria-labelledby="filterModal"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable filter-modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="filterModal">
+                  Filter
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <Filter mobileView={mobileView} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
       {/* modal end */}
     </>
