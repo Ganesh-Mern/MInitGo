@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BsTrash3 } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import myContext from "../components/context/MyContext";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -12,10 +12,22 @@ import {
   deleteWishList,
 } from "../components/redux/Slices/CartSlice";
 import { selectTotalQuantity } from "../components/redux/Slices/CartSlice.js";
+import { useLocation } from "react-router-dom";
+import { Col, Modal, Row } from "react-bootstrap";
+import Login from "../pages/Signin.jsx";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const context = useContext(myContext);
+  const [loginModal, setLoginModal] = useState(false);
+  const locationState = useLocation();
+  const openLoginModal = locationState?.state?.openLoginModal;
+
+  useEffect(() => {
+    if (openLoginModal) {
+      setLoginModal(true);
+    }
+  }, [openLoginModal]);
 
   function calculateTotalPrice() {
     let totalPrice = 0;
@@ -25,7 +37,10 @@ const Cart = () => {
     return totalPrice;
   }
 
- 
+
+  const signInData = localStorage.getItem("user");
+  const parsedSignInData = JSON.parse(signInData);
+  console.log("signInData", signInData)
 
   //redux code start
 
@@ -52,7 +67,7 @@ const Cart = () => {
 
   return (
     <>
-    
+
       <section className="h-100 gradient-custom">
         <div className="container h-100">
           <div className="row justify-content-center my-4">
@@ -282,12 +297,22 @@ const Cart = () => {
                       </span>
                     </li>
                   </ul>
-                  {cartData.length > 0 && (
+                  {cartData?.length > 0 && parsedSignInData?.userId ? (
                     <Link to="/checkout">
                       <button className="btn btn-lg btn-block btn-primary">
                         Go to checkout
                       </button>
                     </Link>
+                  ) : (
+                    <>
+                      <div className="btn btn-lg btn-block btn-primary"
+                        onClick={() => setLoginModal(true)}
+                      >
+                        Login
+                      </div>
+                      <p>Please Login here</p>
+                    </>
+
                   )}
                 </div>
               </div>
@@ -315,10 +340,10 @@ const Cart = () => {
                             ? prod.product_discription.slice(0, 40) + "..."
                             : prod.product_discription}</p>
                           <div className="d-flex justify-content-between flex-wrap">
-                          <p className="text-muted">{prod.product_size}</p>
-                          <p className="text-muted">{prod.product_price}</p>
+                            <p className="text-muted">{prod.product_size}</p>
+                            <p className="text-muted">{prod.product_price}</p>
                           </div>
-                        
+
                         </div>
                         <div className="d-flex justify-content-center align-items-center fs-4 my-1 pb-1 mt-auto">
                           <button className="btn  btn-dark w-100">❤</button>
@@ -337,6 +362,23 @@ const Cart = () => {
           </div>
         </div>
       </section>
+
+
+
+      <Modal
+        show={loginModal}
+        onHide={() => setLoginModal(false)}
+        aria-labelledby="example-custom-modal-styling-title"
+        className=" bg-opacity"
+      >
+        <Modal.Body
+          className="p-0 rounded-4 d-flex w-max "
+          style={{ minWidth: "100%" }}
+        >
+
+          <Login closeLoginModal={() => setLoginModal(false)} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

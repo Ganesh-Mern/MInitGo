@@ -6,11 +6,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import myContext from "../components/context/MyContext";
 import { Link } from "react-router-dom";
+import SignUp from "../pages/SignUp.jsx";
 
 const Login = ({ closeLoginModal }) => {
   // Shubham- Login functionality starts here
-
-
+ 
   const [rememberMe, setRememberMe] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
   const [userid, setUserID] = useState("");
@@ -19,7 +19,7 @@ const Login = ({ closeLoginModal }) => {
 
   const context=useContext(myContext)
 
-  const {forgetPasswordModal, setForgetPasswordModal}=context;
+  const {forgetPasswordModal, setForgetPasswordModal,setShowModal}=context;
 
   const handleRememberMeChange = (event) => {
     setRememberMe(event.target.checked);
@@ -33,105 +33,6 @@ const Login = ({ closeLoginModal }) => {
 
 
 
-  // function handleSubmit(e) {
- 
-  //   e.preventDefault();
-  //   console.log(userid);
-  //   console.log(password);
-  //   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  //   const phonePattern = /^[0-9]{7}$/;
-  //   if (userid === "" || password === "") {
-  //      if (userid === "" ) {
-  //     toast.error("All fields are required", {
-  //       autoClose: 1000,
-  //       hideProgressBar: true,
-  //     });
-  //     return;
-  //   } else if (!emailPattern.test(userid) && !phonePattern.test(userid)) {
-  //     toast.error("Please enter a valid email or phone number", {
-  //       autoClose: 1000,
-  //       hideProgressBar: true,
-  //     });
-  //     return;
-  //   } else if (password.length < 8 || password.length > 12) {
-  //     toast.error("Password must be between 8 and 12 characters long", {
-  //       autoClose: 1000,
-  //       hideProgressBar: true,
-  //     });
-  //     return;
-  //   } else {
-  //     console.log("USER ID:", userid);
-  //     console.log("PASS:", password);
-
-  //     const data = {
-  //       email: userid,
-  //       password: password,
-  //     };
-  //     axios
-  //       .get("https://minitgo.com/api/fetch_login.php")
-  //       .then((response) => {
-  //         if (response.data && response.data.length > 0) {
-  //           const allUsers = response.data;
-
-  //           const foundUser = allUsers.find(
-  //             (user) => user.email === data.email
-  //           );
-
-  //           if (foundUser) {
-  //             // User with the provided email is found
-  //             if (foundUser.password === data.password) {
-  //               console.log("Login successful");
-  //               closeLoginModal();
-  //               toast.success("Login successfull", {
-  //                 autoClose: 1000,
-  //                 hideProgressBar: true,
-  //               });
-
-  //               const userData = {
-  //                 userId: foundUser.id,
-  //                 fullName: foundUser.full_name,
-  //                 phoneNumber: foundUser.phone_number,
-  //                 email: foundUser.email,
-  //                 address: foundUser.Address,
-  //                 officeAddress: foundUser.office_address,
-  //                 lat: foundUser.lat,
-  //                 log: foundUser.log,
-  //               };
-
-  //               localStorage.setItem("user", JSON.stringify(userData));
-
-  //               console.log("FOUNDUSER,", userData);
-
-  //               setUserID("");
-  //               setPassword("");
-  //             } else {
-  //               toast.error("Invalid Password", {
-  //                 autoClose: 1000,
-  //                 hideProgressBar: true,
-  //               });
-  //               console.log("Invalid password");
-  //             }
-  //           } else {
-  //             toast.error("Invalid Email", {
-  //               autoClose: 1000,
-  //               hideProgressBar: true,
-  //             });
-  //           }
-  //         } else {
-  //           toast.error("Server Error", {
-  //             autoClose: 1000,
-  //             hideProgressBar: true,
-  //           });
-  //         }
-  //         window.location.reload();
-
-  //       })
-  //       .catch((error) => {
-  //         console.error("Failed to fetch user information:", error);
-  //       });
-  //   }
-  // }
- 
 
   // code start by younus ansari
 
@@ -307,7 +208,8 @@ const Login = ({ closeLoginModal }) => {
                   Forgot Password?
                 </div>
                 <div>
-                <Link to="/register"  className=" d-flex align-items-center ">
+                  {/* signup modal */}
+                <Link  className=" d-flex align-items-center "  onClick={() => setShowModal(true)}>
                   Create an Account!
                 </Link>
                 </div>
