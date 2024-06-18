@@ -46,6 +46,7 @@ const Cart = () => {
 
   const cart = useSelector((state) => state.cart);
   const cartData = cart.items;
+  console.log(cartData,"cartData")
   const wishListData = cart.wishList;
   const totalQuantity = useSelector(selectTotalQuantity);
 
