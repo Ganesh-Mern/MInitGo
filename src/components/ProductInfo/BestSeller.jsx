@@ -58,7 +58,7 @@ function BestSellers() {
     <div className="container" onWheel={handleWheelScroll}>
       <div
         id="best-seller"
-        className="carousel slide"
+        className="carousel slide "
         data-bs-ride="carousel"
         ref={carouselRef}
       >

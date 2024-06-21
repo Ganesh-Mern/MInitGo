@@ -613,17 +613,14 @@ const HomeProducts = () => {
                           )}
                       </div>
 
-                      <div
-                        className="d-flex align-items-center mt-2 px-2"
-                        id="btns-sections"
-                      >
-                        <div className="  cart-button  w-100 d-flex justify-content-between">
+                      
+                        <div className=" cart-btn px-1">
                           <button
                             className={`btn ${
                               wishlistClicked[index]
                                 ? "btn-success"
                                 : "btn-primary"
-                            } w-20 my-2`}
+                            } w-21 my-2`}
                             // style={{ height: "20px", fill: "white" }}
                             onClick={() => handleWishListToCart(product, index)}
                           >
@@ -638,7 +635,7 @@ const HomeProducts = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  // </div>
                 ))
               )}
             </div>

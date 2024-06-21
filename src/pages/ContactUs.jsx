@@ -7,7 +7,7 @@ function ContactUs() {
   }, []);
 
   return (
-    <div className="container py-2 mb-2" style={{ marginTop: "4vh" }}>
+    <div className="container py-2 mb-4" style={{ marginTop: "4vh"  }}>
       <div className="row">
         <div className="col-md-6 text-dark">
           <h3 className="text-center text-md-start display-5 ">
