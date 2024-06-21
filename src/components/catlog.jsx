@@ -112,7 +112,7 @@ export default function Catlog() {
                 <FaLocationDot className="fs-4 p-1 mb-1" />
                 {/* <span > Delivery Address</span> */}
 
-                <span id="addressDisplay">{addressDisplay}</span>
+                <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "16px"}}>{addressDisplay}</span>
               </button>
               <ul className="dropdown-menu" aria-labelledby="locationDropdown">
                 <li>
