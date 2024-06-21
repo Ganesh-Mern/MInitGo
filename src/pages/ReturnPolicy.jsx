@@ -122,6 +122,8 @@ function ReturnPolicy() {
           </div>
         </section>
       </div>
+      <br />
+      <br />
     </div>
   );
 }

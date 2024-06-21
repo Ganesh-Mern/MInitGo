@@ -255,13 +255,13 @@ const Mens = () => {
           <Filter brand="Test" />
 
           <div className="col-md-10">
-            <div className="row">
+            <div className="row ">
               {filteredProducts?.map((product, index) => (
                 <div
                   key={index}
-                  className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2"
+                  className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2 "
                 >
-                  <div className="product-card">
+                  <div className="product-card ">
                     <a
                       href={`/${product.product_id}`}
                       target="_blank"
@@ -324,7 +324,7 @@ const Mens = () => {
                             textDecoration: "none",
                             color: "black",
                           }}
-                          className="fw-semibold"
+                          className="fw-semibold "
                         >
                           {windowWidth <= 1024
                             ? product.product_name.length > 15
@@ -360,7 +360,7 @@ const Mens = () => {
                         <div
                           className="d-flex justify-content-between "
                           style={{ fontSize: "14px" }}
-                        >
+                         >
                           <div>
                             <span className="fw-semibold"></span>{" "}
                             <span>{product.material}</span>
@@ -374,7 +374,7 @@ const Mens = () => {
                         <div
                           className="mt-1 clamped-text"
                           style={{ textAlign: "justify" }}
-                        >
+                         >
                           {/* code end by ganesh */}
                           {windowWidth <= 576
                             ? product.product_discription.length > 20
@@ -419,9 +419,9 @@ const Mens = () => {
                       </div>
                     </a>
 
-                    <div className="d-flex cart-button  justify-content-center align-items-center gap-2">
+                    <div className="cart-btn px-1">
                       <button
-                        className="btn btn-secondary  ms-2"
+                        className="btn btn-secondary  "
                         onClick={() => handleAddToCart(product, index)}
                       >
                         <img
@@ -432,7 +432,7 @@ const Mens = () => {
                       </button>
                       <button
                         onClick={() => handleAddToCart(product, index)}
-                        className="btn btn-primary my-2  ms-2 px-2 py-1"
+                        className="btn btn-primary my-2  ms-2 px-2 "
                       >
                         Add to cart
                       </button>
@@ -444,6 +444,8 @@ const Mens = () => {
           </div>
         </div>
       </div>
+      <br/>
+      <br/>
     </>
   );
 };

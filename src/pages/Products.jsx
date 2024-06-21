@@ -472,7 +472,7 @@ console.log(products);
                         </div>
                       </div>
 
-                      <div className="product-content d-flex flex-column gap-1 pt-3  px-1 ">
+                      <div className="product-content d-flex flex-column gap-1 pt-3  px-1 pb-3  ">
                         <div className="" style={{ height:"40px",fontSize: "14px" ,gap:"2px" ,display:"flex" , justifyContent:"space-between" }}>
                          <div className="text-sm line-clamp-1"> {product.category}</div>
                           {isNewProduct(product.date) && (
@@ -549,9 +549,9 @@ console.log(products);
                       </div>
 
                       {/* Buttons */}
-                      <div className="d-flex  justify-content-center align-items-center gap-2">
+                      <div className="cart-btn px-2">
                         <button
-                          className="btn btn-secondary  ms-2"
+                          className="btn btn-secondary  "
                           onClick={() => handleAddToCart(product, index)}
                         >
                           <img
@@ -560,7 +560,7 @@ console.log(products);
                             style={{ height: "20px" }}
                           />
                         </button>
-                        <button className="btn btn-primary my-2  ms-2 px-2 py-1">
+                        <button className="btn btn-primary my-2  ms-2 ">
                           <Link
                             to="/checkout"
                             style={{ textDecoration: "none", color: "#000" }}
@@ -577,6 +577,8 @@ console.log(products);
           </div>
         </div>
       </div>
+      <br></br>
+
     </>
   );
 };

@@ -462,9 +462,9 @@ const Accessories = () => {
                       </div>
                     </a>
 
-                    <div className="d-flex cart-button  justify-content-center align-items-center gap-2">
+                    <div className="cart-btn px-1">
                       <button
-                        className="btn btn-secondary  ms-2"
+                        className="btn btn-secondary  "
                         onClick={() => handleAddToCart(product, index)}
                       >
                         <img
@@ -475,7 +475,7 @@ const Accessories = () => {
                       </button>
                       <button
                         onClick={() => handleAddToCart(product, index)}
-                        className="btn btn-primary my-2  ms-2 px-2 py-1"
+                        className="btn btn-primary my-2  ms-2 px-2 "
                       >
                         Add to cart
                       </button>
@@ -487,6 +487,8 @@ const Accessories = () => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
     </>
   );
 };

@@ -149,9 +149,9 @@ function AdsCarousel({ products }) {
                     </div>
                   </a>
 
-                  <div className="d-flex justify-content-center align-items-center gap-2">
+                  <div className="cart-btn px-1">
                     <button
-                      className="btn btn-primary  ms-2"
+                      className="btn btn-secondary  "
                       onClick={() => handleAddToCart(product, index)}
                     >
                       <img
@@ -160,7 +160,7 @@ function AdsCarousel({ products }) {
                         style={{ height: "20px" }}
                       />
                     </button>
-                    <button className="btn btn-primary my-2  ms-2 px-2 py-1">
+                    <button className="btn btn-primary my-2  ms-2 px-2">
                       Buy Now
                     </button>
                   </div>
@@ -204,6 +204,8 @@ function AdsCarousel({ products }) {
           ></span>
         </button>
       </div>
+      <br/>
+      <br/>
     </>
   );
 }

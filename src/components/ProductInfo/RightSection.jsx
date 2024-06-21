@@ -157,7 +157,7 @@ function RightSection({ productId }) {
               <div className="d-flex gap-3 pb-1">
                     <button
                       onClick={() => handleAddToCart(product)}
-                      className="btn btn-primary "
+                      className="btn btn-secondary"
                       style={{width:'60px'}}
                     >
                     <img src={cartIcon} alt="AddToCart" style={{width:'20px',height:'100%'}} />
@@ -168,7 +168,7 @@ function RightSection({ productId }) {
                         Buy Now
                       </button>
                     </Link>
-                  </div>
+              </div>
 
               <div className="d-flex flex-column gap-1 ">
                 <h2 className="  fs-4 text-start">Description</h2>
