@@ -1611,6 +1611,15 @@ button:hover {
   align-items: center;
   justify-content: center;
   justify-content: space-between;
+  /* justify-content: end; */
+}
+.cart-btn1{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: space-between; */
+  justify-content: end;
 }
 /*code started by isha*/
 .FilterHeadingCss {

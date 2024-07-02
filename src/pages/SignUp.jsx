@@ -6,15 +6,13 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import myContext from "../components/context/MyContext";
 
-
 // SHUBHAM- SignUp functioanlity
 
 function SignUp() {
-
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
 
-  const [latLong,setLatLong]=useState('');
+  const [latLong, setLatLong] = useState("");
 
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -45,7 +43,7 @@ function SignUp() {
           if (prevTimer === 1) {
             clearInterval(intervalId);
             setSendOTPagain(false);
-            return 30; 
+            return 30;
           }
           return prevTimer - 1;
         });
@@ -53,7 +51,7 @@ function SignUp() {
     }
 
     return () => {
-      clearInterval(intervalId); 
+      clearInterval(intervalId);
     };
   }, [showOTP, sendOTPagain]);
 
@@ -86,6 +84,7 @@ function SignUp() {
     }
   }
 
+  
   function verifySentOTP() {
     const otpInputs = document.querySelectorAll(".otp-input");
     let enteredOTP = "";
@@ -97,7 +96,6 @@ function SignUp() {
     console.log("ENTERED OTP:", enteredOTP);
 
     if (enteredOTP === OTP) {
-      
       axios
         .post(
           "https://minitgo.com/api/user_reg.php",
@@ -105,9 +103,9 @@ function SignUp() {
           {}
         )
         .then((response) => {
-          // console.log("RESPONSE", response);
+          console.log("RESPONSE", response);
           const responseData = response.data.message;
-          if (responseData==='Data inserted successfully.') {
+          if (responseData === "Data inserted successfully.") {
             const userData = {
               userId: credentials.id,
               fullName: credentials.full_name,
@@ -134,7 +132,6 @@ function SignUp() {
           console.error("Login failed:", error);
         });
       navigate("/");
-
     } else {
       toast.error("Invalid OTP. Please try again.", {
         autoClose: 1000,
@@ -146,9 +143,9 @@ function SignUp() {
   function handleRegister(e) {
     e.preventDefault();
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    
+
     const phonePattern = /^[0-9]{10}$/;
-  
+
     if (
       fullName === "" ||
       phoneNumber === "" ||
@@ -185,83 +182,90 @@ function SignUp() {
         .then((response) => {
           if (response.data && response.data.length > 0) {
             const allUsers = response.data;
-  
+
             const foundUser = allUsers.find((user) => user.email === email);
-  
+
             if (foundUser) {
               toast.error("Email already exists", {
                 autoClose: 1000,
                 hideProgressBar: true,
               });
               return;
-            } else {
-              handleUseCurrentLocation().then(({ latitude, longitude }) => {
-                setLatLong({lat:latitude,log:longitude})
-
-              })
-
-              const data = {
-                full_name: fullName,
-                phone_number: phoneNumber,
-                email: email,
-                password: password,
-                Address: addresss,
-                lat:latLong.lat,
-                log: latLong.log,
-              };
-  
-              setCredentials(data);
-  
-              // console.log("DATA", data);
-  
-              const OTPvalue = generateOTP();
-  
-              setOTP(OTPvalue);
-  
-              sendOTPtoEmail(OTPvalue);
-  
-            }
+            } 
           }
         })
         .catch((error) => {
           console.error("Failed to fetch user information:", error);
         });
     }
+    const data = {
+      lat: "37.7749,-122.4194",
+      log: "37.7749,-122.4194",
+      Address: "123 Main St, San Francisco, CA 94103",
+      full_name: "John Doe",
+      phone_number: "123-456-7890",
+      office_address:
+        "456 Office Plaza, Suite 789, San Francisco, CA 94103",
+      email: "john.doe@example.com",
+      password: "securepassword123",
+      landmark: "Near Central Park",
+    };
+    setCredentials(data);
+    console.log("cred",credentials);
+    const OTPvalue = generateOTP();
+
+    setOTP(OTPvalue);
+
+    sendOTPtoEmail(OTPvalue);
   }
-  
 
- 
+  // const handleUseCurrentLocation = () => {
+  //   return new Promise((resolve, reject) => {
+  //     // Use browser geolocation API to get the current location
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         async (position) => {
+  //           const { latitude, longitude } = position.coords;
+  //           resolve({ latitude, longitude });
 
+  //           // try {
+  //           //   const response = await fetch(
+  //           //     `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`
+  //           //   );
+  //           //   const data = await response.json();
+  //           //   if (data.results.length > 0) {
+  //           //     const { components } = data.results[0];
+  //           //     setAddress(components.road || "");
+  //           //     setCity(
+  //           //       components.city || components.town || components.village || ""
+  //           //     );
+  //           //     setPincode(components.postcode || "");
+  //           //     setTownDistrict(components.town || components.district || "");
+  //           //     setState(components.state || "");
+
+  //           //   } else {
+  //           //     reject(new Error("No results found"));
+  //           //   }
+  //           // } catch (error) {
+  //           //   reject(error);
+  //           // }
+  //         },
+  //         (error) => {
+  //           reject(error);
+  //         }
+  //       );
+  //     } else {
+  //       reject(new Error("Geolocation not supported"));
+  //     }
+  //   });
+  // };
   const handleUseCurrentLocation = () => {
     return new Promise((resolve, reject) => {
-      // Use browser geolocation API to get the current location
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          async (position) => {
+          (position) => {
             const { latitude, longitude } = position.coords;
-              resolve({ latitude, longitude });
-
-            // try {
-            //   const response = await fetch(
-            //     `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`
-            //   ); 
-            //   const data = await response.json();
-            //   if (data.results.length > 0) {
-            //     const { components } = data.results[0];
-            //     setAddress(components.road || "");
-            //     setCity(
-            //       components.city || components.town || components.village || ""
-            //     );
-            //     setPincode(components.postcode || "");
-            //     setTownDistrict(components.town || components.district || "");
-            //     setState(components.state || "");
-  
-            //   } else {
-            //     reject(new Error("No results found"));
-            //   }
-            // } catch (error) {
-            //   reject(error);
-            // }
+            resolve({ latitude, longitude });
           },
           (error) => {
             reject(error);
@@ -272,7 +276,6 @@ function SignUp() {
       }
     });
   };
-  
 
   return (
     <>

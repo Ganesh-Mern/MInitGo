@@ -130,7 +130,7 @@ const Login = ({ closeLoginModal }) => {
               hideProgressBar: true,
             });
           }
-          window.location.reload();
+          // window.location.reload();
         })
         .catch((error) => {
           console.error("Failed to fetch user information:", error);

@@ -419,8 +419,8 @@ const Mens = () => {
                       </div>
                     </a>
 
-                    <div className="cart-btn px-1">
-                      <button
+                    <div className="cart-btn1 px-1">
+                      {/* <button
                         className="btn btn-secondary  "
                         onClick={() => handleAddToCart(product, index)}
                       >
@@ -429,7 +429,7 @@ const Mens = () => {
                           src={cartIcon}
                           style={{ height: "20px" }}
                         />
-                      </button>
+                      </button> */}
                       <button
                         onClick={() => handleAddToCart(product, index)}
                         className="btn btn-primary my-2  ms-2 px-2 "
