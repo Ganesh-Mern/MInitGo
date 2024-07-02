@@ -12,7 +12,8 @@ function SignUp() {
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
 
-  const [latLong, setLatLong] = useState("");
+  // const [latLong, setLatLong] = useState({ lat: null, log: null });
+  const [location, setLocation] = useState({ lat: null, log: null });
 
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -26,7 +27,7 @@ function SignUp() {
   const [OTP, setOTP] = useState("");
   const [showSignUpModal, setShowSignUpModal] = useState(true);
 
-  const [credentials, setCredentials] = useState("");
+  const [credentials, setCredentials] = useState({});
 
   const navigate = useNavigate();
 
@@ -116,6 +117,7 @@ function SignUp() {
               lat: credentials.lat,
               log: credentials.log,
             };
+            console.log("userdata",userData);
             localStorage.setItem("user", JSON.stringify(userData));
             setShowOTP(false);
             setShowSignUpModal(false);
@@ -176,7 +178,7 @@ function SignUp() {
         hideProgressBar: true,
       });
       return;
-    } else {
+    } else  {
       axios
         .get("https://minitgo.com/api/fetch_login.php")
         .then((response) => {
@@ -199,15 +201,14 @@ function SignUp() {
         });
     }
     const data = {
-      lat: "37.7749,-122.4194",
-      log: "37.7749,-122.4194",
-      Address: "123 Main St, San Francisco, CA 94103",
-      full_name: "John Doe",
-      phone_number: "123-456-7890",
-      office_address:
-        "456 Office Plaza, Suite 789, San Francisco, CA 94103",
-      email: "john.doe@example.com",
-      password: "securepassword123",
+      lat: location.lat,
+      log: location.log,
+      Address: addresss,
+      full_name: fullName,
+      phone_number: phoneNumber,
+      office_address:addresss,
+      email: email,
+      password: password,
       landmark: "Near Central Park",
     };
     setCredentials(data);
@@ -218,63 +219,23 @@ function SignUp() {
 
     sendOTPtoEmail(OTPvalue);
   }
-
-  // const handleUseCurrentLocation = () => {
-  //   return new Promise((resolve, reject) => {
-  //     // Use browser geolocation API to get the current location
-  //     if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition(
-  //         async (position) => {
-  //           const { latitude, longitude } = position.coords;
-  //           resolve({ latitude, longitude });
-
-  //           // try {
-  //           //   const response = await fetch(
-  //           //     `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=YOUR_API_KEY`
-  //           //   );
-  //           //   const data = await response.json();
-  //           //   if (data.results.length > 0) {
-  //           //     const { components } = data.results[0];
-  //           //     setAddress(components.road || "");
-  //           //     setCity(
-  //           //       components.city || components.town || components.village || ""
-  //           //     );
-  //           //     setPincode(components.postcode || "");
-  //           //     setTownDistrict(components.town || components.district || "");
-  //           //     setState(components.state || "");
-
-  //           //   } else {
-  //           //     reject(new Error("No results found"));
-  //           //   }
-  //           // } catch (error) {
-  //           //   reject(error);
-  //           // }
-  //         },
-  //         (error) => {
-  //           reject(error);
-  //         }
-  //       );
-  //     } else {
-  //       reject(new Error("Geolocation not supported"));
-  //     }
-  //   });
-  // };
   const handleUseCurrentLocation = () => {
-    return new Promise((resolve, reject) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            resolve({ latitude, longitude });
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-      } else {
-        reject(new Error("Geolocation not supported"));
-      }
-    });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            log: position.coords.longitude,
+          });
+        },
+        (err) => {
+          setError(err.message);
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
+    }
+    console.log(location.log);
   };
 
   return (
