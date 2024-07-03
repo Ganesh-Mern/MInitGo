@@ -193,30 +193,31 @@ function SignUp() {
                 hideProgressBar: true,
               });
               return;
-            } else{
-              const data = {
-                lat: location.lat,
-                log: location.log,
-                Address: addresss,
-                full_name: fullName,
-                phone_number: phoneNumber,
-                office_address: addresss,
-                email: email,
-                password: password,
-                landmark: "Near Central Park",
-              };
-              setCredentials(data);
-              console.log("cred", data);
-              const OTPvalue = generateOTP();
-              setOTP(OTPvalue);
-              sendOTPtoEmail(OTPvalue);
+            } 
             }
-            }
+            const data = {
+              lat: location.lat,
+              log: location.log,
+              Address: addresss,
+              full_name: fullName,
+              phone_number: phoneNumber,
+              office_address: addresss,
+              email: email,
+              password: password,
+              landmark: "Near Central Park",
+            };
+            setCredentials(data);
+            console.log("cred", data);
+            const OTPvalue = generateOTP();
+            setOTP(OTPvalue);
+            sendOTPtoEmail(OTPvalue);
+            setShowOTP(true)
           }
         )
         .catch((error) => {
           console.error("Failed to fetch user information:", error);
         });
+        
     }
   }
   const handleUseCurrentLocation = () => {
