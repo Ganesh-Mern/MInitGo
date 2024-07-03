@@ -149,20 +149,21 @@ function AdsCarousel({ products }) {
                     </div>
                   </a>
 
-                  <div className="cart-btn px-1">
+                  <div className="cart-btn d-flex justify-content-end mb-1 px-2">
                     <button
-                      className="btn btn-secondary  "
+                      className="btn btn-secondary text-dark"
                       onClick={() => handleAddToCart(product, index)}
                     >
-                      <img
+                      {/* <img
                         className="img-fluid"
                         src={cartIcon}
                         style={{ height: "20px" }}
-                      />
+                      /> */}
+                      Add To Cart
                     </button>
-                    <button className="btn btn-primary my-2  ms-2 px-2">
+                    {/* <button className="btn btn-primary my-2  ms-2 px-2">
                       Buy Now
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
