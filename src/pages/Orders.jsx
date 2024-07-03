@@ -26,6 +26,7 @@ const OrdersPage = () => {
       axios
         .post("https://minitgo.com/api/user_orders.php", postData)
         .then((response) => {
+          console.log(response.data.data);
           if (Array.isArray(response.data.data)) {
             setOrderData(response.data.data);
           } else {

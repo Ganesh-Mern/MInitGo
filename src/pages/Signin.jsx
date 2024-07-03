@@ -92,6 +92,7 @@ const Login = ({ closeLoginModal }) => {
                   autoClose: 1000,
                   hideProgressBar: true,
                 });
+                window.location.reload();
  
                 const userData = {
                   userId: foundUser.id,

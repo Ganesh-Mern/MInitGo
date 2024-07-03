@@ -236,8 +236,8 @@ function SignUp() {
     } else {
       setError("Geolocation is not supported by this browser.");
     }
-    console.log(location.log);
   };
+  console.log(location);
 
   return (
     <>
