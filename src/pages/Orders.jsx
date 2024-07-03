@@ -272,10 +272,10 @@ const OrdersPage = () => {
                                         <div className="d-flex flex-wrap align-items-center py-3">
                                           {order.product_status.toLowerCase() === 'delivered' ? (
                                             <Link to="/" className="btn btn-disabled mx-1 disabled" role="button" aria-disabled="">
-                                              Track
+                                              Cancel Order
                                             </Link>
                                           ) : <Link to="/" className="btn btn-primary mx-1" role="button" aria-disabled="">
-                                            Track
+                                            Cancel Order
                                           </Link>
 
                                           }
