@@ -22,9 +22,11 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [timer, setTimer] = useState(30);
   const [sendOTPagain, setSendOTPagain] = useState(false);
+  const [buttonText, setButtonText] = useState("Use Current Location");
 
   const [showOTP, setShowOTP] = useState(false);
   const [OTP, setOTP] = useState("");
+  const [OTPExpiry, setOTPExpiry] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(true);
 
   const [credentials, setCredentials] = useState({});
@@ -34,6 +36,7 @@ function SignUp() {
   const context = useContext(myContext);
 
   const { showModal, setShowModal } = context;
+  // const otpRefs = useRef([]);
 
   useEffect(() => {
     let intervalId;
@@ -44,6 +47,7 @@ function SignUp() {
           if (prevTimer === 1) {
             clearInterval(intervalId);
             setSendOTPagain(false);
+            setOTPExpiry(true);
             return 30;
           }
           return prevTimer - 1;
@@ -60,6 +64,7 @@ function SignUp() {
     setTimer(30);
     setShowOTP(true);
     setSendOTPagain(true);
+    setOTPExpiry(false);
     toast.success("OTP sent successfully", {
       autoClose: 1000,
       hideProgressBar: true,
@@ -77,6 +82,10 @@ function SignUp() {
     const newOTP = generateOTP();
     setOTP(newOTP);
     sendOTPtoEmail(newOTP);
+    const otpInputs = document.querySelectorAll(".otp-input");
+    otpInputs.forEach((input) => {
+      input.value = "";
+    });
   }
 
   function sendOTPtoEmail(OTP) {
@@ -85,7 +94,6 @@ function SignUp() {
     }
   }
 
-  
   function verifySentOTP() {
     const otpInputs = document.querySelectorAll(".otp-input");
     let enteredOTP = "";
@@ -95,8 +103,13 @@ function SignUp() {
     });
 
     console.log("ENTERED OTP:", enteredOTP);
-
-    if (enteredOTP === OTP) {
+    if (OTPExpiry) {
+      toast.error("OTP expired. Please request a new OTP.", {
+        autoClose: 1000,
+        hideProgressBar: true,
+      });
+      return; // Stop execution if OTP is expired
+    } else if (enteredOTP === OTP) {
       axios
         .post(
           "https://minitgo.com/api/user_reg.php",
@@ -117,7 +130,7 @@ function SignUp() {
               lat: credentials.lat,
               log: credentials.log,
             };
-            console.log("userdata",userData);
+            console.log("userdata", userData);
             localStorage.setItem("user", JSON.stringify(userData));
             setShowOTP(false);
             setShowSignUpModal(false);
@@ -178,7 +191,7 @@ function SignUp() {
         hideProgressBar: true,
       });
       return;
-    } else  {
+    } else {
       axios
         .get("https://minitgo.com/api/fetch_login.php")
         .then((response) => {
@@ -186,6 +199,9 @@ function SignUp() {
             const allUsers = response.data;
 
             const foundUser = allUsers.find((user) => user.email === email);
+            const foundUserByPhone = allUsers.find(
+              (user) => user.phone_number === phoneNumber
+            );
 
             if (foundUser) {
               toast.error("Email already exists", {
@@ -193,34 +209,40 @@ function SignUp() {
                 hideProgressBar: true,
               });
               return;
-            } 
             }
-            const data = {
-              lat: location.lat,
-              log: location.log,
-              Address: addresss,
-              full_name: fullName,
-              phone_number: phoneNumber,
-              office_address: addresss,
-              email: email,
-              password: password,
-              landmark: "Near Central Park",
-            };
-            setCredentials(data);
-            console.log("cred", data);
-            const OTPvalue = generateOTP();
-            setOTP(OTPvalue);
-            sendOTPtoEmail(OTPvalue);
-            setShowOTP(true)
+            if (foundUserByPhone) {
+              toast.error("Phone number already exists", {
+                autoClose: 1000,
+                hideProgressBar: true,
+              });
+              return;
+            }
           }
-        )
+          const data = {
+            lat: location.lat,
+            log: location.log,
+            Address: addresss,
+            full_name: fullName,
+            phone_number: phoneNumber,
+            office_address: addresss,
+            email: email,
+            password: password,
+            landmark: "Near Central Park",
+          };
+          setCredentials(data);
+          console.log("cred", data);
+          const OTPvalue = generateOTP();
+          setOTP(OTPvalue);
+          sendOTPtoEmail(OTPvalue);
+          setShowOTP(true);
+        })
         .catch((error) => {
           console.error("Failed to fetch user information:", error);
         });
-        
     }
   }
   const handleUseCurrentLocation = () => {
+    setButtonText("Fetching current location...");
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -228,17 +250,30 @@ function SignUp() {
             lat: position.coords.latitude,
             log: position.coords.longitude,
           });
+          setButtonText("Location fetched successfully");
+          toast.success("Location fetched successfully", {
+            autoClose: 1000,
+            hideProgressBar: true,
+          });
         },
         (err) => {
           setError(err.message);
+          setButtonText("Try again....");
+          toast.error("Failed to fetch location: " + err.message, {
+            autoClose: 1000,
+            hideProgressBar: true,
+          });
         }
       );
     } else {
       setError("Geolocation is not supported by this browser.");
+      toast.error("Geolocation is not supported by this browser.", {
+        autoClose: 1000,
+        hideProgressBar: true,
+      });
     }
+    console.log(location);
   };
-  console.log(location);
-
   return (
     <>
       {showOTP ? (
@@ -517,7 +552,7 @@ function SignUp() {
                 />
               </Form>
               <Button variant="secondary" onClick={handleUseCurrentLocation}>
-                Use Current Location
+                {buttonText}
               </Button>
 
               <Button
