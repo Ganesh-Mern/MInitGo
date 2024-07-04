@@ -181,6 +181,29 @@ function Header() {
   }, [user]);
 
   useEffect(() => {
+    
+     if (searchQuery !== "") {
+      setSelectedCategory("");
+
+      const normalizedQuery = searchQuery
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9 ]/g, "");
+
+      const suggestions = products.filter((product) => {
+        product.product_name.toLowerCase().includes(searchQuery.toLowerCase());
+        // Normalize the product name for comparison
+        const normalizedProductName = product.product_name
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        return normalizedProductName.includes(normalizedQuery);
+      });
+      setSearchSuggestions(suggestions);
+    } else {
+      setSearchSuggestions([]);
+    }
+  }, [searchQuery, products]);
+console.log("search ",searchQuery);
+  const handleGoButton = () => {
     const lowerCaseQuery = searchQuery.toLowerCase();
     const filteredProducts = products.filter((product) =>
       Object.values(product).some(value =>
@@ -198,41 +221,6 @@ function Header() {
       // console.log();
       setSearchSuggestions([]);
     }
-    //  if (searchQuery !== "") {
-    //   setSelectedCategory("");
-
-    //   const normalizedQuery = searchQuery
-    //     .toLowerCase()
-    //     .replace(/[^a-zA-Z0-9 ]/g, "");
-
-    //   const suggestions = products.filter((product) => {
-    //     product.product_name.toLowerCase().includes(searchQuery.toLowerCase());
-    //     // Normalize the product name for comparison
-    //     const normalizedProductName = product.product_name
-    //       .toLowerCase()
-    //       .replace(/[^a-zA-Z0-9 ]/g, "");
-    //     return normalizedProductName.includes(normalizedQuery);
-    //   });
-    //   setSearchSuggestions(suggestions);
-    // } else {
-    //   setSearchSuggestions([]);
-    // }
-  }, [searchQuery, products]);
-console.log("search ",searchQuery);
-  const handleGoButton = () => {
-    // if (searchQuery !== "" && searchSuggestions.length === 0) {
-    //   // console.log(`No products found for "${searchQuery}"`);
-    //   toast.error(`No products found for "${searchQuery}"`, {
-    //     autoClose: 1000,
-    //     hideProgressBar: true,
-    //   });
-    // } else 
-    if (searchQuery !== "") {
-      navigate("/products", { state: { data: searchSuggestions } });
-    } else {
-      navigate("/products");
-    }
-    setSearchSuggestions([]);
   };
 
   const handleSuggestionClick = (productName) => {
