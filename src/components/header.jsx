@@ -581,7 +581,13 @@ function Header() {
 
                 <NavDropdown.Divider />
               </NavDropdown>
-              {parsedSignInData ? <Link
+              <Link
+                to="/orders"
+                className="nav-link text-decoration-none text-dark my-2"
+              >
+                Orders
+              </Link>
+              {/* {parsedSignInData ? <Link
                 to="/orders"
                 //updated//sonali
                 className="nav-link text-decoration-none text-dark my-2"
@@ -589,16 +595,7 @@ function Header() {
               // className="nav-link text-decoration-none text-dark "
               >
                 Orders
-              </Link>:""}
-              {/* <Link
-                to="/orders"
-                //updated//sonali
-                className="nav-link text-decoration-none text-dark my-2"
-                //original code
-                // className="nav-link text-decoration-none text-dark "
-              >
-                Orders
-              </Link> */}
+              </Link>:""} */}
 
               {/* <Link to="/cart" className='text-secondary' style={{ fontSize: '33px', margin: '-5.8% 0 0 0' }}><BiCartAlt /></Link> */}
               <Link

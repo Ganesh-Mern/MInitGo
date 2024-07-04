@@ -146,6 +146,7 @@ const OrdersPage = () => {
 
                     <div className=" border bg-body-tertiary  mt-3" style={{ borderRadius: "10px" }}>
                       <div className="card-header px-4 py-4 col d-flex flex-column gap-2  ">
+                      {parsedSignInData.userId && (
                         <div className=" d-flex ">
                           <h5 className="text-muted mb-0  ">
                             Thanks for your Order,{" "}
@@ -154,7 +155,7 @@ const OrdersPage = () => {
                             </span>
                             !
                           </h5>
-                        </div>
+                        </div>)}
                       </div>
                     </div>
                   </div>
