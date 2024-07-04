@@ -521,10 +521,7 @@ function Header() {
               <NavDropdown
                 title={login}
                 id="collasible-nav-dropdown"
-                //updates//sonali
                 className="Dropdown my-2 "
-              // //original code
-              // className="Dropdown "
               >
                 {fullName && (
                   <>
@@ -581,23 +578,13 @@ function Header() {
 
                 <NavDropdown.Divider />
               </NavDropdown>
-              <Link
+              {parsedSignInData ? <Link
                 to="/orders"
                 className="nav-link text-decoration-none text-dark my-2"
               >
                 Orders
-              </Link>
-              {/* {parsedSignInData ? <Link
-                to="/orders"
-                //updated//sonali
-                className="nav-link text-decoration-none text-dark my-2"
-              //original code
-              // className="nav-link text-decoration-none text-dark "
-              >
-                Orders
-              </Link>:""} */}
+              </Link>:""}
 
-              {/* <Link to="/cart" className='text-secondary' style={{ fontSize: '33px', margin: '-5.8% 0 0 0' }}><BiCartAlt /></Link> */}
               <Link
                 to="/cart"
                 className="text-secondary position-relative   "
@@ -610,11 +597,7 @@ function Header() {
                   <img
                     src={cartIcon}
                     alt="Cart"
-                    //updated code//sonali
                     className="w-100 mx-auto "
-                    // origial code
-                    // className="w-100 mx-auto "
-
                     style={{ height: "40px", marginRight: "50px", marginLeft: "20px" }}
                   />
                   <h6
