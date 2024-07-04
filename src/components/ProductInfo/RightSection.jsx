@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 import myContext from "../context/MyContext";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../components/redux/Slices/CartSlice";
+import { toast } from "react-toastify";
 
 function RightSection({ productId }) {
   const [cart, setCart] = useState([]);
@@ -47,6 +48,16 @@ function RightSection({ productId }) {
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(addToCart(product));
+    toast.success('Item added to cart!', {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   };
 
 
@@ -157,17 +168,11 @@ function RightSection({ productId }) {
               <div className="d-flex gap-3 pb-1">
                     <button
                       onClick={() => handleAddToCart(product)}
-                      className="btn btn-secondary"
-                      style={{width:'60px'}}
+                      className="btn btn-primary my-2  ms-2 px-2 "
+                      // style={{width:'60px'}}
                     >
-                    <img src={cartIcon} alt="AddToCart" style={{width:'20px',height:'100%'}} />
+                    Add to cart
                     </button>
-
-                    <Link to="/checkout" style={{width:'150px'}}>
-                      <button className="btn btn-primary   w-100">
-                        Buy Now
-                      </button>
-                    </Link>
               </div>
 
               <div className="d-flex flex-column gap-1 ">

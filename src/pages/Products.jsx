@@ -549,25 +549,32 @@ console.log(products);
                       </div>
 
                       {/* Buttons */}
-                      <div className="cart-btn px-2">
+                      <div className="cart-btn px-1">
+                      <button
+                            className={`btn ${
+                              wishlistClicked[index]
+                                ? "btn-success"
+                                : "btn-primary"
+                            } w-21 my-2`}
+                            // style={{ height: "20px", fill: "white" }}
+                            onClick={() => handleWishListToCart(product, index)}
+                          >
+                            ❤
+                          </button>
                         <button
-                          className="btn btn-secondary  "
+                          className="btn btn-primary my-2  ms-2 px-2 "
                           onClick={() => handleAddToCart(product, index)}
                         >
-                          <img
-                            // className="img-fluid"
-                            src={cartIcon}
-                            style={{ height: "20px" }}
-                          />
+                          Add to cart
                         </button>
-                        <button className="btn btn-primary my-2  ms-2 ">
+                        {/* <button className="btn btn-primary my-2  ms-2 ">
                           <Link
                             to="/checkout"
                             style={{ textDecoration: "none", color: "#000" }}
                           >
                             Buy Now
                           </Link>
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>
