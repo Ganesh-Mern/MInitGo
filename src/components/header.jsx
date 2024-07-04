@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -15,7 +12,6 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.css";
 import Logo from "../components/images/minitgo.png";
 import profileIcon from "../assets/profile.svg";
-
 
 import {
   FaBox,
@@ -37,7 +33,10 @@ import { useContext } from "react";
 import myContext from "../components/context/MyContext.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectTotalQuantity, showSnackbar } from "../components/redux/Slices/CartSlice.js";
+import {
+  selectTotalQuantity,
+  showSnackbar,
+} from "../components/redux/Slices/CartSlice.js";
 import Login from "../pages/Signin.jsx";
 import { Col, Modal, Row } from "react-bootstrap";
 import SignUp from "../pages/SignUp.jsx";
@@ -48,10 +47,10 @@ import { FiLogIn } from "react-icons/fi";
 import { MdContactSupport, MdHelp, MdOutlineUpdate } from "react-icons/md";
 import { BsPersonCircle } from "react-icons/bs";
 import { PiHandshakeBold } from "react-icons/pi";
-import location from '../assets/redDot.png';
+import location from "../assets/redDot.png";
 import "./header.css";
 import ResetPassword from "./ResetPassword.jsx";
-
+import { toast } from "react-toastify";
 
 function Header() {
   const [address, setAddress] = useState("");
@@ -61,7 +60,31 @@ function Header() {
   const [state, setState] = useState("");
   const signInData = localStorage.getItem("user");
   const parsedSignInData = JSON.parse(signInData);
-  console.log("parsedSignInData", parsedSignInData)
+  console.log("parsedSignInData", parsedSignInData);
+
+
+  // const [query, setQuery] = useState('');
+  // const handleInputChange = (event) => {
+  //   setQuery(event.target.value);
+  // };
+  // const handleSearch = () => {
+  //   const lowerCaseQuery = query.toLowerCase();
+  //   const filteredProducts = products.filter((product) =>
+  //     Object.values(product).some(value =>
+  //       value.toString().toLowerCase().includes(lowerCaseQuery)
+  //     )
+  //   );
+
+  //   if (filteredProducts.length > 0) {
+  //     // setResults(filteredProducts);
+  //     console.log("filtered",filteredProducts);
+  //   } else {
+  //     toast.error('Result not found!');
+  //     // setResults([]);
+  //     console.log();
+  //   }
+  //   // Add your search functionality here
+  // };
 
   const handleSnackbarClose = () => {
     setShowSnackbar(false);
@@ -101,11 +124,8 @@ function Header() {
     forgetPasswordModal,
     addressStore,
     setAddressStore,
-    setOfficeAddressStore
-
-
+    setOfficeAddressStore,
   } = context;
-
 
   // code for serach
   const [searchSuggestions, setSearchSuggestions] = useState([]);
@@ -140,13 +160,13 @@ function Header() {
           image: userImage,
           number: userNumber,
           location: userLocation,
-          address: userLocation // Assuming userLocation is the address
+          address: userLocation, // Assuming userLocation is the address
         });
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
-    console.log('uss', userData)
+    console.log("uss", userData);
 
     fetchUserData();
   }, []);
@@ -156,35 +176,57 @@ function Header() {
       setAddressStore(userData.address);
     }
     if (userData && userData.officeAddress) {
-      setOfficeAddressStore(userData.officeAddress)
+      setOfficeAddressStore(userData.officeAddress);
     }
   }, [user]);
 
-
-
   useEffect(() => {
-    if (searchQuery !== "") {
-      setSelectedCategory("");
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    const filteredProducts = products.filter((product) =>
+      Object.values(product).some(value =>
+        value.toString().toLowerCase().includes(lowerCaseQuery)
+      )
+    );
 
-      const normalizedQuery = searchQuery
-        .toLowerCase()
-        .replace(/[^a-zA-Z0-9 ]/g, "");
-
-      const suggestions = products.filter((product) => {
-        product.product_name.toLowerCase().includes(searchQuery.toLowerCase());
-        // Normalize the product name for comparison
-        const normalizedProductName = product.product_name
-          .toLowerCase()
-          .replace(/[^a-zA-Z0-9 ]/g, "");
-        return normalizedProductName.includes(normalizedQuery);
-      });
-      setSearchSuggestions(suggestions);
+    if (filteredProducts.length > 0) {
+      // setResults(filteredProducts);
+      setSearchSuggestions(filteredProducts);
+      console.log("filtered",filteredProducts);
     } else {
+      toast.error(`Result not found! of ${searchQuery}`);
+      // setResults([]);
+      // console.log();
       setSearchSuggestions([]);
     }
-  }, [searchQuery, products]);
+    //  if (searchQuery !== "") {
+    //   setSelectedCategory("");
 
+    //   const normalizedQuery = searchQuery
+    //     .toLowerCase()
+    //     .replace(/[^a-zA-Z0-9 ]/g, "");
+
+    //   const suggestions = products.filter((product) => {
+    //     product.product_name.toLowerCase().includes(searchQuery.toLowerCase());
+    //     // Normalize the product name for comparison
+    //     const normalizedProductName = product.product_name
+    //       .toLowerCase()
+    //       .replace(/[^a-zA-Z0-9 ]/g, "");
+    //     return normalizedProductName.includes(normalizedQuery);
+    //   });
+    //   setSearchSuggestions(suggestions);
+    // } else {
+    //   setSearchSuggestions([]);
+    // }
+  }, [searchQuery, products]);
+console.log("search ",searchQuery);
   const handleGoButton = () => {
+    // if (searchQuery !== "" && searchSuggestions.length === 0) {
+    //   // console.log(`No products found for "${searchQuery}"`);
+    //   toast.error(`No products found for "${searchQuery}"`, {
+    //     autoClose: 1000,
+    //     hideProgressBar: true,
+    //   });
+    // } else 
     if (searchQuery !== "") {
       navigate("/products", { state: { data: searchSuggestions } });
     } else {
@@ -233,7 +275,7 @@ function Header() {
               setTownDistrict(components.town || components.district || "");
               setState(components.state || "");
             }
-          } catch (error) { }
+          } catch (error) {}
         },
         (error) => {
           return;
@@ -244,9 +286,14 @@ function Header() {
   };
 
   //code for location
-  {/*code started by isha */ }
-  const [locationForWeather, setLocationForWeather] = useState({ latitude: 17.385044, longitude: 78.486671, });
-  const [cityAccordingToLocation, setCityAccordingToLocation] = useState("")
+  {
+    /*code started by isha */
+  }
+  const [locationForWeather, setLocationForWeather] = useState({
+    latitude: 17.385044,
+    longitude: 78.486671,
+  });
+  const [cityAccordingToLocation, setCityAccordingToLocation] = useState("");
   const [error, setError] = useState(null);
   const API_KEY = "cdbf68f3afc557e674b97c9f52536ab6";
   const [weatherData, setWeatherData] = useState(null);
@@ -255,13 +302,15 @@ function Header() {
     if (locationForWeather.latitude && locationForWeather.longitude) {
       const fetchWeatherData = async () => {
         try {
-          const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${locationForWeather.latitude}&lon=${locationForWeather.longitude}&appid=${API_KEY}`);
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${locationForWeather.latitude}&lon=${locationForWeather.longitude}&appid=${API_KEY}`
+          );
           if (!response.ok) {
-            throw new Error('Failed to fetch weather data');
+            throw new Error("Failed to fetch weather data");
           }
           const data = await response.json();
           setWeatherData((data?.main?.temp - 273.15).toFixed(2));
-          setCityAccordingToLocation(data?.name)
+          setCityAccordingToLocation(data?.name);
         } catch (error) {
           setError(error.message);
         }
@@ -270,14 +319,15 @@ function Header() {
       fetchWeatherData();
     }
   }, [locationForWeather]);
-  {/*code end by isha */ }
+  {
+    /*code end by isha */
+  }
 
   const userData = JSON.parse(localStorage.getItem("user"));
 
   const fullName = userData ? userData.fullName : null;
   const userLocation = userData ? userData.address : null;
   const phoneNumber = userData ? userData.phoneNumber : null;
-
 
   function getInitials(fullName) {
     return fullName
@@ -293,37 +343,48 @@ function Header() {
     </span>
   );
 
-
   return (
     <>
       <Navbar
         collapseOnSelect
         expand="lg"
         className="fixed-top flex-wrap shadow "
-        style={{ background: '#e8d9b7' }}
+        style={{ background: "#e8d9b7" }}
       >
         <Container className="justify-content-between ">
           <Navbar.Brand className="d-flex  navbar-brand">
             <Link to="/">
               {/* sonali  */}
               {/* code start by ganesh */}
-              <img className="minitgo-logo" src={Logo} style={{ width: "100px", marginRight: "10px" }} />
+              <img
+                className="minitgo-logo"
+                src={Logo}
+                style={{ width: "100px", marginRight: "10px" }}
+              />
               {/* code end by ganesh */}
               {/* original code */}
               {/* <img className="minitgo-logo" src={Logo} style={{ width: "90px" }} /> */}
             </Link>
-            <div className="mobile-menu-logo d-lg-none d-flex profile-data " style={{ marginLeft: '2px' }}>
+            <div
+              className="mobile-menu-logo d-lg-none d-flex profile-data "
+              style={{ marginLeft: "2px" }}
+            >
               <span
                 className="profile d-flex align-items-centrer "
                 onClick={() => setShowLeftSideOffcanvas(true)}
               >
-
-                <CgProfile className="profile-icon " style={{ height: "2rem", width: "1.2rem" }} />
-
+                <CgProfile
+                  className="profile-icon "
+                  style={{ height: "2rem", width: "1.2rem" }}
+                />
               </span>
               {fullName && (
                 <div className="userData  ">
-                  <span style={{ fontSize: "13px",marginLeft:"1px" }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
+                  <span style={{ fontSize: "13px", marginLeft: "1px" }}>
+                    {fullName.length > 10
+                      ? fullName.substring(0, 12) + "..."
+                      : fullName}
+                  </span>
                   <span style={{ fontSize: "10px" }}>
                     <div className="d-flex">
                       {/* {userLocation && userLocation.length > 0 && (
@@ -334,36 +395,40 @@ function Header() {
                           </span>
                         </>
                       )} */}
-
                     </div>
-
                   </span>
                 </div>
               )}
-
             </div>
-
-
           </Navbar.Brand>
 
           {/* for mobile vieww */}
-          <div className="mobile-menu-logo d-lg-none d-flex align-items-center" >
+          <div className="mobile-menu-logo d-lg-none d-flex align-items-center">
             {/* weather add in mobile view */}
 
-            <div className="d-flex flex-column align-items-center temp-block px-1" >
-              <div className="d-flex  align-items-center justify-content-center" >
-                 <span className="dot"></span>
-                <div className="fw-semibold" style={{ fontSize: "13px" }}>{weatherData}&deg;C</div>
+            <div className="d-flex flex-column align-items-center temp-block px-1">
+              <div className="d-flex  align-items-center justify-content-center">
+                <span className="dot"></span>
+                <div className="fw-semibold" style={{ fontSize: "13px" }}>
+                  {weatherData}&deg;C
+                </div>
               </div>
               <div>
-                <div style={{ fontSize: "10px" }}>{cityAccordingToLocation}</div>
+                <div style={{ fontSize: "10px" }}>
+                  {cityAccordingToLocation}
+                </div>
               </div>
             </div>
 
-
             {/* cart button */}
             <Link
-              to="/cart" style={{ color: "#000" ,paddingLeft:"2px ",paddingRight:"2px"}}>
+              to="/cart"
+              style={{
+                color: "#000",
+                paddingLeft: "2px ",
+                paddingRight: "2px",
+              }}
+            >
               <div
                 className="nav-link cat-nav d-lg-none d-block text-center "
                 style={{ position: "relative" }}
@@ -376,11 +441,13 @@ function Header() {
                 />
                 <h6
                   className="QTYValue"
-                  style={{ position: "absolute", top: "-0.3rem", left: "0.8rem" }}
-
+                  style={{
+                    position: "absolute",
+                    top: "-0.3rem",
+                    left: "0.8rem",
+                  }}
                 >
                   {totalQuantity}
-
                 </h6>
               </div>
             </Link>
@@ -388,20 +455,24 @@ function Header() {
             <BiMenuAltRight
               className="mobile-menu-logo d-lg-none hamIcon"
               onClick={() => setShowOffcanvas(true)}
-              style={{ fontSize: "33px",paddingLeft:"1px" }}
+              style={{ fontSize: "33px", paddingLeft: "1px" }}
             />
           </div>
 
           <Navbar.Collapse id="responsive-navbar-nav">
-
             <Nav className="me-auto  ">
               <NavDropdown
                 title={dropdownTitle}
                 id="collasible-nav-dropdown"
                 // updated sonali
 
-                style={{ border: "2.6px solid #d8dfab", borderRadius: "13px", marginLeft: "3px", background: "#f2b057" }}
-              // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
+                style={{
+                  border: "2.6px solid #d8dfab",
+                  borderRadius: "13px",
+                  marginLeft: "3px",
+                  background: "#f2b057",
+                }}
+                // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
               >
                 <NavDropdown.Item
                   onClick={() => {
@@ -409,7 +480,7 @@ function Header() {
                       latitude: 17.385044,
                       longitude: 78.486671,
                     });
-                    handleDropdownItemClick("Hyderabad")
+                    handleDropdownItemClick("Hyderabad");
                   }}
                 >
                   <FaLocationCrosshairs /> Hyderabad
@@ -421,7 +492,7 @@ function Header() {
                       latitude: 19.075983,
                       longitude: 72.877655,
                     });
-                    handleDropdownItemClick("Mumbai")
+                    handleDropdownItemClick("Mumbai");
                   }}
                 >
                   Mumbai
@@ -429,10 +500,10 @@ function Header() {
                 <NavDropdown.Item
                   onClick={() => {
                     setLocationForWeather({
-                      latitude: 28.704060,
+                      latitude: 28.70406,
                       longitude: 77.102493,
                     });
-                    handleDropdownItemClick("Delhi")
+                    handleDropdownItemClick("Delhi");
                   }}
                 >
                   Delhi
@@ -443,7 +514,7 @@ function Header() {
                       latitude: 12.971599,
                       longitude: 77.594566,
                     });
-                    handleDropdownItemClick("Bangalore")
+                    handleDropdownItemClick("Bangalore");
                   }}
                 >
                   Bangalore
@@ -461,6 +532,8 @@ function Header() {
               className=" search-box"
               aria-label="Search"
               value={searchQuery}
+              // value={query}
+              // onChange={handleInputChange}
               onChange={handleSearchInputChange}
               onKeyPress={handleKeyPress}
             />
@@ -475,10 +548,10 @@ function Header() {
               // style={{ margin: "0 0px 0 32px"}}
               variant="outline-success"
               onClick={handleGoButton}
+              // onClick={handleSearch}
             >
               GO
             </Button>
-
 
             <div
               className="suggestion position-absolute"
@@ -554,7 +627,7 @@ function Header() {
                   </NavDropdown.Item>
                 ) : (
                   <>
-                    <NavDropdown.Item >
+                    <NavDropdown.Item>
                       <div
                         onClick={() => setShowModal(true)}
                         style={{ color: "blue" }}
@@ -578,12 +651,16 @@ function Header() {
 
                 <NavDropdown.Divider />
               </NavDropdown>
-              {parsedSignInData ? <Link
-                to="/orders"
-                className="nav-link text-decoration-none text-dark my-2"
-              >
-                Orders
-              </Link>:""}
+              {parsedSignInData ? (
+                <Link
+                  to="/orders"
+                  className="nav-link text-decoration-none text-dark my-2"
+                >
+                  Orders
+                </Link>
+              ) : (
+                ""
+              )}
 
               <Link
                 to="/cart"
@@ -598,7 +675,11 @@ function Header() {
                     src={cartIcon}
                     alt="Cart"
                     className="w-100 mx-auto "
-                    style={{ height: "40px", marginRight: "50px", marginLeft: "20px" }}
+                    style={{
+                      height: "40px",
+                      marginRight: "50px",
+                      marginLeft: "20px",
+                    }}
                   />
                   <h6
                     className=" w-100  position-absolute text-center "
@@ -612,15 +693,13 @@ function Header() {
 
               {/* weather add in desktop view */}
               <div className="d-flex flex-column align-items-center  gap-x-5 pt-1">
-
-                <div className="d-flex  align-items-center justify-content-center" >
+                <div className="d-flex  align-items-center justify-content-center">
                   <span className="dot"></span>
                   <span className="fw-semibold">{weatherData}&deg;C</span>
                 </div>
                 <div>
                   <p style={{ fontSize: "10px" }}>{cityAccordingToLocation}</p>
                 </div>
-
               </div>
             </Nav>
           </Navbar.Collapse>
@@ -644,7 +723,6 @@ function Header() {
               className=" search-btn"
               variant="outline-success"
               onClick={handleGoButton}
-
             >
               Go
             </Button>
@@ -717,17 +795,13 @@ function Header() {
           className="p-0 rounded-4 d-flex w-max "
           style={{ minWidth: "100%" }}
         >
-
           <Login closeLoginModal={() => setLoginModal(false)} />
         </Modal.Body>
       </Modal>
 
-      {
-        forgetPasswordModal && (
-          <ResetPassword setLoginModal={() => setLoginModal(true)} />
-        )
-      }
-
+      {forgetPasswordModal && (
+        <ResetPassword setLoginModal={() => setLoginModal(true)} />
+      )}
 
       {/* Offcanvas Sidebar */}
 
@@ -746,12 +820,15 @@ function Header() {
               width={100}
               // code start by ganesh
               height={30}
-            // code end by ganesh
+              // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="d-flex flex-column justify-content-center align-items-center border rounded   my-2 " style={{ height: '150px' }}>
+          <div
+            className="d-flex flex-column justify-content-center align-items-center border rounded   my-2 "
+            style={{ height: "150px" }}
+          >
             <img src="man-working.jpg" alt="IMG" className="w-100 h-100" />
           </div>
           {/* Sidebar content goes here */}
@@ -999,14 +1076,13 @@ function Header() {
               width={100}
               // code start by ganesh
               height={30}
-            // code end by ganesh
+              // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           {fullName && (
             <div className="d-flex flex-column justify-content-center align-items-center border rounded  py-4 my-2">
-
               <div
                 className="rounded rounded-circle  border-2 border-primary "
                 style={{
@@ -1014,9 +1090,10 @@ function Header() {
                   justifyContent: "center",
                   alignItems: "center",
                   fontSize: "1.5rem",
-                  height: '60px',
-                  width: '60px'
-                }}>
+                  height: "60px",
+                  width: "60px",
+                }}
+              >
                 {getInitials(fullName)}
               </div>
 
@@ -1033,7 +1110,7 @@ function Header() {
             {fullName && <></>}
 
             {fullName ? (
-              <div >
+              <div>
                 <div className=" py-3 px-2 w-100 ">
                   <Link
                     to="/profile"
@@ -1124,4 +1201,3 @@ function Header() {
 }
 
 export default Header;
-
