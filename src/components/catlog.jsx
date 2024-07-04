@@ -26,6 +26,9 @@ export default function Catlog() {
 
   const { products, addressStore, officeAddressStore, loginSuccess } = context;
   const [selectedAddress, setSelectedAddress] = useState(addressStore)
+  const signInData = localStorage.getItem("user");
+  const parsedSignInData = JSON.parse(signInData);
+  console.log("parsedSignInData", parsedSignInData);
 
 
   const location = useLocation();
@@ -181,10 +184,10 @@ export default function Catlog() {
           {showHyDropdown() && (
             <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-black">
               {/* // code start by ganesh */}
-              <div className="dropdown d-down  ">
+              <div className="dropdown d-down ">
                 {/* code end by ganesh */}
-                <button className="btn dropdown-toggle" type="button" id="mobileLocationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                  {dropdownTitle}
+                <button className="btn dropdown-toggle " type="button" id="mobileLocationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  {parsedSignInData.address}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="mobileLocationDropdown">
                   <li><a className="dropdown-item" href="#">Hyderabad</a></li>
@@ -192,6 +195,7 @@ export default function Catlog() {
                   <li><a className="dropdown-item" href="#">Delhi</a></li>
                   <li><a className="dropdown-item" href="#">Banglore</a></li>
                 </ul>
+                
               </div>
               {/* <span>
                 <img src="https://cdn.pixabay.com/photo/2016/11/21/16/55/high-heels-1846436_640.jpg" className="m-0 p-0 homeCatlogImg" style={{ height: "4rem", width: "12rem" }} />

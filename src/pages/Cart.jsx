@@ -298,7 +298,7 @@ const Cart = () => {
                       </span>
                     </li>
                   </ul>
-                  {cartData?.length > 0 && parsedSignInData?.userId ? (
+                  {parsedSignInData?.userId && cartData?.length > 0 ? (
                     <Link to="/checkout">
                       <button className="btn btn-lg btn-block btn-primary">
                         Go to checkout
@@ -306,14 +306,18 @@ const Cart = () => {
                     </Link>
                   ) : (
                     <>
-                      <div className="btn btn-lg btn-block btn-primary"
-                        onClick={() => setLoginModal(true)}
-                      >
-                        Login
-                      </div>
-                      <p>Please Login here</p>
+                      {!parsedSignInData?.userId && (
+                        <>
+                          <div
+                            className="btn btn-lg btn-block btn-primary"
+                            onClick={() => setLoginModal(true)}
+                          >
+                            Login
+                          </div>
+                          <p>Please Login here</p>
+                        </>
+                      )}
                     </>
-
                   )}
                 </div>
               </div>

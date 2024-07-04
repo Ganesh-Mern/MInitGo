@@ -127,6 +127,7 @@ function SignUp() {
               email: credentials.email,
               address: credentials.Address,
               officeAddress: credentials.office_address,
+              // user_coordinates:credentials.lat + "." + credentials.log,
               lat: credentials.lat,
               log: credentials.log,
             };

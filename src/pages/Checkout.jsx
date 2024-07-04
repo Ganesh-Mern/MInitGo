@@ -112,7 +112,6 @@ export const Checkout = () => {
       };
     });
     console.log("orderItems", orderItems);
-    localStorage.setItem("orderItems", JSON.stringify(orderItems));
     const sendOrderItem = async (orderItem) => {
       console.log("orderitem", orderItem);
       try {
@@ -138,6 +137,7 @@ export const Checkout = () => {
       alert("Failed to place order. Please try again.");
     }
   };
+  console.log("cart data",cart);
   // code end by ganesh
 
   return (
@@ -485,7 +485,9 @@ export const Checkout = () => {
                     <div className="modal-dialog">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h5 className="modal-title" id="placeOrderModal">
+                          <h5 className="modal-title" 
+                          id="placeOrderModal"
+                          >
                             Order Confirmation
                           </h5>
                           <button

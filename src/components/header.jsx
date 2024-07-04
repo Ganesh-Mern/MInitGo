@@ -312,28 +312,28 @@ function Header() {
               {/* original code */}
               {/* <img className="minitgo-logo" src={Logo} style={{ width: "90px" }} /> */}
             </Link>
-            <div className="mobile-menu-logo d-lg-none d-flex profile-data " style={{ marginLeft: '5px' }}>
+            <div className="mobile-menu-logo d-lg-none d-flex profile-data " style={{ marginLeft: '2px' }}>
               <span
                 className="profile d-flex align-items-centrer "
                 onClick={() => setShowLeftSideOffcanvas(true)}
               >
 
-                <CgProfile className="profile-icon " style={{ height: "2rem", width: "1.5rem" }} />
+                <CgProfile className="profile-icon " style={{ height: "2rem", width: "1.2rem" }} />
 
               </span>
               {fullName && (
-                <div className="userData  d-flex flex-column">
-                  <span style={{ fontSize: "10px" }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
+                <div className="userData  ">
+                  <span style={{ fontSize: "13px",marginLeft:"1px" }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
                   <span style={{ fontSize: "10px" }}>
                     <div className="d-flex">
-                      {userLocation && userLocation.length > 0 && (
+                      {/* {userLocation && userLocation.length > 0 && (
                         <>
                           <FaLocationDot className="fs-5 p-1 locationSymbolFold" />
                           <span style={{ fontSize: '12px' }}>
                             {userLocation.length > 0 ? userLocation.substring(0, 8) + '...' : userLocation}
                           </span>
                         </>
-                      )}
+                      )} */}
 
                     </div>
 
@@ -350,7 +350,7 @@ function Header() {
           <div className="mobile-menu-logo d-lg-none d-flex align-items-center" >
             {/* weather add in mobile view */}
 
-            <div className="d-flex flex-column align-items-center temp-block" >
+            <div className="d-flex flex-column align-items-center temp-block px-1" >
               <div className="d-flex  align-items-center justify-content-center" >
                  <span className="dot"></span>
                 <div className="fw-semibold" style={{ fontSize: "13px" }}>{weatherData}&deg;C</div>
@@ -363,7 +363,7 @@ function Header() {
 
             {/* cart button */}
             <Link
-              to="/cart" style={{ color: "#000" }}>
+              to="/cart" style={{ color: "#000" ,paddingLeft:"2px ",paddingRight:"2px"}}>
               <div
                 className="nav-link cat-nav d-lg-none d-block text-center "
                 style={{ position: "relative" }}
@@ -388,7 +388,7 @@ function Header() {
             <BiMenuAltRight
               className="mobile-menu-logo d-lg-none hamIcon"
               onClick={() => setShowOffcanvas(true)}
-              style={{ fontSize: "33px", }}
+              style={{ fontSize: "33px",paddingLeft:"1px" }}
             />
           </div>
 
