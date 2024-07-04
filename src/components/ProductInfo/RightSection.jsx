@@ -20,6 +20,7 @@ function RightSection({ productId }) {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState({});
+  // const [selectedSize, setSelectedSize] = useState("");
   const id = productId;
 
   const {handleImageClick}=useContext(myContext);
@@ -59,8 +60,15 @@ function RightSection({ productId }) {
     });
 
   };
+  const handleSizeClick = (size) => {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      product_size: size,
+    }));
+    console.log(product);
+  };
 
-
+console.log("products send ",product);
 
 
   return (
@@ -116,7 +124,7 @@ function RightSection({ productId }) {
                 </div>
               </div>
 
-              <div className="d-grid gap-1">
+              {/* <div className="d-grid gap-1">
                 <h2 className="fw-semibold fs-5 text-start">Select Size</h2>
                 <div
                   className="d-grid gap-4"
@@ -151,6 +159,28 @@ function RightSection({ productId }) {
                     2XL
                   </span>
                   
+                </div>
+              </div> */}
+              <div className="d-grid gap-1">
+                <h2 className="fw-semibold fs-5 text-start">Select Size</h2>
+                <div
+                  className="d-grid gap-4"
+                  style={{
+                    fontSize: "12px",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(35px, 1fr))",
+                  }}
+                >
+                  {["M", "S", "L", "XL", "2XL"].map((size) => (
+                    <button
+                      key={size}
+                      className={`border py-1 px-1 rounded text-center ${
+                        product.product_size=== size ? "bg-primary text-white" : "bg-body-secondary"
+                      }`}
+                      onClick={() => handleSizeClick(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
                 </div>
               </div>
 
