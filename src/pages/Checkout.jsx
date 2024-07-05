@@ -22,6 +22,7 @@ import {
   deleteWishList,
 } from "../components/redux/Slices/CartSlice";
 import { selectTotalQuantity } from "../components/redux/Slices/CartSlice.js";
+import { Toast } from "bootstrap";
 
 export const Checkout = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,12 @@ export const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("Cash On Delivery");
   const [selectedAddress, setSelectedAddress] = useState({
     type: "Home Address",
-    location: "1234 Random St, City, Country",
+    location: parsedSignInData.address,
   });
   const [isMobile, setIsMobile] = useState(false);
+  const [location, setLocation] = useState({ lat: null, log: null });
+  const [userLocation, setuserLocation] = useState("");
+  console.log("userlocation", userLocation);
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,6 +79,7 @@ export const Checkout = () => {
   };
   const handleConfirmOrder = async () => {
     const orderItems = cart.map((item) => {
+      
       return {
         product_id: item.pid,
         order_id: "78455",
@@ -88,7 +93,7 @@ export const Checkout = () => {
         client_coordinates: item.lat + "." + item.log,
         user_name: parsedSignInData.fullName,
         user_id: parsedSignInData.userId,
-        user_coordinates: item.coordinates,
+        user_coordinates: `${location.lat},${location.log}`,
         user_address: parsedSignInData.address,
         product_color:
           item.product_color1 ||
@@ -112,33 +117,74 @@ export const Checkout = () => {
       };
     });
     console.log("orderItems", orderItems);
-    const sendOrderItem = async (orderItem) => {
-      console.log("orderitem", orderItem);
-      try {
-        const response = await axios.post(
-          "https://minitgo.com/api/insert_order.php",
-          orderItem
-        );
-        console.log("response", response.data);
-        return response.data.status === true;
-      } catch (error) {
-        console.error("Error placing order:", error);
-        return false;
-      }
-    };
-    const results = await Promise.all(orderItems.map(sendOrderItem));
+    // const sendOrderItem = async (orderItem) => {
+    //   console.log("orderitem", orderItem);
+    //   try {
+    //     const response = await axios.post(
+    //       "https://minitgo.com/api/insert_order.php",
+    //       orderItem
+    //     );
+    //     console.log("response", response.data);
+    //     return response.data.status === true;
+    //   } catch (error) {
+    //     console.error("Error placing order:", error);
+    //     return false;
+    //   }
+    // };
+    // const results = await Promise.all(orderItems.map(sendOrderItem));
 
-    if (results.every((result) => result === true)) {
-      toast.success("Order successfully placed", {
+    // if (results.every((result) => result === true)) {
+    //   toast.success("Order successfully placed", {
+    //     autoClose: 1000,
+    //     hideProgressBar: true,
+    //   });
+    // } else {
+    //   alert("Failed to place order. Please try again.");
+    // }
+  };
+  console.log("cart data", cart);
+  // code end by ganesh
+  const handleUseCurrentLocation = () => {
+    // setButtonText("Fetching current location...");
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const newLocation = {
+            lat: position.coords.latitude,
+            log: position.coords.longitude,
+          };
+          setLocation(newLocation);
+          // Update cart items with the new location
+          const updatedCart = cart.map(item => ({
+            ...item,
+            coordinates: `${newLocation.lat},${newLocation.log}`,
+          }));
+          // Update cart state with new coordinates
+          updatedCart.forEach(item => {
+            item.coordinates = `${newLocation.lat},${newLocation.log}`;
+          });
+          setLocation(newLocation);
+          toast.success("Location fetched successfully", {
+            autoClose: 1000,
+            hideProgressBar: true,
+          });
+        },
+        (err) => {
+          setError(err.message);
+          toast.error("Failed to fetch location: " + err.message, {
+            autoClose: 1000,
+            hideProgressBar: true,
+          });
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
+      toast.error("Geolocation is not supported by this browser.", {
         autoClose: 1000,
         hideProgressBar: true,
       });
-    } else {
-      alert("Failed to place order. Please try again.");
     }
   };
-  console.log("cart data",cart);
-  // code end by ganesh
 
   return (
     <>
@@ -363,9 +409,11 @@ export const Checkout = () => {
                         checked={paymentMethod === "Paytm / GPay"}
                         onChange={() => setPaymentMethod("Paytm / GPay")}
                       />
+                      
                     </div>
                     <div className="rounded border d-flex w-100 p-3 align-items-center">
-                      <p className="mb-0 fw-semibold">
+                    pay after arrived via 
+                      <p className="mb-0 fw-semibold mx-2">
                         <SiPaytm
                           className="me-2"
                           style={{ height: "3rem", width: "3rem" }}
@@ -376,6 +424,7 @@ export const Checkout = () => {
                           style={{ height: "3rem", width: "3rem" }}
                         />
                       </p>
+                        {/* pay after arrived via  */}
                       {/* <div className="ms-auto">************1038</div>ss */}
                     </div>
                   </div>
@@ -392,7 +441,7 @@ export const Checkout = () => {
                           onChange={() =>
                             setSelectedAddress({
                               type: "Home Address",
-                              location: "1234 Random St, City, Country",
+                              location: parsedSignInData.address,
                             })
                           }
                         />
@@ -406,7 +455,7 @@ export const Checkout = () => {
                           Home Address
                         </p>
                         <span className="ms-auto fs-6">
-                          {"1234 Random St, City, Country"}
+                          {parsedSignInData.address}
                         </span>
                       </div>
                     </div>
@@ -420,7 +469,7 @@ export const Checkout = () => {
                           onChange={() =>
                             setSelectedAddress({
                               type: "Office Address",
-                              location: "5678 Business Ave, Town, Country",
+                              location: parsedSignInData.officeAddress,
                             })
                           }
                         />
@@ -435,7 +484,7 @@ export const Checkout = () => {
                           Office Address
                         </p>
                         <span className="ms-auto fs-6">
-                          {"5678 Business Ave, Town, Country"}
+                          {parsedSignInData.officeAddress}
                         </span>
                       </div>
                     </div>
@@ -455,7 +504,10 @@ export const Checkout = () => {
                         />
                       </div>
                       <div className="rounded border d-flex w-100 p-3 align-items-center">
-                        <button className="mb-0 fw-semibold btn btn-primary">
+                        <button
+                          className="mb-0 fw-semibold btn btn-primary"
+                          onClick={handleUseCurrentLocation}
+                        >
                           Use Current Address
                         </button>
                         {/* <span className="ms-auto fs-6">
@@ -485,9 +537,7 @@ export const Checkout = () => {
                     <div className="modal-dialog">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h5 className="modal-title" 
-                          id="placeOrderModal"
-                          >
+                          <h5 className="modal-title" id="placeOrderModal">
                             Order Confirmation
                           </h5>
                           <button
@@ -543,6 +593,14 @@ export const Checkout = () => {
                           </div>
                           <hr />
 
+                          <div className="px-3 total-amount d-flex justify-content-between align-items-center">
+                            <h3>Delivery Charges:</h3>
+                            <h5 className="text-success">
+                              {/* {calculateTotalPrice() + 350} */}
+                               RS
+                            </h5>
+                          </div>
+                          <hr />
                           <div className="px-3 total-amount d-flex justify-content-between align-items-center">
                             <h3>Total Amount:</h3>
                             <h5 className="text-success">
