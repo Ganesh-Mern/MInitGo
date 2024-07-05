@@ -187,7 +187,7 @@ export default function Catlog() {
               <div className="dropdown d-down ">
                 {/* code end by ganesh */}
                 <button className="btn dropdown-toggle " type="button" id="mobileLocationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                  {parsedSignInData.address}
+                  {/* {parsedSignInData.address} */}
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="mobileLocationDropdown">
                   <li><a className="dropdown-item" href="#">Hyderabad</a></li>
