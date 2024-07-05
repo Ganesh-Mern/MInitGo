@@ -221,7 +221,7 @@ function Header() {
         // alert("yes")
         navigate("/products", { state: { data: searchSuggestions } });
       } else {
-        toast.error(`Result not found! of ${searchQuery}`);
+        toast.error(`Result not found! for ${searchQuery}`);
       }
     }
     // if (searchQuery !== "") {
@@ -363,39 +363,22 @@ function Header() {
               {/* <img className="minitgo-logo" src={Logo} style={{ width: "90px" }} /> */}
             </Link>
             <div
-              className="mobile-menu-logo d-lg-none d-flex profile-data "
-              style={{ marginLeft: "2px" }}
+              className="mobile-menu-logo d-lg-none d-flex profile-data flex-column"
+              style={{ marginLeft: "2px", height: "20px" }}
             >
+              <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between" >
               <span
-                className="profile d-flex align-items-centrer "
+                className="profile align-items-centrer  d-flex flex-column "
                 onClick={() => setShowLeftSideOffcanvas(true)}
               >
-                <CgProfile
-                  className="profile-icon "
-                  style={{ height: "2rem", width: "1.2rem" }}
-                />
+ 
+                <CgProfile className="profile-icon " style={{ width: "2rem",height:"1.4rem" }} />
+                {fullName && (
+                  <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
+                )}
               </span>
-              {fullName && (
-                <div className="userData  ">
-                  <span style={{ fontSize: "13px", marginLeft: "1px" }}>
-                    {fullName.length > 10
-                      ? fullName.substring(0, 12) + "..."
-                      : fullName}
-                  </span>
-                  <span style={{ fontSize: "10px" }}>
-                    <div className="d-flex">
-                      {/* {userLocation && userLocation.length > 0 && (
-                        <>
-                          <FaLocationDot className="fs-5 p-1 locationSymbolFold" />
-                          <span style={{ fontSize: '12px' }}>
-                            {userLocation.length > 0 ? userLocation.substring(0, 8) + '...' : userLocation}
-                          </span>
-                        </>
-                      )} */}
-                    </div>
-                  </span>
-                </div>
-              )}
+ 
+            </div>
             </div>
           </Navbar.Brand>
 
@@ -419,13 +402,9 @@ function Header() {
 
             {/* cart button */}
             <Link
-              to="/cart"
-              style={{
-                color: "#000",
-                paddingLeft: "2px ",
-                paddingRight: "2px",
-              }}
-            >
+              to="/cart"  className="px-2" style={{ color: "#000" }}
+               
+              >
               <div
                 className="nav-link cat-nav d-lg-none d-block text-center "
                 style={{ position: "relative" }}
