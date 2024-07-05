@@ -117,30 +117,30 @@ export const Checkout = () => {
       };
     });
     console.log("orderItems", orderItems);
-    // const sendOrderItem = async (orderItem) => {
-    //   console.log("orderitem", orderItem);
-    //   try {
-    //     const response = await axios.post(
-    //       "https://minitgo.com/api/insert_order.php",
-    //       orderItem
-    //     );
-    //     console.log("response", response.data);
-    //     return response.data.status === true;
-    //   } catch (error) {
-    //     console.error("Error placing order:", error);
-    //     return false;
-    //   }
-    // };
-    // const results = await Promise.all(orderItems.map(sendOrderItem));
+    const sendOrderItem = async (orderItem) => {
+      console.log("orderitem", orderItem);
+      try {
+        const response = await axios.post(
+          "https://minitgo.com/api/insert_order.php",
+          orderItem
+        );
+        console.log("response", response.data);
+        return response.data.status === true;
+      } catch (error) {
+        console.error("Error placing order:", error);
+        return false;
+      }
+    };
+    const results = await Promise.all(orderItems.map(sendOrderItem));
 
-    // if (results.every((result) => result === true)) {
-    //   toast.success("Order successfully placed", {
-    //     autoClose: 1000,
-    //     hideProgressBar: true,
-    //   });
-    // } else {
-    //   alert("Failed to place order. Please try again.");
-    // }
+    if (results.every((result) => result === true)) {
+      toast.success("Order successfully placed", {
+        autoClose: 1000,
+        hideProgressBar: true,
+      });
+    } else {
+      alert("Failed to place order. Please try again.");
+    }
   };
   console.log("cart data", cart);
   // code end by ganesh
