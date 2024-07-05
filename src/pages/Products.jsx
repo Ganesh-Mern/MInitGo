@@ -122,11 +122,10 @@ const HomeProducts = () => {
 
     return distanceInKm.toFixed(2);
   };
-  
+
   useEffect(() => {
     setAccessoriesCategory("");
     setSelectedCategory("");
-    
 
     // Apply price filtering
     let productsToFilter = products;
@@ -256,29 +255,59 @@ const HomeProducts = () => {
     }
 
     // Apply category and search query filtering
-    const menRegex = /^(men|man|mens|men's)/;
+    // const menRegex = /^(men|man|mens|men's)/;
+    // const womenRegex = /^(women|woman|womens|women's)/;
+
+    // if (menRegex.test(lowerCaseSearchQuery)) {
+    //   const filtered = productsToFilter.filter(
+    //     (product) =>
+    //       product.category.toLowerCase().startsWith("men") ||
+    //       product.product_name.toLowerCase().startsWith("men")
+    //   );
+    //   setFilteredProducts(filtered);
+    // } else
+    // if (womenRegex.test(lowerCaseSearchQuery)) {
+    //   const filtered = productsToFilter.filter(
+    //     (product) =>
+    //       product.category.toLowerCase().startsWith("women") ||
+    //       product.product_name.toLowerCase().startsWith("women")
+    //   );
+    //   setFilteredProducts(filtered);
+    // } else
     const lowerCaseSearchQuery = searchQuery.toLowerCase();
+    const normalizedQuery = lowerCaseSearchQuery.replace(/[^a-zA-Z0-9 ]/g, "");
+    console.log("lowercase", lowerCaseSearchQuery);
+    if (lowerCaseSearchQuery.trim() !== "") {
+      const filtered = productsToFilter.filter((product) => {
+        // Normalize the product fields for comparison
+        const normalizedCategory = product.category
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        const normalizedProductTitle = product.product_title
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        const normalizedProductName = product.product_name
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        const normalizedDescription =
+          product.description?.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "") ||
+          "";
+        const normalizedBrand =
+          product.brand?.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "") || "";
+        const normalizedClientName =
+          product.client_name?.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "") ||
+          "";
 
-    if (menRegex.test(lowerCaseSearchQuery)) {
-      const filtered = productsToFilter.filter(
-        (product) =>
-          product.category.toLowerCase().startsWith("men") ||
-          product.product_name.toLowerCase().startsWith("men")
-      );
-      setFilteredProducts(filtered);
-    } else if (lowerCaseSearchQuery.trim() !== "") {
-      const filtered = productsToFilter.filter(
-        (product) =>
-          // code started by team
-          product.category.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.product_title.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.product_name.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.description?.toLowerCase().includes(lowerCaseSearchQuery) ||
-          product.brand?.toLowerCase().includes(lowerCaseSearchQuery)||
-          product.client_name?.toLowerCase().includes(lowerCaseSearchQuery)
-          // code end by team
-      );
-
+        return (
+          normalizedCategory.includes(normalizedQuery) ||
+          normalizedProductTitle.includes(normalizedQuery) ||
+          normalizedProductName.includes(normalizedQuery) ||
+          normalizedDescription.includes(normalizedQuery) ||
+          normalizedBrand.includes(normalizedQuery) ||
+          normalizedClientName.includes(normalizedQuery)
+        );
+      });
+      console.log("filtered productspage ",filtered);
       if (filtered.length > 0) {
         setFilteredProducts(filtered);
       } else {
@@ -372,6 +401,7 @@ const HomeProducts = () => {
       }
     } else {
       setFilteredProducts(productsToFilter);
+      // setFilteredProducts([])
     }
   }, [
     products,
@@ -381,7 +411,7 @@ const HomeProducts = () => {
     selectedCategory,
     selectedDistance,
   ]);
-console.log(products);
+  console.log(products);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -473,14 +503,28 @@ console.log(products);
                       </div>
 
                       <div className="product-content d-flex flex-column gap-1 pt-3  px-1 pb-3  ">
-                        <div className="" style={{ height:"40px",fontSize: "14px" ,gap:"2px" ,display:"flex" , justifyContent:"space-between" }}>
-                         <div className="text-sm line-clamp-1"> {product.category}</div>
+                        <div
+                          className=""
+                          style={{
+                            height: "40px",
+                            fontSize: "14px",
+                            gap: "2px",
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div className="text-sm line-clamp-1">
+                            {" "}
+                            {product.category}
+                          </div>
                           {isNewProduct(product.date) && (
                             <span className="ms-4" style={{ color: "#ffc107" }}>
                               New
                             </span>
                           )}
-                          <div className="line-clamp-1">{product.client_name}</div>
+                          <div className="line-clamp-1">
+                            {product.client_name}
+                          </div>
                         </div>
                         <a
                           href={`/${product.product_id}`}
@@ -498,7 +542,7 @@ console.log(products);
                             ? product.product_name.substring(0, 25) + "..."
                             : product.product_name}
                         </a>
-                        
+
                         <h5 className="mt-1">
                           <sup>&#x20B9;</sup>
                           {product.product_price}
@@ -522,7 +566,6 @@ console.log(products);
                             Color: <span>{product.product_color1}</span>
                           </h6>
                         </div>
-                        
 
                         <div className="clamped-text">
                           {product.product_discription.length > 40
@@ -550,17 +593,17 @@ console.log(products);
 
                       {/* Buttons */}
                       <div className="cart-btn px-1">
-                      <button
-                            className={`btn ${
-                              wishlistClicked[index]
-                                ? "btn-success"
-                                : "btn-primary"
-                            } w-21 my-2`}
-                            // style={{ height: "20px", fill: "white" }}
-                            onClick={() => handleWishListToCart(product, index)}
-                          >
-                            ❤
-                          </button>
+                        <button
+                          className={`btn ${
+                            wishlistClicked[index]
+                              ? "btn-success"
+                              : "btn-primary"
+                          } w-21 my-2`}
+                          // style={{ height: "20px", fill: "white" }}
+                          onClick={() => handleWishListToCart(product, index)}
+                        >
+                          ❤
+                        </button>
                         <button
                           className="btn btn-primary my-2  ms-2 px-2 "
                           onClick={() => handleAddToCart(product, index)}
@@ -585,7 +628,6 @@ console.log(products);
         </div>
       </div>
       <br></br>
-
     </>
   );
 };

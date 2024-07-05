@@ -62,30 +62,6 @@ function Header() {
   const parsedSignInData = JSON.parse(signInData);
   console.log("parsedSignInData", parsedSignInData);
 
-
-  // const [query, setQuery] = useState('');
-  // const handleInputChange = (event) => {
-  //   setQuery(event.target.value);
-  // };
-  // const handleSearch = () => {
-  //   const lowerCaseQuery = query.toLowerCase();
-  //   const filteredProducts = products.filter((product) =>
-  //     Object.values(product).some(value =>
-  //       value.toString().toLowerCase().includes(lowerCaseQuery)
-  //     )
-  //   );
-
-  //   if (filteredProducts.length > 0) {
-  //     // setResults(filteredProducts);
-  //     console.log("filtered",filteredProducts);
-  //   } else {
-  //     toast.error('Result not found!');
-  //     // setResults([]);
-  //     console.log();
-  //   }
-  //   // Add your search functionality here
-  // };
-
   const handleSnackbarClose = () => {
     setShowSnackbar(false);
   };
@@ -127,6 +103,7 @@ function Header() {
     setOfficeAddressStore,
   } = context;
 
+  let productsToFilter = products;
   // code for serach
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const focusSearchInput = () => {
@@ -181,8 +158,7 @@ function Header() {
   }, [user]);
 
   useEffect(() => {
-    
-     if (searchQuery !== "") {
+    if (searchQuery !== "") {
       setSelectedCategory("");
 
       const normalizedQuery = searchQuery
@@ -202,25 +178,58 @@ function Header() {
       setSearchSuggestions([]);
     }
   }, [searchQuery, products]);
-console.log("search ",searchQuery);
-  const handleGoButton = () => {
-    const lowerCaseQuery = searchQuery.toLowerCase();
-    const filteredProducts = products.filter((product) =>
-      Object.values(product).some(value =>
-        value.toString().toLowerCase().includes(lowerCaseQuery)
-      )
-    );
 
-    if (filteredProducts.length > 0) {
-      // setResults(filteredProducts);
-      setSearchSuggestions(filteredProducts);
-      console.log("filtered",filteredProducts);
-    } else {
-      toast.error(`Result not found! of ${searchQuery}`);
-      // setResults([]);
-      // console.log();
-      setSearchSuggestions([]);
+  const handleGoButton = () => {
+    // const lowerCaseSearchQuery = searchQuery.searchQuery
+    // .toLowerCase()
+    // .replace(/[^a-zA-Z0-9 ]/g, "");
+    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+    const normalizedQuery = lowerCaseSearchQuery.replace(/[^a-zA-Z0-9 ]/g, "");
+    console.log("lowercase", lowerCaseSearchQuery);
+    if (lowerCaseSearchQuery.trim() !== "") {
+      const filtered = productsToFilter.filter((product) => {
+        // Normalize the product fields for comparison
+        const normalizedCategory = product.category
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        const normalizedProductTitle = product.product_title
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        const normalizedProductName = product.product_name
+          .toLowerCase()
+          .replace(/[^a-zA-Z0-9 ]/g, "");
+        const normalizedDescription =
+          product.description?.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "") ||
+          "";
+        const normalizedBrand =
+          product.brand?.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "") || "";
+        const normalizedClientName =
+          product.client_name?.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "") ||
+          "";
+
+        return (
+          normalizedCategory.includes(normalizedQuery) ||
+          normalizedProductTitle.includes(normalizedQuery) ||
+          normalizedProductName.includes(normalizedQuery) ||
+          normalizedDescription.includes(normalizedQuery) ||
+          normalizedBrand.includes(normalizedQuery) ||
+          normalizedClientName.includes(normalizedQuery)
+        );
+      });
+      if (filtered.length > 0) {
+        // setFilteredProducts(filtered);
+        // alert("yes")
+        navigate("/products", { state: { data: searchSuggestions } });
+      } else {
+        toast.error(`Result not found! of ${searchQuery}`);
+      }
     }
+    // if (searchQuery !== "") {
+    //   navigate("/products", { state: { data: searchSuggestions } });
+    // } else {
+    //   navigate("/products");
+    // }
+    setSearchSuggestions([]);
   };
 
   const handleSuggestionClick = (productName) => {
@@ -520,8 +529,6 @@ console.log("search ",searchQuery);
               className=" search-box"
               aria-label="Search"
               value={searchQuery}
-              // value={query}
-              // onChange={handleInputChange}
               onChange={handleSearchInputChange}
               onKeyPress={handleKeyPress}
             />
@@ -536,7 +543,6 @@ console.log("search ",searchQuery);
               // style={{ margin: "0 0px 0 32px"}}
               variant="outline-success"
               onClick={handleGoButton}
-              // onClick={handleSearch}
             >
               GO
             </Button>
