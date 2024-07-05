@@ -23,7 +23,6 @@ import {
 } from "../components/redux/Slices/CartSlice";
 import { selectTotalQuantity } from "../components/redux/Slices/CartSlice.js";
 import { Toast } from "bootstrap";
-
 export const Checkout = () => {
   const dispatch = useDispatch();
   const signInData = localStorage.getItem("user");
@@ -40,7 +39,6 @@ export const Checkout = () => {
   const [location, setLocation] = useState({ lat: null, log: null });
   const [userLocation, setuserLocation] = useState("");
   console.log("userlocation", userLocation);
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768); // Assuming mobile screen width is less than 768px
@@ -79,7 +77,6 @@ export const Checkout = () => {
   };
   const handleConfirmOrder = async () => {
     const orderItems = cart.map((item) => {
-      
       return {
         product_id: item.pid,
         order_id: "78455",
@@ -118,74 +115,76 @@ export const Checkout = () => {
     });
     console.log("orderItems", orderItems);
     const sendOrderItem = async (orderItem) => {
-      console.log("orderitem", orderItem);
-      try {
-        const response = await axios.post(
-          "https://minitgo.com/api/insert_order.php",
-          orderItem
-        );
-        console.log("response", response.data);
-        return response.data.status === true;
-      } catch (error) {
-        console.error("Error placing order:", error);
-        return false;
+        console.log("orderitem", orderItem);
+        try {
+          const response = await axios.post(
+            "https://minitgo.com/api/insert_order.php",
+            orderItem
+          );
+          console.log("response", response.data);
+          return response.data.status === true;
+        } catch (error) {
+          console.error("Error placing order:", error);
+          return false;
+        }
+      };
+      const results = await Promise.all(orderItems.map(sendOrderItem));
+  
+      if (results.every((result) => result === true)) {
+        toast.success("Order successfully placed", {
+          autoClose: 1000,
+          hideProgressBar: true,
+        });
+      } else {
+        alert("Failed to place order. Please try again.");
       }
     };
-    const results = await Promise.all(orderItems.map(sendOrderItem));
-
-    if (results.every((result) => result === true)) {
-      toast.success("Order successfully placed", {
-        autoClose: 1000,
-        hideProgressBar: true,
-      });
-    } else {
-      alert("Failed to place order. Please try again.");
-    }
-  };
-  console.log("cart data", cart);
-  // code end by ganesh
-  const handleUseCurrentLocation = () => {
-    // setButtonText("Fetching current location...");
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const newLocation = {
-            lat: position.coords.latitude,
-            log: position.coords.longitude,
-          };
-          setLocation(newLocation);
-          // Update cart items with the new location
-          const updatedCart = cart.map(item => ({
-            ...item,
-            coordinates: `${newLocation.lat},${newLocation.log}`,
-          }));
-          // Update cart state with new coordinates
-          updatedCart.forEach(item => {
-            item.coordinates = `${newLocation.lat},${newLocation.log}`;
-          });
-          setLocation(newLocation);
-          toast.success("Location fetched successfully", {
-            autoClose: 1000,
-            hideProgressBar: true,
-          });
-        },
-        (err) => {
-          setError(err.message);
-          toast.error("Failed to fetch location: " + err.message, {
-            autoClose: 1000,
-            hideProgressBar: true,
-          });
-        }
-      );
-    } else {
-      setError("Geolocation is not supported by this browser.");
-      toast.error("Geolocation is not supported by this browser.", {
-        autoClose: 1000,
-        hideProgressBar: true,
-      });
-    }
-  };
-
+    console.log("cart data", cart);
+    // code end by ganesh
+    const handleUseCurrentLocation = () => {
+      // setButtonText("Fetching current location...");
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const newLocation = {
+              lat: position.coords.latitude,
+              log: position.coords.longitude,
+            };
+            setLocation(newLocation);
+            // Update cart items with the new location
+            const updatedCart = cart.map(item => ({
+              ...item,
+              coordinates: `${newLocation.lat},${newLocation.log}`,
+            }));
+            // Update cart state with new coordinates
+            updatedCart.forEach(item => {
+              item.coordinates = `${newLocation.lat},${newLocation.log}`;
+            });
+            setLocation(newLocation);
+            toast.success("Location fetched successfully", {
+              autoClose: 1000,
+              hideProgressBar: true,
+            });
+          },
+          (err) => {
+            setError(err.message);
+            toast.error("Failed to fetch location: " + err.message, {
+              autoClose: 1000,
+              hideProgressBar: true,
+            });
+          }
+        );
+      } else {
+        setError("Geolocation is not supported by this browser.");
+        toast.error("Geolocation is not supported by this browser.", {
+          autoClose: 1000,
+          hideProgressBar: true,
+        });
+      }
+    };
+    console.log("location",location);
+    
+  
   return (
     <>
       <div
@@ -409,11 +408,10 @@ export const Checkout = () => {
                         checked={paymentMethod === "Paytm / GPay"}
                         onChange={() => setPaymentMethod("Paytm / GPay")}
                       />
-                      
                     </div>
                     <div className="rounded border d-flex w-100 p-3 align-items-center">
                     pay after arrived via 
-                      <p className="mb-0 fw-semibold mx-2">
+                      <p className="mb-0 fw-semibold">
                         <SiPaytm
                           className="me-2"
                           style={{ height: "3rem", width: "3rem" }}
@@ -424,7 +422,6 @@ export const Checkout = () => {
                           style={{ height: "3rem", width: "3rem" }}
                         />
                       </p>
-                        {/* pay after arrived via  */}
                       {/* <div className="ms-auto">************1038</div>ss */}
                     </div>
                   </div>
@@ -455,7 +452,7 @@ export const Checkout = () => {
                           Home Address
                         </p>
                         <span className="ms-auto fs-6">
-                          {parsedSignInData.address}
+                        {parsedSignInData.address}
                         </span>
                       </div>
                     </div>
@@ -484,7 +481,7 @@ export const Checkout = () => {
                           Office Address
                         </p>
                         <span className="ms-auto fs-6">
-                          {parsedSignInData.officeAddress}
+                        {parsedSignInData.officeAddress}
                         </span>
                       </div>
                     </div>
@@ -504,9 +501,8 @@ export const Checkout = () => {
                         />
                       </div>
                       <div className="rounded border d-flex w-100 p-3 align-items-center">
-                        <button
-                          className="mb-0 fw-semibold btn btn-primary"
-                          onClick={handleUseCurrentLocation}
+                        <button className="mb-0 fw-semibold btn btn-primary"
+                        onClick={handleUseCurrentLocation}
                         >
                           Use Current Address
                         </button>
@@ -537,7 +533,9 @@ export const Checkout = () => {
                     <div className="modal-dialog">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h5 className="modal-title" id="placeOrderModal">
+                          <h5 className="modal-title" 
+                          id="placeOrderModal"
+                          >
                             Order Confirmation
                           </h5>
                           <button
@@ -593,14 +591,6 @@ export const Checkout = () => {
                           </div>
                           <hr />
 
-                          <div className="px-3 total-amount d-flex justify-content-between align-items-center">
-                            <h3>Delivery Charges:</h3>
-                            <h5 className="text-success">
-                              {/* {calculateTotalPrice() + 350} */}
-                               RS
-                            </h5>
-                          </div>
-                          <hr />
                           <div className="px-3 total-amount d-flex justify-content-between align-items-center">
                             <h3>Total Amount:</h3>
                             <h5 className="text-success">

@@ -372,7 +372,7 @@ function Header() {
                 onClick={() => setShowLeftSideOffcanvas(true)}
               >
  
-                <CgProfile className="profile-icon " style={{ width: "2rem",height:"1.4rem" }} />
+                <CgProfile className="profile-icon " style={{ width: "2.5rem",height:"1.4rem" }} />
                 {fullName && (
                   <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
                 )}
