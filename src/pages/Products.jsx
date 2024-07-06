@@ -7,6 +7,8 @@ import StarRatings from "../components/ProductInfo/StarRatings.jsx";
 import cartIcon from "../assets/cart-icon.svg";
 import { useContext } from "react";
 import myContext from "../components/context/MyContext.js";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import {
   addToCart,
   showSnackbar,
@@ -23,6 +25,7 @@ const HomeProducts = () => {
   }, []);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryFiltered, setCategoryFiltered] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -126,6 +129,10 @@ const HomeProducts = () => {
   useEffect(() => {
     setAccessoriesCategory("");
     setSelectedCategory("");
+    setTimeout(() => setLoading(false), 2000);
+    // setLoading(true)
+    // Adjust time as needed
+
 
     // Apply price filtering
     let productsToFilter = products;
@@ -253,27 +260,6 @@ const HomeProducts = () => {
 
       productsToFilter = filteredByOffer;
     }
-
-    // Apply category and search query filtering
-    // const menRegex = /^(men|man|mens|men's)/;
-    // const womenRegex = /^(women|woman|womens|women's)/;
-
-    // if (menRegex.test(lowerCaseSearchQuery)) {
-    //   const filtered = productsToFilter.filter(
-    //     (product) =>
-    //       product.category.toLowerCase().startsWith("men") ||
-    //       product.product_name.toLowerCase().startsWith("men")
-    //   );
-    //   setFilteredProducts(filtered);
-    // } else
-    // if (womenRegex.test(lowerCaseSearchQuery)) {
-    //   const filtered = productsToFilter.filter(
-    //     (product) =>
-    //       product.category.toLowerCase().startsWith("women") ||
-    //       product.product_name.toLowerCase().startsWith("women")
-    //   );
-    //   setFilteredProducts(filtered);
-    // } else
     const lowerCaseSearchQuery = searchQuery.toLowerCase();
     const normalizedQuery = lowerCaseSearchQuery.replace(/[^a-zA-Z0-9 ]/g, "");
     console.log("lowercase", lowerCaseSearchQuery);
@@ -310,6 +296,10 @@ const HomeProducts = () => {
       console.log("filtered productspage ",filtered);
       if (filtered.length > 0) {
         setFilteredProducts(filtered);
+        const timer = setTimeout(() => {
+          setLoading(false);
+        }, 2000); 
+        return () => clearTimeout(timer);
       } else {
         productsToFilter = products;
 
@@ -403,6 +393,7 @@ const HomeProducts = () => {
       setFilteredProducts(productsToFilter);
       // setFilteredProducts([])
     }
+    // return () => clearTimeout(timer);
   }, [
     products,
     searchQuery,
@@ -440,7 +431,21 @@ const HomeProducts = () => {
 
           <div className="col-md-10">
             <div className="row">
-              {filteredProducts?.length === 0 ? (
+              {
+              loading ? (
+                Array.from({ length: 8 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2"
+                  >
+                    <Skeleton height={200} />
+                    <Skeleton height={20} width="80%" />
+                    <Skeleton height={20} width="60%" />
+                    <Skeleton height={20} width="40%" />
+                    <Skeleton height={20} width="30%" />
+                  </div>
+                ))
+              ) :filteredProducts?.length === 0 ? (
                 <div
                   className="col-12 py-2 text-center fs-4 fw-semibold"
                   id="sections"

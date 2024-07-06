@@ -21,6 +21,7 @@ function Filter({ brand, mobileView }) {
   useEffect(() => {
     if (selectedCategory === `Men's Fashion`) {
       setSelectedCategory(`Men's Fashion`);
+      
     } else if (selectedCategory === `Women's Fashion`) {
       setSelectedCategory(`Women's Fashion`);
     }

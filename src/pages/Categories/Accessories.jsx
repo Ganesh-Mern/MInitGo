@@ -6,6 +6,8 @@ import StarRatings from "../../components/ProductInfo/StarRatings.jsx";
 import { useContext } from "react";
 import myContext from "../../components/context/MyContext.js";
 import cartIcon from "../../assets/cart-icon.svg";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import {
   addToCart,
@@ -19,9 +21,16 @@ import {
   addItemToWishlist,
 } from "../../components/redux/Slices/CartSlice.js";
 
+
 const Accessories = () => {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust time as needed
+
+    return () => clearTimeout(timer);
   }, []);
 
   const navigate = useNavigate();
@@ -297,7 +306,21 @@ const Accessories = () => {
 
           <div className="col-md-10">
             <div className="row">
-              {filteredProducts?.map((product, index) => (
+              {loading ? (
+                Array.from({ length: 8 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2"
+                  >
+                    <Skeleton height={200} />
+                    <Skeleton height={20} width="80%" />
+                    <Skeleton height={20} width="60%" />
+                    <Skeleton height={20} width="40%" />
+                    <Skeleton height={20} width="30%" />
+                  </div>
+                ))
+              ) :(
+              filteredProducts?.map((product, index) => (
                 <div
                   key={index}
                   className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2"
@@ -483,7 +506,7 @@ const Accessories = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )))}
             </div>
           </div>
         </div>

@@ -2,6 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { FaLocationDot } from "react-icons/fa6";
 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import $ from "jquery"; // Import jQuery
 import myContext from "./context/MyContext";
 import { Link } from "react-router-dom";
@@ -17,7 +20,6 @@ import {
 } from "./redux/Slices/CartSlice";
 import zIndex from "@mui/material/styles/zIndex";
 
-
 const HomeProducts = () => {
   const dispatch = useDispatch();
   const [coordinates, setCoordinates] = useState("");
@@ -25,11 +27,18 @@ const HomeProducts = () => {
   const { products, isNewProduct } = context;
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [distanceValue, setDistanceValue] = useState("all");
 
   useEffect(() => {
     setFilteredProducts(products);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust time as needed
+
+    return () => clearTimeout(timer);
+    
   }, [products]);
 
   useEffect(() => {
@@ -48,11 +57,11 @@ const HomeProducts = () => {
 
     setImages(productImages);
   }, [filteredProducts]);
-// code start by ganesh
+  // code start by ganesh
   const handleAddToCart = (product, index) => {
     const productWithCoordinates = {
       ...product,
-      coordinates, 
+      coordinates,
     };
     // code end by ganesh
     dispatch(addToCart(productWithCoordinates));
@@ -366,14 +375,20 @@ const HomeProducts = () => {
           <div className="col-md-10 p-2">
             {/* row remove */}
             <div className="row">
-              {filteredProducts?.length === 0 ? (
-                <div
-                  className="col-6 col-md-3 py-2 text-center fs-4 fw-semibold p-0"
-                  id="sections"
-                >
-                  No Products Found
-                </div>
-              ) : (
+              {loading ? (
+                Array.from({ length: 8 }).map((_, index) => (
+                  <div
+                    key={index}
+                    className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2"
+                  >
+                    <Skeleton height={200} />
+                    <Skeleton height={20} width="80%" />
+                    <Skeleton height={20} width="60%" />
+                    <Skeleton height={20} width="40%" />
+                    <Skeleton height={20} width="30%" />
+                  </div>
+                ))
+              )  : (
                 filteredProducts?.map((product, index) => (
                   <div
                     key={index}
@@ -569,7 +584,7 @@ const HomeProducts = () => {
                         <div
                           className="mt-1 clamped-text"
                           style={{ textAlign: "justify" }}
-                         >
+                        >
                           {/* code end by ganesh */}
                           {windowWidth <= 576
                             ? product.product_discription.length > 20
@@ -613,28 +628,27 @@ const HomeProducts = () => {
                           )}
                       </div>
 
-                      
-                        <div className=" cart-btn px-1">
-                          <button
-                            className={`btn ${
-                              wishlistClicked[index]
-                                ? "btn-success"
-                                : "btn-primary"
-                            } w-21 my-2`}
-                            // style={{ height: "20px", fill: "white" }}
-                            onClick={() => handleWishListToCart(product, index)}
-                          >
-                            ❤
-                          </button>
-                          <button
-                            onClick={() => handleAddToCart(product, index)}
-                            className="btn btn-primary my-2  ms-2"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
+                      <div className=" cart-btn px-1">
+                        <button
+                          className={`btn ${
+                            wishlistClicked[index]
+                              ? "btn-success"
+                              : "btn-primary"
+                          } w-21 my-2`}
+                          // style={{ height: "20px", fill: "white" }}
+                          onClick={() => handleWishListToCart(product, index)}
+                        >
+                          ❤
+                        </button>
+                        <button
+                          onClick={() => handleAddToCart(product, index)}
+                          className="btn btn-primary my-2  ms-2"
+                        >
+                          Add to cart
+                        </button>
                       </div>
                     </div>
+                  </div>
                   // </div>
                 ))
               )}

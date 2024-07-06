@@ -7,6 +7,8 @@ import { useContext } from "react";
 import myContext from "../../components/context/MyContext.js";
 import { addToCart } from "../../components/redux/Slices/CartSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import cartIcon from "../../assets/cart-icon.svg";
 import {
   showSnackbar,
@@ -17,8 +19,14 @@ import {
 } from "../../components/redux/Slices/CartSlice.js";
 
 const Women = () => {
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     window.scrollTo(0, 0);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust time as needed
+
+    return () => clearTimeout(timer);
   }, []);
 
   const navigate = useNavigate();
@@ -261,7 +269,19 @@ const Women = () => {
 
           <div className="col-md-10">
             <div className="row">
-              {filteredProducts?.map((product, index) => (
+              {
+                loading ? (
+                  Array.from({ length: 8 }).map((_, index) => (
+                    <div key={index} className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2">
+                      <Skeleton height={200} />
+                      <Skeleton height={20} width="80%" />
+                      <Skeleton height={20} width="60%" />
+                      <Skeleton height={20} width="40%" />
+                      <Skeleton height={20} width="30%" />
+                    </div>
+                  ))
+                ) :(
+              filteredProducts?.map((product, index) => (
                 <div
                   key={index}
                   className="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 py-2"
@@ -445,7 +465,7 @@ const Women = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+              )))}
             </div>
           </div>
         </div>
