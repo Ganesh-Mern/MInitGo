@@ -222,7 +222,7 @@ function Header() {
         navigate("/products", { state: { data: searchSuggestions } });
       } else {
         toast.error(`Result not found! for ${searchQuery}`);
-        navigate("/products");
+        navigate("/products");   
       }
     }
     // if (searchQuery !== "") {
