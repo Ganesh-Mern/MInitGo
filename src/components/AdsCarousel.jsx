@@ -79,7 +79,7 @@ function AdsCarousel({ products }) {
               }`}
             >
               <div key={index} className=" w-100 ">
-                <div className="product-card " style={{ height: "100%" }}>
+                <div className="product-card p-1" style={{ height: "100%" }}>
                   <a
                     href={`/${product.product_id}`}
                     target="_blank"
