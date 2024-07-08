@@ -27,7 +27,7 @@ export default function Banner() {
   }
   return (
     <>
-       <div className="container" style={{ marginTop: "15px" }}>
+       <div className="container banner" style={{ marginTop: "30px", }}>
         <Row>
           <div className="custom-bg ">
             <Col className="left-box ">
@@ -57,7 +57,7 @@ export default function Banner() {
                   <Button className="find-btn" onClick={handleNavigateToProducts}>
                     Find near me
                   </Button>
-                  <p>
+                  <p style={{marginTop:"16px"}}>
                     {" "}
                     <BiInfoCircle style={{ fontSize: "10pt" }} /> Get the products
                     from nearest & trusted stores

@@ -12,10 +12,25 @@ body {
 }
 
 /* Sonali changing the h3 to bold */
-
+.intial-profile1{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 50%;
+  background-color: #fff;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* margin-right: 0.5rem; */
+}
 .spacing {
   gap: 15px;
   margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .locate {
@@ -172,6 +187,42 @@ p,
   border: 2.55px solid #cbd394;
   border-radius: 10px 0 0 10px;
 }
+/* temp for desktop */
+.temp{
+  height: 100%;
+  display: flex;
+  text-align: center;
+}
+.inr-temp{
+  position: relative;
+  width: 55px;
+  height: 40px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.temp-add{
+  position: absolute;
+  width: 50px;
+  height: 45px;
+  border: 3px solid white;
+  border-radius: 50%;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+}
+/* App.css */
+.loading-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; /* Ensure it is above other content */
+}
+
 
 .search-btn {
   right: 1%;
@@ -239,6 +290,13 @@ p,
 
 .banner {
   margin-top: 129px;
+  width: 80%;
+  margin-bottom: 40px;
+}
+@media (max-width: 557px) {
+  .banner {
+    width: 100%;
+  }
 }
 
 .custom-bg {
@@ -251,7 +309,7 @@ p,
   height: 60vh;
   background-size: 1400% 100%;
   /* Define the keyframe animation for the background color wave effect */
-  border-left: 5.5px solid #7f7d86;
+  /* border-left: 5.5px solid #7f7d86; */
 }
 
 .right-box .imgs {
@@ -274,8 +332,8 @@ p,
 
 .left-box {
 
-  padding-top: 19px;
-  padding-left: 9%;
+  padding-top: 10px;
+  padding-left: 5%;
 
 
 }
@@ -312,7 +370,7 @@ p,
   background-color: #f2785c;
   width: 136px;
   /* Allow the width to adjust based on content */
-  margin-right: 10px;
+  margin-right: 20px;
   /* Reduce margin for smaller screens */
   margin-bottom: 8px;
   color: rgb(22, 20, 20);
@@ -326,6 +384,19 @@ p,
   color: #262a2b;
   margin-bottom: 8px;
 
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.dropdown-toggle1::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
 }
 
 /* Define the blinking cursor animation */
@@ -1313,6 +1384,11 @@ button:hover {
     margin-top: 6.7rem;
   }
 }
+@media screen and (min-width: 992px) {
+  .catlog {
+    margin-top:3.8rem;
+  }
+}
 
 @media screen and (min-width: 1024px) and (max-width: 1024px) {
   .product-image img {
@@ -1678,4 +1754,19 @@ button:hover {
 .minitgo-logo{
   width: 60px !important;
 }
+}
+
+/* profile name initial */
+.intial-profile{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background-color: #fff;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
 }
