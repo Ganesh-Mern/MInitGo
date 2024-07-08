@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./ProductInfo/ProductCard";
 
 function AdsCarousel({ products }) {
+  console.log("products AdsCarousel",products)
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const handleAddToCart = (product, index) => {
@@ -132,6 +133,7 @@ function AdsCarousel({ products }) {
                           {product.product_stock}
                         </span>
                       </h5>
+                      <h6>{product.product_title}</h6>
                       <div className="product-rating text-warning">
                         Rating: <StarRatings rating={product.product_ratings} />
                       </div>
@@ -154,16 +156,9 @@ function AdsCarousel({ products }) {
                       className="btn btn-secondary text-dark"
                       onClick={() => handleAddToCart(product, index)}
                     >
-                      {/* <img
-                        className="img-fluid"
-                        src={cartIcon}
-                        style={{ height: "20px" }}
-                      /> */}
                       Add To Cart
                     </button>
-                    {/* <button className="btn btn-primary my-2  ms-2 px-2">
-                      Buy Now
-                    </button> */}
+                  
                   </div>
                 </div>
               </div>
