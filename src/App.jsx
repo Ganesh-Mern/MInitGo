@@ -1,50 +1,53 @@
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import Notfound from "./pages/Notfound";
-// import Login from './pages/Signin';
-import Register from "./pages/Register";
-import OrdersPage from "./pages/Orders.jsx";
-import GoogleApiWrapper from "./pages/Contact";
-import About from "./pages/About.jsx";
 import Header from "./components/header";
 import Footer from "./components/Footer";
-import Cart from "./pages/Cart.jsx";
-import Checkout from "./pages/Checkout.jsx";
-import Feedback from "./pages/Feedback.jsx";
-import Products from "./pages/Products.jsx";
-import Client_register from "./client/pages/Client_registre.jsx";
-import Clientdashboard from "./client/pages/Client_dashboard.jsx";
-import ContactUs from "./pages/ContactUs.jsx";
-import Blog from "./pages/Blog/Blog.jsx";
-import Profile from "./components/profile.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ProductInfo from "./pages/ProductInfo.jsx";
-import AddBlog from "./pages/Blog/AddBlog.jsx";
-import ReturnPolicy from "./pages/ReturnPolicy.jsx";
-import Help from "./pages/Help.jsx";
-import FindNearMe from "./pages/FindNearMe.jsx";
-import Connect from "./pages/Connect.jsx";
-import Updates from "./pages/Updates.jsx";
-import Mystate from "./components/context/MyState.jsx";
-import BecomePartner from "./pages/BecomePartner.jsx";
-import Increase from "./pages/Increase.jsx";
-import Accessories from "./pages/Categories/Accessories.jsx";
-import Mens from "./pages/Categories/Mens.jsx";
-import Womens from "./pages/Categories/Womens.jsx";
-import Category from "./pages/Category.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Catlog from "./components/catlog.jsx";
+import Mystate from "./components/context/MyState.jsx";
+// import LoadingSpinner from "./components/LoadingSpinner";
+import './App.css';
+import LoadingSpinner from "./components/spiner/LoadingSpinner.jsx";
+
+const Home = lazy(() => import("./pages/Home"));
+const Notfound = lazy(() => import("./pages/Notfound"));
+const Register = lazy(() => import("./pages/Register"));
+const OrdersPage = lazy(() => import("./pages/Orders.jsx"));
+const GoogleApiWrapper = lazy(() => import("./pages/Contact"));
+const About = lazy(() => import("./pages/About.jsx"));
+const Cart = lazy(() => import("./pages/Cart.jsx"));
+const Checkout = lazy(() => import("./pages/Checkout.jsx"));
+const Feedback = lazy(() => import("./pages/Feedback.jsx"));
+const Products = lazy(() => import("./pages/Products.jsx"));
+const Client_register = lazy(() => import("./client/pages/Client_registre.jsx"));
+const Clientdashboard = lazy(() => import("./client/pages/Client_dashboard.jsx"));
+const ContactUs = lazy(() => import("./pages/ContactUs.jsx"));
+const Blog = lazy(() => import("./pages/Blog/Blog.jsx"));
+const Profile = lazy(() => import("./components/profile.jsx"));
+const ProductInfo = lazy(() => import("./pages/ProductInfo.jsx"));
+const AddBlog = lazy(() => import("./pages/Blog/AddBlog.jsx"));
+const ReturnPolicy = lazy(() => import("./pages/ReturnPolicy.jsx"));
+const Help = lazy(() => import("./pages/Help.jsx"));
+const FindNearMe = lazy(() => import("./pages/FindNearMe.jsx"));
+const Connect = lazy(() => import("./pages/Connect.jsx"));
+const Updates = lazy(() => import("./pages/Updates.jsx"));
+const BecomePartner = lazy(() => import("./pages/BecomePartner.jsx"));
+const Increase = lazy(() => import("./pages/Increase.jsx"));
+const Accessories = lazy(() => import("./pages/Categories/Accessories.jsx"));
+const Mens = lazy(() => import("./pages/Categories/Mens.jsx"));
+const Womens = lazy(() => import("./pages/Categories/Womens.jsx"));
+const Category = lazy(() => import("./pages/Category.jsx"));
+const Catlog = lazy(() => import("./components/catlog.jsx"));
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const signInData = localStorage.getItem("user");
   const parsedSignInData = JSON.parse(signInData);
-  console.log("parsedSignInData", parsedSignInData)
 
   // Function to determine if header should be shown based on route
   const showHeader = () => {
-    // Check if location pathname is not '/signin' or '/register'
     return (
       location.pathname !== "/signin" &&
       location.pathname !== "/register" &&
@@ -58,44 +61,55 @@ const App = () => {
     return location.pathname !== "/cdashboard";
   };
 
+  useEffect(() => {
+    // Simulate a network request
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds delay
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <Mystate>
-      {showHeader() && <Header /> }
-      {/* <Header /> <Catlog/> */}
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        {/* <Route path="/signin" element={<Login />} /> */}
-        <Route path="/register" element={<Register />} />
-        {parsedSignInData?<Route path="/orders" element={<OrdersPage />} />:""}
-        {/* <Route path="/orders" element={<OrdersPage />} /> */}
-        <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/feedback" element={<Feedback />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/accessories" element={<Accessories />} />
-        <Route path="/mens-category" element={<Mens />} />
-        <Route path="/womens-category" element={<Womens />} />
-        <Route path="/:id" element={<ProductInfo />} />
-        <Route path="/connect" element={<Connect />} />
-        <Route exact path="/contact" element={<ContactUs />} />
-        <Route exact path="/blog" element={<Blog />} />
-        <Route path="/updates" element={<Updates />} />
-        <Route path="/add-blog" element={<AddBlog />} />
-        <Route path="/partner" element={<Increase />} />
-        <Route path="returns" element={<ReturnPolicy />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/near-me" element={<FindNearMe />} />
-        <Route exact path="/profile" element={<Profile />} />
-        <Route path="/clientregister" element={<Client_register />} />
-        <Route path="/cart" element={<GoogleApiWrapper />} />
-        <Route exact path="*" element={<Notfound />} />
-        <Route exact path="/cdashboard" element={<Clientdashboard />} />
-        <Route exact path="/increase" element={<BecomePartner />} />
-      </Routes>
+      {showHeader() && <Header />}
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          {parsedSignInData ? <Route path="/orders" element={<OrdersPage />} /> : ""}
+          <Route path="/about" element={<About />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/category" element={<Category />} />
+          <Route path="/accessories" element={<Accessories />} />
+          <Route path="/mens-category" element={<Mens />} />
+          <Route path="/womens-category" element={<Womens />} />
+          <Route path="/:id" element={<ProductInfo />} />
+          <Route path="/connect" element={<Connect />} />
+          <Route exact path="/contact" element={<ContactUs />} />
+          <Route exact path="/blog" element={<Blog />} />
+          <Route path="/updates" element={<Updates />} />
+          <Route path="/add-blog" element={<AddBlog />} />
+          <Route path="/partner" element={<Increase />} />
+          <Route path="returns" element={<ReturnPolicy />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/near-me" element={<FindNearMe />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route path="/clientregister" element={<Client_register />} />
+          <Route path="/cart" element={<GoogleApiWrapper />} />
+          <Route exact path="*" element={<Notfound />} />
+          <Route exact path="/cdashboard" element={<Clientdashboard />} />
+          <Route exact path="/increase" element={<BecomePartner />} />
+        </Routes>
+      </Suspense>
       <ToastContainer />
-
       {showFooter() && <Footer />}
     </Mystate>
   );

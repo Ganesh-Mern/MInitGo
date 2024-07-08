@@ -222,7 +222,7 @@ function Header() {
         navigate("/products", { state: { data: searchSuggestions } });
       } else {
         toast.error(`Result not found! for ${searchQuery}`);
-        navigate("/products");   
+        navigate("/products");
       }
     }
     // if (searchQuery !== "") {
@@ -295,7 +295,7 @@ function Header() {
   const [error, setError] = useState(null);
   const API_KEY = "cdbf68f3afc557e674b97c9f52536ab6";
   const [weatherData, setWeatherData] = useState(null);
-
+  const formattedWeatherData = Math.round(parseFloat(weatherData));
   useEffect(() => {
     if (locationForWeather.latitude && locationForWeather.longitude) {
       const fetchWeatherData = async () => {
@@ -327,17 +327,22 @@ function Header() {
   const userLocation = userData ? userData.address : null;
   const phoneNumber = userData ? userData.phoneNumber : null;
 
-  function getInitials(fullName) {
-    return fullName
-      .split(" ")
-      .map((name) => name.charAt(0))
-      .join("");
-  }
+  // function getInitials(fullName) {
+  //   return fullName
+  //     .split(" ")
+  //     .map((name) => name.charAt(0))
+  //     .join("");
+  // }
+  const getInitials = (fullName) => {
+    return fullName ? fullName.charAt(0).toUpperCase() : "";
+  };
   const login = fullName ? (
-    fullName
+    <span>
+      <div className="intial-profile1">{getInitials(fullName)}</div>
+    </span>
   ) : (
     <span>
-      <BiLogIn /> Signin
+      <BiLogIn /> Signin hiii
     </span>
   );
 
@@ -367,19 +372,24 @@ function Header() {
               className="mobile-menu-logo d-lg-none d-flex profile-data flex-column"
               style={{ marginLeft: "2px", height: "20px" }}
             >
-              <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between" >
-              <span
-                className="profile align-items-centrer  d-flex flex-column "
-                onClick={() => setShowLeftSideOffcanvas(true)}
-              >
- 
-                <CgProfile className="profile-icon " style={{ width: "2.5rem",height:"1.4rem" }} />
-                {fullName && (
-                  <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
-                )}
-              </span>
- 
-            </div>
+              <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between">
+                <span
+                  className="profile align-items-centrer  d-flex flex-column "
+                  onClick={() => setShowLeftSideOffcanvas(true)}
+                >
+                  <CgProfile
+                    className="profile-icon "
+                    style={{ width: "2.5rem", height: "1.4rem" }}
+                  />
+                  {fullName && (
+                    <span style={{ fontSize: "13px", marginLeft: "1px" }}>
+                      {fullName.length > 10
+                        ? fullName.substring(0, 12) + "..."
+                        : fullName}
+                    </span>
+                  )}
+                </span>
+              </div>
             </div>
           </Navbar.Brand>
 
@@ -402,10 +412,7 @@ function Header() {
             </div>
 
             {/* cart button */}
-            <Link
-              to="/cart"  className="px-2" style={{ color: "#000" }}
-               
-              >
+            <Link to="/cart" className="px-2" style={{ color: "#000" }}>
               <div
                 className="nav-link cat-nav d-lg-none d-block text-center "
                 style={{ position: "relative" }}
@@ -436,7 +443,7 @@ function Header() {
             />
           </div>
 
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse id="responsive-navbar-nav ">
             <Nav className="me-auto  ">
               <NavDropdown
                 title={dropdownTitle}
@@ -445,7 +452,7 @@ function Header() {
 
                 style={{
                   border: "2.6px solid #d8dfab",
-                  borderRadius: "13px",
+                  borderRadius: "70px",
                   marginLeft: "3px",
                   background: "#f2b057",
                 }}
@@ -505,7 +512,7 @@ function Header() {
               //orginal code
               // style={{ margin: "0 0px 0 32px", }}
               type="search"
-              placeholder="Find near me"
+              placeholder="Search"
               className=" search-box"
               aria-label="Search"
               value={searchQuery}
@@ -563,12 +570,12 @@ function Header() {
             </div>
 
             {/* updates sonali */}
-            <Nav className="spacing">
+            <div className="spacing  ">
               {/* <Nav> */}
               <NavDropdown
                 title={login}
-                id="collasible-nav-dropdown"
-                className="Dropdown my-2 "
+                // id="collasible-nav-dropdown"
+                // className=" "
               >
                 {fullName && (
                   <>
@@ -628,7 +635,8 @@ function Header() {
               {parsedSignInData ? (
                 <Link
                   to="/orders"
-                  className="nav-link text-decoration-none text-dark my-2"
+                  className=" text-decoration-none text-dark "
+                  style={{ fontSize: "1.2rem" }}
                 >
                   Orders
                 </Link>
@@ -641,24 +649,24 @@ function Header() {
                 className="text-secondary position-relative   "
                 style={{
                   textDecoration: "none",
-                  width: "50px",
+                  width: "40px",
                 }}
               >
-                <div className=" cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
+                <div className="bg-white p-1 rounded cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
                   <img
                     src={cartIcon}
                     alt="Cart"
                     className="w-100 mx-auto "
                     style={{
-                      height: "40px",
-                      marginRight: "50px",
-                      marginLeft: "20px",
+                      height: "35px",
+                      // marginRight: "50px",
+                      // marginLeft: "20px",
                     }}
                   />
                   <h6
-                    className=" w-100  position-absolute text-center "
+                    className="  position-absolute text-center "
                     id="cartNo"
-                    style={{ top: "3px", left: "1px", fontSize: "14px" }}
+                    style={{width:"16px", top: "1px", left: "15px", fontSize: "14px" ,backgroundColor:"orange" ,borderRadius:"50%"}}
                   >
                     {totalQuantity}
                   </h6>
@@ -666,7 +674,7 @@ function Header() {
               </Link>
 
               {/* weather add in desktop view */}
-              <div className="d-flex flex-column align-items-center  gap-x-5 pt-1">
+              {/* <div className="d-flex flex-column align-items-center  gap-x-5 pt-1">
                 <div className="d-flex  align-items-center justify-content-center">
                   <span className="dot"></span>
                   <span className="fw-semibold">{weatherData}&deg;C</span>
@@ -674,8 +682,45 @@ function Header() {
                 <div>
                   <p style={{ fontSize: "10px" }}>{cityAccordingToLocation}</p>
                 </div>
+              </div> */}
+              <div className="temp"  >
+                <div className="inr-temp"
+                  // style={{
+                  //   position: "relative",
+                  //   width: "55px",
+                  //   height: "40px",
+                  //   overflow: "hidden",
+                  //   margin: "0 auto", // Center the half-circle
+                  //   // marginBottom: '1rem', // Adjust spacing as needed
+                  // }}
+                 >
+                  <div className="temp-add"
+                    // style={{
+                    //   position: "absolute",
+                    //   width: "50px",
+                    //   height: "45px",
+                    //   border: "3px solid white",
+                    //   borderRadius: "50%",
+                    //   borderBottom: "none",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   alignItems: "center",
+                    //   color: "#fff",
+                    //   fontSize: "15px",
+                    //   fontWeight: "bold",
+                    // }}
+                  >
+                    {formattedWeatherData}&deg;C
+                  </div>
+                  <div>
+                  <p style={{ fontSize: "10px" ,position:"relative",top:"29px",zIndex:"2000",left:"-2px"}}>{cityAccordingToLocation}</p>
+                </div>
+                </div>
+                {/* <div style={{ fontSize: '10px' }}>
+                {cityAccordingToLocation}
+              </div> */}
               </div>
-            </Nav>
+            </div>
           </Navbar.Collapse>
         </Container>
         <div className="mobile-menu-logo d-lg-none w-100  ">
