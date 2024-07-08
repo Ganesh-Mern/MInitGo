@@ -107,11 +107,11 @@ export default function Catlog() {
     <>
       <div className="catlog filter ">
         {/* code start by ganesh  */}
-        <div className="inr-catlog catlog-names  text-center  container-fluid ">
-          <div className="nav-link  cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100  mx-5   me-5 new-catlog align-items-center">
+        <div className="inr-catlog catlog-names  text-center  container-fluid px-0">
+          <div className="nav-link  cat-nav hidden md:flex pd-2 d-none d-md-flex justify-content-evenly w-100      new-catlog align-items-center">
             {/* code end by ganesh */}
-            <div className="dropdown bg-secondary rounded text-white">
-              <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <div className="dropdown  rounded text-white">
+              <button className="btn dropdown-toggle1" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <FaLocationDot className="fs-4 p-1 mb-1" />
                 {/* <span > Delivery Address</span> */}
 
@@ -152,10 +152,10 @@ export default function Catlog() {
                 search: `?category=Women's Fashion`,
               }}
               style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
-            ><span className="mt-1 ">Women's</span></Link>
-            <Link
+            ><span className="mt-1 ">Women's Kids</span></Link>
+            {/* <Link
               style={{ color: "#dfd7d7", fontSize: "14px", textDecoration: "none", paddingTop: "2px", fontWeight: "bolder" }}
-            ><span className="mt-1 ">Kids</span></Link>
+            ><span className="mt-1 ">others</span></Link> */}
             <Link
               to={{
                 pathname: "/accessories",
@@ -201,7 +201,7 @@ export default function Catlog() {
             //   </span> */}
             // 
             <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-black">
-            <div className="dropdown bg-secondary rounded text-white">
+            <div className="dropdown  rounded text-white">
               <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <FaLocationDot className="fs-4 p-1 mb-1" />
                 {/* <span > Delivery Address</span> */}
