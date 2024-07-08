@@ -222,7 +222,7 @@ function Header() {
         navigate("/products", { state: { data: searchSuggestions } });
       } else {
         toast.error(`Result not found! for ${searchQuery}`);
-        navigate("/products");   
+        navigate("/products");
       }
     }
     // if (searchQuery !== "") {
@@ -273,7 +273,7 @@ function Header() {
               setTownDistrict(components.town || components.district || "");
               setState(components.state || "");
             }
-          } catch (error) {}
+          } catch (error) { }
         },
         (error) => {
           return;
@@ -341,6 +341,13 @@ function Header() {
     </span>
   );
 
+
+  const getInitial = (fullName) => {
+    return fullName ? fullName.charAt(0).toUpperCase() : '';
+  };
+
+  const formattedWeatherData = Math.round(parseFloat(weatherData));
+  
   return (
     <>
       <Navbar
@@ -368,18 +375,23 @@ function Header() {
               style={{ marginLeft: "2px", height: "20px" }}
             >
               <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between" >
-              <span
-                className="profile align-items-centrer  d-flex flex-column "
-                onClick={() => setShowLeftSideOffcanvas(true)}
-              >
- 
-                <CgProfile className="profile-icon " style={{ width: "2.5rem",height:"1.4rem" }} />
+                <span
+                  className="profile align-items-centrer  d-flex flex-column "
+                  onClick={() => setShowLeftSideOffcanvas(true)}
+                >
+
+                  {/* <CgProfile className="profile-icon " style={{ width: "2.5rem",height:"1.4rem" }} />
                 {fullName && (
                   <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
-                )}
-              </span>
- 
-            </div>
+                )} */}
+                  <span>
+                    <div className="intial-profile">
+                      {getInitial(fullName)}
+                    </div>
+                  </span>
+                </span>
+
+              </div>
             </div>
           </Navbar.Brand>
 
@@ -387,7 +399,7 @@ function Header() {
           <div className="mobile-menu-logo d-lg-none d-flex align-items-center">
             {/* weather add in mobile view */}
 
-            <div className="d-flex flex-column align-items-center temp-block px-1">
+            {/* <div className="d-flex flex-column align-items-center temp-block px-1">
               <div className="d-flex  align-items-center justify-content-center">
                 <span className="dot"></span>
                 <div className="fw-semibold" style={{ fontSize: "13px" }}>
@@ -399,13 +411,43 @@ function Header() {
                   {cityAccordingToLocation}
                 </div>
               </div>
+            </div> */}
+            <div style={{ textAlign: 'center' }}>
+              <div
+                style={{
+                  position: 'relative',
+                  width: '55px',
+                  height: '33px',
+                  overflow: 'hidden',
+                  margin: '0 auto', 
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    width: '40px',
+                    height: '40px',
+                    border: '3px solid white', 
+                    borderRadius: '50%',
+                    borderBottom: 'none',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: '#fff',
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {formattedWeatherData}
+                </div>
+              </div>
             </div>
 
             {/* cart button */}
-            <Link
-              to="/cart"  className="px-2" style={{ color: "#000" }}
-               
-              >
+            {/* <Link
+              to="/cart" className="px-2" style={{ color: "#000" }}
+
+            >
               <div
                 className="nav-link cat-nav d-lg-none d-block text-center "
                 style={{ position: "relative" }}
@@ -427,12 +469,41 @@ function Header() {
                   {totalQuantity}
                 </h6>
               </div>
-            </Link>
+            </Link> */}
+            <Link
+                to="/cart"
+                className="text-secondary position-relative "
+                style={{
+                  textDecoration: "none",
+                  width: "35px",
+                  height:"34px"
+                }}
+               >
+                <div className="bg-white p-1 rounded cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
+                  <img
+                    src={cartIcon}
+                    alt="Cart"
+                    className="w-100 mx-auto "
+                    style={{
+                      height: "30px",
+                      // marginRight: "50px",
+                      // marginLeft: "20px",
+                    }}
+                  />
+                  <h6
+                    className=" w-100  position-absolute text-center "
+                    id="cartNo"
+                    style={{ top: "1px", left: "3px", fontSize: "14px" }}
+                  >
+                    {totalQuantity}
+                  </h6>
+                </div>
+              </Link>
 
             <BiMenuAltRight
               className="mobile-menu-logo d-lg-none hamIcon"
               onClick={() => setShowOffcanvas(true)}
-              style={{ fontSize: "33px", paddingLeft: "1px" }}
+              style={{ fontSize: "44px", paddingLeft: "5px",height:"35px" }}
             />
           </div>
 
@@ -449,7 +520,7 @@ function Header() {
                   marginLeft: "3px",
                   background: "#f2b057",
                 }}
-                // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
+              // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
               >
                 <NavDropdown.Item
                   onClick={() => {
@@ -682,7 +753,7 @@ function Header() {
           <div className="mobile-search mt-2 container">
             <Form.Control
               type="search"
-              placeholder="Ex: T-Shirt near me"
+              placeholder="search"
               className=" search-box  "
               aria-label="Search"
               value={searchQuery}
@@ -794,7 +865,7 @@ function Header() {
               width={100}
               // code start by ganesh
               height={30}
-              // code end by ganesh
+            // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -1050,7 +1121,7 @@ function Header() {
               width={100}
               // code start by ganesh
               height={30}
-              // code end by ganesh
+            // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>

@@ -66,7 +66,7 @@ export default function Catlog() {
       console.log('Element found:', element);
       const text = element.innerText;
       const words = text.split(' ');
-      console.log("words.length",words.length)
+      console.log("words.length", words.length)
 
       if (words.length >= 5) {
         console.log("if in")
@@ -79,7 +79,7 @@ export default function Catlog() {
   }
 
   useEffect(() => {
-    truncateText('addressDisplay', 4); 
+    truncateText('addressDisplay', 4);
   }, [addressDisplay]);
 
 
@@ -115,7 +115,8 @@ export default function Catlog() {
                 <FaLocationDot className="fs-4 p-1 mb-1" />
                 {/* <span > Delivery Address</span> */}
 
-                <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "16px"}}>{addressDisplay}</span>
+                <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "16px" }}>{addressDisplay}</span>
+
               </button>
               <ul className="dropdown-menu" aria-labelledby="locationDropdown">
                 <li>
@@ -181,54 +182,44 @@ export default function Catlog() {
           </div>
 
           {/* Add the image and dropdown for mobile view */}
-          {showHyDropdown() && (
-            //   {/* // code start by ganesh */}
-            //   <div className="dropdown d-down ">
-            //     {/* code end by ganesh */}
-            //     <button className="btn dropdown-toggle " type="button" id="mobileLocationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            //       {/* {parsedSignInData.address} */}
-            //     </button>
-            //     <ul className="dropdown-menu" aria-labelledby="mobileLocationDropdown">
-            //       <li><a className="dropdown-item" href="#">Hyderabad</a></li>
-            //       <li><a className="dropdown-item" href="#">Mumbai</a></li>
-            //       <li><a className="dropdown-item" href="#">Delhi</a></li>
-            //       <li><a className="dropdown-item" href="#">Banglore</a></li>
-            //     </ul>
-            
-            //   </div>
-            //   {/* <span>
-            //     <img src="https://cdn.pixabay.com/photo/2016/11/21/16/55/high-heels-1846436_640.jpg" className="m-0 p-0 homeCatlogImg" style={{ height: "4rem", width: "12rem" }} />
-            //   </span> */}
-            // 
-            <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-black">
-            <div className="dropdown bg-secondary rounded text-white">
-              <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <FaLocationDot className="fs-4 p-1 mb-1" />
-                {/* <span > Delivery Address</span> */}
+          {showHyDropdown() && (<>
+            <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-white">
+              <div className="dropdown text-white mx-1">
+                <button className="btn" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <FaLocationDot className="fs-5 p-1 mb-1 text-white" />
+                  {/* <span > Delivery Address</span> */}
 
-                <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "16px"}}>{addressDisplay}</span>
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="locationDropdown">
-                <li>
-                  <a className={`dropdown-item ${addressDisplay && selectedAddress === addressStore ? 'active' : ''}`} href="#" onClick={() => handleAddressTypeChange(addressStore)}>
+                  {/* <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "14px" }}>{addressDisplay}</span> */}
+                  <span id="addressDisplay" className="fw-bold" style={{ color: "#fff", fontSize: "0.8rem" }}> {addressDisplay.length > 10 ? addressDisplay.substring(0, 12) + '...' : addressDisplay}</span>
+                </button>
+                {/* <ul className="dropdown-menu" aria-labelledby="locationDropdown">
+                  <li>
+                    <a className={`dropdown-item ${addressDisplay && selectedAddress === addressStore ? 'active' : ''}`} href="#" onClick={() => handleAddressTypeChange(addressStore)}>
 
-                    <span   >Home Address</span><br />
-                    <FaLocationDot className="fs-5 p-1 mb-1" />
-                    {addressStore}
-                  </a>
-                </li>
-                <li>
-                  <a className={`dropdown-item ${addressDisplay && selectedAddress === officeAddressStore ? 'active' : ''}`} href="#" onClick={() => handleAddressTypeChange(officeAddressStore)}>
-                    <span className="">Office Address</span><br />
-                    <FaLocationDot className="fs-5 p-1 mb-1" />
-                    {officeAddressStore}
-                  </a>
-                </li>
-              </ul>
+                      <span   >Home Address</span><br />
+                      <FaLocationDot className="fs-5 p-1 mb-1" />
+                      {addressStore}
+                    </a>
+                  </li>
+                  <li>
+                    <a className={`dropdown-item ${addressDisplay && selectedAddress === officeAddressStore ? 'active' : ''}`} href="#" onClick={() => handleAddressTypeChange(officeAddressStore)}>
+                      <span className="">Office Address</span><br />
+                      <FaLocationDot className="fs-5 p-1 mb-1" />
+                      {officeAddressStore}
+                    </a>
+                  </li>
+                </ul> */}
+              </div>
+
+
+              <span className=" text-white fw-bold" style={{ fontSize: "0.8rem" }}>Find near you</span>
+              <span className="text-white fw-bold" style={{ fontSize: "0.8rem" }}>Become partner</span>
             </div>
-            </div>
+
+          </>
+
           )}
-          
+
 
           {/* Add the filter button for mobile view */}
           {showFilter() && (
