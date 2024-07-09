@@ -342,7 +342,7 @@ function Header() {
     </span>
   ) : (
     <span>
-      <BiLogIn /> Signin hiii
+      <BiLogIn /> Signin
     </span>
   );
 
@@ -352,7 +352,7 @@ function Header() {
   };
 
   // const formattedWeatherData = Math.round(parseFloat(weatherData));
-  
+
   return (
     <>
       <Navbar
@@ -375,11 +375,11 @@ function Header() {
               {/* original code */}
               {/* <img className="minitgo-logo" src={Logo} style={{ width: "90px" }} /> */}
             </Link>
-            
-              {/* <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between"> */}
 
-              <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between" >
-                {/* <span
+            {/* <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between"> */}
+
+            <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between" >
+              {/* <span
                   className="profile align-items-centrer  d-flex flex-column "
                   onClick={() => setShowLeftSideOffcanvas(true)}
                 >
@@ -397,18 +397,34 @@ function Header() {
                   )}
                 </span> */}
 
-                  {/* <CgProfile className="profile-icon " style={{ width: "2.5rem",height:"1.4rem" }} />
+              {/* <CgProfile className="profile-icon " style={{ width: "2.5rem",height:"1.4rem" }} />
                 {fullName && (
                   <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
                 )} */}
-                  <span>
+
+              {
+                parsedSignInData ? (
+                  <span onClick={() => setShowLeftSideOffcanvas(true)}>
                     <div className="intial-profile">
                       {getInitial(fullName)}
                     </div>
                   </span>
-                
-              </div>
-            
+
+                ) : (
+                  <div className="h-100 w-100">
+                    <div className="d-flex flex-column" onClick={() => setShowLeftSideOffcanvas(true)}>
+                     
+                      <CgProfile className="profile-icon" style={{ width: "2.5rem", height: "1.4rem" }} />
+                      <span className="" style={{fontSize:"0.8rem"}}>Sign In</span>
+                    </div>
+                  </div>
+
+                )
+              }
+
+
+            </div>
+
             {/* </div> */}
           </Navbar.Brand>
 
@@ -436,7 +452,7 @@ function Header() {
                   width: '55px',
                   height: '33px',
                   overflow: 'hidden',
-                  margin: '0 auto', 
+                  margin: '0 auto',
                 }}
               >
                 <div
@@ -444,7 +460,7 @@ function Header() {
                     position: 'absolute',
                     width: '40px',
                     height: '40px',
-                    border: '3px solid white', 
+                    border: '3px solid white',
                     borderRadius: '50%',
                     borderBottom: 'none',
                     display: 'flex',
@@ -489,39 +505,39 @@ function Header() {
               </div>
             </Link> */}
             <Link
-                to="/cart"
-                className="text-secondary position-relative "
-                style={{
-                  textDecoration: "none",
-                  width: "35px",
-                  height:"34px"
-                }}
-               >
-                <div className="bg-white p-1 rounded cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
-                  <img
-                    src={cartIcon}
-                    alt="Cart"
-                    className="w-100 mx-auto "
-                    style={{
-                      height: "30px",
-                      // marginRight: "50px",
-                      // marginLeft: "20px",
-                    }}
-                  />
-                  <h6
-                    className="   position-absolute text-center "
-                    id="cartNo"
-                    style={{width:"0.8rem", top: "0px", left: "13px", fontSize: "12px",backgroundColor:"orange" ,borderRadius:"50%" }}
-                  >
-                    {totalQuantity}
-                  </h6>
-                </div>
-              </Link>
+              to="/cart"
+              className="text-secondary position-relative "
+              style={{
+                textDecoration: "none",
+                width: "35px",
+                height: "34px"
+              }}
+            >
+              <div className="bg-white p-1 rounded cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
+                <img
+                  src={cartIcon}
+                  alt="Cart"
+                  className="w-100 mx-auto "
+                  style={{
+                    height: "30px",
+                    // marginRight: "50px",
+                    // marginLeft: "20px",
+                  }}
+                />
+                <h6
+                  className="   position-absolute text-center "
+                  id="cartNo"
+                  style={{ width: "0.8rem", top: "0px", left: "13px", fontSize: "12px", backgroundColor: "orange", borderRadius: "50%" }}
+                >
+                  {totalQuantity}
+                </h6>
+              </div>
+            </Link>
 
             <BiMenuAltRight
               className="mobile-menu-logo d-lg-none hamIcon"
               onClick={() => setShowOffcanvas(true)}
-              style={{ fontSize: "44px", paddingLeft: "5px",height:"35px" }}
+              style={{ fontSize: "44px", paddingLeft: "5px", height: "35px" }}
             />
           </div>
 
@@ -656,8 +672,8 @@ function Header() {
               {/* <Nav> */}
               <NavDropdown
                 title={login}
-                // id="collasible-nav-dropdown"
-                // className=" "
+              // id="collasible-nav-dropdown"
+              // className=" "
               >
                 {fullName && (
                   <>
@@ -748,9 +764,9 @@ function Header() {
                   <h6
                     className="  position-absolute text-center "
                     id="cartNo"
-                    style={{width:"16px", top: "1px", left: "15px", fontSize: "14px" ,backgroundColor:"orange" ,borderRadius:"50%"}}
+                    style={{ width: "16px", top: "1px", left: "15px", fontSize: "14px", backgroundColor: "orange", borderRadius: "50%" }}
                   >
-                    {totalQuantity}   
+                    {totalQuantity}
                   </h6>
                 </div>
               </Link>
@@ -767,36 +783,36 @@ function Header() {
               </div> */}
               <div className="temp"  >
                 <div className="inr-temp"
-                  // style={{
-                  //   position: "relative",
-                  //   width: "55px",
-                  //   height: "40px",
-                  //   overflow: "hidden",
-                  //   margin: "0 auto", // Center the half-circle
-                  //   // marginBottom: '1rem', // Adjust spacing as needed
-                  // }}
-                 >
+                // style={{
+                //   position: "relative",
+                //   width: "55px",
+                //   height: "40px",
+                //   overflow: "hidden",
+                //   margin: "0 auto", // Center the half-circle
+                //   // marginBottom: '1rem', // Adjust spacing as needed
+                // }}
+                >
                   <div className="temp-add"
-                    // style={{
-                    //   position: "absolute",
-                    //   width: "50px",
-                    //   height: "45px",
-                    //   border: "3px solid white",
-                    //   borderRadius: "50%",
-                    //   borderBottom: "none",
-                    //   display: "flex",
-                    //   justifyContent: "center",
-                    //   alignItems: "center",
-                    //   color: "#fff",
-                    //   fontSize: "15px",
-                    //   fontWeight: "bold",
-                    // }}
+                  // style={{
+                  //   position: "absolute",
+                  //   width: "50px",
+                  //   height: "45px",
+                  //   border: "3px solid white",
+                  //   borderRadius: "50%",
+                  //   borderBottom: "none",
+                  //   display: "flex",
+                  //   justifyContent: "center",
+                  //   alignItems: "center",
+                  //   color: "#fff",
+                  //   fontSize: "15px",
+                  //   fontWeight: "bold",
+                  // }}
                   >
                     {formattedWeatherData}&deg;C
                   </div>
                   <div>
-                  <p style={{ fontSize: "10px" ,position:"relative",top:"29px",zIndex:"2000",left:"-2px"}}>{cityAccordingToLocation}</p>
-                </div>
+                    <p style={{ fontSize: "10px", position: "relative", top: "29px", zIndex: "2000", left: "-2px" }}>{cityAccordingToLocation}</p>
+                  </div>
                 </div>
                 {/* <div style={{ fontSize: '10px' }}>
                 {cityAccordingToLocation}

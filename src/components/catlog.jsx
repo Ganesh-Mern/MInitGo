@@ -181,7 +181,7 @@ export default function Catlog() {
           </div>
 
           {/* Add the image and dropdown for mobile view */}
-          {showHyDropdown() && (
+          {showHyDropdown() && parsedSignInData && (
             //   {/* // code start by ganesh */}
             //   <div className="dropdown d-down ">
             //     {/* code end by ganesh */}
