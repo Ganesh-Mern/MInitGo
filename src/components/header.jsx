@@ -509,9 +509,9 @@ function Header() {
                     }}
                   />
                   <h6
-                    className=" w-100  position-absolute text-center "
+                    className="   position-absolute text-center "
                     id="cartNo"
-                    style={{ top: "1px", left: "3px", fontSize: "14px" }}
+                    style={{width:"0.8rem", top: "0px", left: "13px", fontSize: "12px",backgroundColor:"orange" ,borderRadius:"50%" }}
                   >
                     {totalQuantity}
                   </h6>
@@ -750,7 +750,7 @@ function Header() {
                     id="cartNo"
                     style={{width:"16px", top: "1px", left: "15px", fontSize: "14px" ,backgroundColor:"orange" ,borderRadius:"50%"}}
                   >
-                    {totalQuantity}
+                    {totalQuantity}   
                   </h6>
                 </div>
               </Link>
