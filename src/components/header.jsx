@@ -415,7 +415,6 @@ function Header() {
                     <div className="d-flex justify-content-center align-items-center" onClick={() => setShowLeftSideOffcanvas(true)}>
                     <div className="intial-profile">
                     <FaRegCircleUser style={{fontSize:"28px"}}/>
-                    {/* <i className="fa fa-user-circle-o" aria-hidden="true" style={{fontSize:"28px"}}></i> */}
                     </div>
                     
                       <span className="mt-1" style={{fontSize:"0.8rem"}}>Sign In</span>

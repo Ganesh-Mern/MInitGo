@@ -211,7 +211,7 @@ export default function Catlog() {
                   ) : (
                     <>
                       <FaLocationDot className="fs-4 p-1 text-white" />
-                      <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "16px" }}>Hyderabad</span>
+                      <span id="addressDisplay"className="fw-bold" style={{ color: "#fff", fontSize: "0.8rem" }}>Hyderabad</span>
                     </>
                   )}
                
