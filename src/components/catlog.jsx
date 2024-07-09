@@ -203,12 +203,12 @@ export default function Catlog() {
             <div className="dropdown nav-link cat-nav d-md-none d-flex justify-content-between w-100 align-items-center text-black">
             <div className="dropdown  rounded text-white">
               <button className="btn dropdown-toggle" type="button" id="locationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <FaLocationDot className="fs-4 p-1 mb-1" />
+                <FaLocationDot className="fs-4 p-1 mb-1 text-white" />
                 {/* <span > Delivery Address</span> */}
 
-                <span id="addressDisplay" style={{ color: "#dfd7d7", fontSize: "16px"}}>{addressDisplay}</span>
+                <span id="addressDisplay" className="fw-bold" style={{ color: "#fff", fontSize: "0.8rem" }}> {addressDisplay.length > 10 ? addressDisplay.substring(0, 12) + '...' : addressDisplay}</span>
               </button>
-              <ul className="dropdown-menu" aria-labelledby="locationDropdown">
+              {/* <ul className="dropdown-menu" aria-labelledby="locationDropdown">
                 <li>
                   <a className={`dropdown-item ${addressDisplay && selectedAddress === addressStore ? 'active' : ''}`} href="#" onClick={() => handleAddressTypeChange(addressStore)}>
 
@@ -224,8 +224,10 @@ export default function Catlog() {
                     {officeAddressStore}
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
+            <span className=" text-white fw-bold" style={{ fontSize: "0.8rem" }}>Find near you</span>
+            <span className="text-white fw-bold" style={{ fontSize: "0.8rem",paddingRight:"20px" }}>Become partner</span>
             </div>
           )}
           
