@@ -342,7 +342,7 @@ function Header() {
     </span>
   ) : (
     <span>
-      <BiLogIn /> Signin hiii
+      <BiLogIn /> Signin
     </span>
   );
 
