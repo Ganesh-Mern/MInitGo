@@ -24,7 +24,7 @@ const LoadingSpinner = () => {
         <span></span>
         <span></span>
       </div>
-      <h1>Redirecting</h1>
+      <h1>get delivery in minits</h1>
     </div>
   );
 };
