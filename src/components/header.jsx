@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.css";
 import Logo from "../components/images/minitgo.png";
-import profileIcon from "../assets/profile.svg";
+import { FaRegUserCircle } from "react-icons/fa";
 
 import {
   FaBox,
@@ -47,7 +47,7 @@ import { FiLogIn } from "react-icons/fi";
 import { MdContactSupport, MdHelp, MdOutlineUpdate } from "react-icons/md";
 import { BsPersonCircle } from "react-icons/bs";
 import { PiHandshakeBold } from "react-icons/pi";
-import location from "../assets/redDot.png";
+import { FaRegCircleUser } from "react-icons/fa6";
 import "./header.css";
 import ResetPassword from "./ResetPassword.jsx";
 import { toast } from "react-toastify";
@@ -412,10 +412,13 @@ function Header() {
 
                 ) : (
                   <div className="h-100 w-100">
-                    <div className="d-flex flex-column" onClick={() => setShowLeftSideOffcanvas(true)}>
-                     
-                      <CgProfile className="profile-icon" style={{ width: "2.5rem", height: "1.4rem" }} />
-                      <span className="" style={{fontSize:"0.8rem"}}>Sign In</span>
+                    <div className="d-flex justify-content-center align-items-center" onClick={() => setShowLeftSideOffcanvas(true)}>
+                    <div className="intial-profile">
+                    <FaRegCircleUser style={{fontSize:"28px"}}/>
+                    {/* <i className="fa fa-user-circle-o" aria-hidden="true" style={{fontSize:"28px"}}></i> */}
+                    </div>
+                    
+                      <span className="mt-1" style={{fontSize:"0.8rem"}}>Sign In</span>
                     </div>
                   </div>
 
