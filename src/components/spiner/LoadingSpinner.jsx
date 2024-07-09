@@ -1,17 +1,30 @@
 // LoadingSpinner.js
-import React from 'react';
-import { Circles } from 'react-loader-spinner';
+import React from "react";
+import { Circles } from "react-loader-spinner";
+import "./spiner.css";
 
 const LoadingSpinner = () => {
   return (
-    <div className="loading-spinner">
-      <Circles
-        height="80"
-        width="80"
-        color="#00BFFF"
-        ariaLabel="circles-loading"
-        visible={true}
-      />
+    <div className="background">
+      <div className="body1">
+        <span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <div className="base1">
+          <span></span>
+          <div className="face1"></div>
+        </div>
+      </div>
+      <div className="longfazers1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <h1>Redirecting</h1>
     </div>
   );
 };

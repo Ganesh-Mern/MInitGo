@@ -76,8 +76,8 @@ const App = () => {
 
   return (
     <Mystate>
-      {showHeader() && <Header />}
       <Suspense fallback={<LoadingSpinner />}>
+      {showHeader() && <Header />}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
@@ -107,6 +107,7 @@ const App = () => {
           <Route exact path="*" element={<Notfound />} />
           <Route exact path="/cdashboard" element={<Clientdashboard />} />
           <Route exact path="/increase" element={<BecomePartner />} />
+          
         </Routes>
       </Suspense>
       <ToastContainer />
