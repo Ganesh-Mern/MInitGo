@@ -4,13 +4,14 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { FaLocationDot } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
-
+import User from "../assets/user.png"
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import { Link, useLocation } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.css";
 import Logo from "../components/images/minitgo.png";
+
 import { FaRegUserCircle } from "react-icons/fa";
 
 import {
@@ -413,12 +414,13 @@ function Header() {
                 ) : (
                   <div className="h-100 w-100">
                     <div className="d-flex justify-content-center align-items-center" onClick={() => setShowLeftSideOffcanvas(true)}>
-                    <div className="intial-profile">
-                    {/* <FaRegCircleUser style={{fontSize:"28px"}}/> */}
-                    <i className="fa fa-user-o" aria-hidden="true" style={{fontSize:"22px"}}></i>
-                    </div>
-                    
-                      <span className="mt-1" style={{fontSize:"0.8rem"}}>Sign In</span>
+                      <div className="user-profile">
+
+                        <img className="img-fluid mb-1 p-1" src={User} alt="user" style={{ width: "28px" }} />
+                      </div>
+
+
+                      <span className="mt-1" style={{ fontSize: "0.8rem",paddingLeft:"4px" }}>Sign In</span>
                     </div>
                   </div>
 
