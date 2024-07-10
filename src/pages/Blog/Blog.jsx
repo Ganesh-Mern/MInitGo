@@ -60,42 +60,42 @@ const Blog = () => {
 
                 </div>
                 <div className="row  justify-content-center  w-100">
-                    <h2 className="mt-5 mb-5">Spring Sale Per Category</h2>
+                    <h2 className="mt-5 mb-3">Spring Sale Per Category</h2>
 
-                    <div className="col-sm-4 mt-2 col-md-2 text-center" style={{ overflow: 'hidden',  }}>
-                        <img src={img6} alt="Image 1" className="img-fluid" style={{ height: '15rem', width: '15rem' }} />
-                        <h4>Outwear</h4>
+                    <div className="col-sm-4 mt-2 col-md-4 text-center" style={{ overflow: 'hidden',  }}>
+                        <img src={img6} alt="Image 1" className="img-fluid" style={{ height: '25rem', width: '30rem' }} />
+                        <h4 className="mt-1">Outwear</h4>
                     </div>
 
-                    <div className="col-sm-4 mt-2 col-md-2 mx-4 text-center" style={{ overflow: 'hidden',  }}>
-                        <img src={img8} alt="Image 2" className="img-fluid" style={{ height: '15rem', width: '15rem' }} />
-                        <h4>Trending</h4>
+                    <div className="col-sm-4 mt-2 col-md-4 text-center" style={{ overflow: 'hidden',  }}>
+                        <img src={img8} alt="Image 2" className="img-fluid" style={{ height: '25rem', width: '30rem' }} />
+                        <h4 className="mt-1">Trending</h4>
                     </div>
 
-                    <div className="col-sm-4 mt-2 col-md-2 mx-4 text-center" style={{ overflow: 'hidden',  }}>
-                        <img src={img7} alt="Image 3" className="img-fluid" style={{ height: '15rem', width: '15rem' }} />
-                        <h4>Footwear</h4>
+                    <div className="col-sm-4 mt-2 col-md-4 text-center" style={{ overflow: 'hidden',  }}>
+                        <img src={img7} alt="Image 3" className="img-fluid" style={{ height: '25rem', width: '30rem' }} />
+                        <h4 className="mt-1">Footwear</h4>
                     </div>
                 </div>
 
 
-                <div className="row mt-5  ">
+                <div className="row mt-3">
                     <h2 className="mt-5 text-center w-100">New Arrivals</h2>
                 </div>
-                <div className="row m-3 ">
-                    <div className="col-sm-4 mt-5 position-relative" style={{ paddingRight: 0 }}>
+                <div className="row m-3">
+                    <div className="col-sm-4 mt-5 position-relative col-md-4" style={{ paddingRight: 0 }}>
                         <img src={img4} alt="Image 1" className="img-fluid h-100 w-100" />
                         <div className="text-overlay mb-3" style={{ position: 'absolute', bottom: '0', left: '0', width: '100%', padding: '20px', boxSizing: 'border-box' }}>
-                            <h3 style={{ color: 'white', margin: '0' }}>The Pantsuit <br></br> Collection</h3>
+                            <h3 style={{ color: 'white', margin: '0' }}>The Pantsuit Collection</h3>
                         </div>
                     </div>
-                    <div className="col-sm-4 mt-5 position-relative" style={{ paddingLeft: 0, paddingRight: 0 }}>
+                    <div className="col-sm-4 mt-5 position-relative col-md-4" style={{ paddingLeft: 0, paddingRight: 0 }}>
                         <img src={img2} alt="Image 2" className="img-fluid h-100 w-100" />
                         <div className="text-overlay mb-3" style={{ position: 'absolute', bottom: '0', left: '0', width: '100%', padding: '20px', boxSizing: 'border-box' }}>
                             <h3 style={{ color: 'white', margin: '0' }}>Sharp and sweet Menswear</h3>
                         </div>
                     </div>
-                    <div className="col-sm-4 mt-5 position-relative" style={{ paddingLeft: 0 }}>
+                    <div className="col-sm-4 mt-5 position-relative col-md-4" style={{ paddingLeft: 0 }}>
                         <img src={img5} alt="Image 3" className="img-fluid h-100 w-100" />
                         <div className="text-overlay mb-3" style={{ position: 'absolute', bottom: '0', left: '0', width: '100%', padding: '20px', boxSizing: 'border-box' }}>
                             <h3 style={{ color: 'white', margin: '0' }}>Adventures Await Accessories</h3>
@@ -111,15 +111,15 @@ const Blog = () => {
 
 <div className="row justify-content-center w-100">
     <h2 className="mt-5 mb-5">Bestsellers by Category</h2>
-    <div className="col-sm-4 mt-2 col-md-2 position-relative text-center" style={{ overflow: 'hidden', height: '13rem', width: '13rem' }}>
+    <div className="col-sm-4 mt-2 col-md-4 position-relative text-center" style={{ overflow: 'hidden', height: '13rem', width: '13rem' }}>
         <img src={img6} alt="Image 1" className="img-fluid" style={{ height: '100%', width: '100%' }} />
         <h5 className="image-overlay" style={{ position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white' }}>Dresses</h5>
     </div>
-    <div className="col-sm-4 mt-2 col-md-2 mx-4 position-relative text-center" style={{ overflow: 'hidden', height: '13rem', width: '13rem' }}>
+    <div className="col-sm-4 mt-2 col-md-4 position-relative text-center" style={{ overflow: 'hidden', height: '13rem', width: '13rem' }}>
         <img src={img3} alt="Image 2" className="img-fluid" style={{ height: '100%', width: '100%' }} />
         <h5 className="image-overlay" style={{ position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white' }}>Knitwear</h5>
     </div>
-    <div className="col-sm-4 mt-2 col-md-2 mx-4 position-relative text-center" style={{ overflow: 'hidden', height: '13rem', width: '13rem' }}>
+    <div className="col-sm-4 mt-2 col-md-4 position-relative text-center" style={{ overflow: 'hidden', height: '13rem', width: '13rem' }}>
         <img src={img9} alt="Image 3" className="img-fluid" style={{ height: '100%', width: '100%' }} />
         <h5 className="image-overlay" style={{ position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white' }}>CropTops</h5>
     </div>
