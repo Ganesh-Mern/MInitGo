@@ -1770,3 +1770,10 @@ button:hover {
   font-weight: bold;
   margin-right: 0.5rem;
 }
+
+.user-profile{
+  border-radius: 50% !important;
+  background-color: #fff  !important;
+  width: 1.8rem;
+  height: 1.8rem;
+}

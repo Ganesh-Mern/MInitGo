@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "./ProductInfo/ProductCard";
 
 function AdsCarousel({ products }) {
-  console.log("products AdsCarousel",products)
+  console.log("products AdsCarousel", products)
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const handleAddToCart = (product, index) => {
@@ -60,7 +60,7 @@ function AdsCarousel({ products }) {
     );
   };
 
-  
+
 
   return (
     <>
@@ -74,9 +74,8 @@ function AdsCarousel({ products }) {
           {products.map((product, index) => (
             <div
               key={index} // Ensure each carousel item has a unique key
-              className={`h-100 carousel-item rounded ${
-                index === currentSlide ? "active" : ""
-              }`}
+              className={`h-100 carousel-item rounded ${index === currentSlide ? "active" : ""
+                }`}
             >
               <div key={index} className=" w-100 ">
                 <div className="product-card p-1" style={{ height: "100%" }}>
@@ -105,15 +104,15 @@ function AdsCarousel({ products }) {
                           fontWeight: "bold",
                           backgroundColor: product.offers === "0" ? "" : "#e8d9b7",
                           opacity: product.offers === "0" ? 0 : 0.5,
-                          
-                      }}>
-                  
-                      {product.offers === "0" ? "No Offer" : `${product.offers}% Off`}
+
+                        }}>
+
+                        {product.offers === "0" ? "No Offer" : `${product.offers}% Off`}
                       </div>
                     </div>
                     {/* code end by ganesh */}
 
-                    <div className="product-content">
+                    {/* <div className="product-content">
                       {product.product_name.length > 15
                         ? product.product_name.substring(0, 25) + "..."
                         : product.product_name}
@@ -148,17 +147,134 @@ function AdsCarousel({ products }) {
                           {cart.snackbar.message}
                         </div>
                       )}
-                    </div>
+                    </div> */}
+                    {/* <div className="d-flex flex-column justify-content-between p-1">
+                      <div className="d-flex flex-column">
+                        <h6>{product.product_name}</h6>
+                        <h6>{product.product_title}</h6>
+                        <h5>
+                          Price: <sup>&#x20B9;</sup>
+                          {product.product_price}
+                          <span className="text-decoration-line-through text-muted fs-6 fw-light">
+                            599
+                          </span>
+                          <span
+                            className="text-muted"
+                            style={{
+                              fontSize: "13px",
+                            }}
+                          >
+                            {" "}
+                            {product.product_stock}
+                          </span>
+                        </h5>
+                        <p className="text-muted fs-6">  {product.product_discription.length > 40
+                          ? product.product_discription.slice(0, 40) + "..."
+                          : product.product_discription}</p>
+
+                        <span className="text-muted">Size: {product.product_size}</span>
+
+
+                        <div className="product-rating text-warning">
+                          Rating: <StarRatings rating={product.product_ratings} />
+                        </div>
+                        <p className="product-distance text-secondary ">
+                          Distance: {product.distance}km away.
+                        </p>
+                      </div>
+                    </div> */}
+                      <div className="product-content d-flex flex-column gap-1 pt-3  px-1 pb-3  ">
+                        <div
+                          className=""
+                          style={{
+                            height: "40px",
+                            fontSize: "14px",
+                            gap: "2px",
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div className="text-sm line-clamp-1">
+                            {" "}
+                            {product.category}
+                          </div>
+                          <div className="line-clamp-1">
+                            {product.client_name}
+                          </div>
+                        </div>
+                        <a
+                          href={`/${product.product_id}`}
+                          target="_blank"
+                          style={{
+                            textDecoration: "none",
+                            color: "black",
+                          }}
+                        >
+                          {windowWidth <= 1024
+                            ? product.product_name.length > 15
+                              ? product.product_name.substring(0, 15) + "..."
+                              : product.product_name
+                            : product.product_name.length > 20
+                            ? product.product_name.substring(0, 25) + "..."
+                            : product.product_name}
+                        </a>
+
+                        <h5 className="mt-1">
+                          <sup>&#x20B9;</sup>
+                          {product.product_price}
+                          <span className="text-decoration-line-through text-muted fs-6 fw-light">
+                            599
+                          </span>
+                          <span
+                            className="text-muted"
+                            style={{ fontSize: "13px" }}
+                          >
+                            {" "}
+                            {product.product_stock}
+                          </span>
+                        </h5>
+
+                        <div className="d-flex flex-column flex-sm-row justify-content-between ">
+                          <h6>
+                            Size: <span>{product.product_size}</span>
+                          </h6>
+                          <h6 className="">
+                            Color: <span>{product.product_color1}</span>
+                          </h6>
+                        </div>
+
+                        <div className="clamped-text">
+                          {product.product_discription.length > 40
+                            ? product.product_discription.slice(0, 40) + "..."
+                            : product.product_discription}
+                        </div>
+
+                        <div className="product-rating text-warning d-flex ">
+                          Rating:{" "}
+                          <StarRatings rating={product.product_ratings} />
+                        </div>
+                        <div className="product-distance text-secondary ">
+                          Distance: {product.distance}km away.
+                        </div>
+                      </div>
+                    {cart.snackbar.open && cart.snackbar.index === index && (
+                      <div
+                        style={{ fontSize: "12px" }}
+                        className="border text-center rounded w-75 mx-auto"
+                      >
+                        {cart.snackbar.message}
+                      </div>
+                    )}
                   </a>
 
-                  <div className="cart-btn d-flex justify-content-end mb-1 px-2">
+                  <div className="cart-btn d-flex justify-content-end px-2">
                     <button
                       className="btn btn-secondary text-dark"
                       onClick={() => handleAddToCart(product, index)}
                     >
                       Add To Cart
                     </button>
-                  
+
                   </div>
                 </div>
               </div>
@@ -200,8 +316,8 @@ function AdsCarousel({ products }) {
           ></span>
         </button>
       </div>
-      <br/>
-      <br/>
+      <br />
+      <br />
     </>
   );
 }
