@@ -416,7 +416,8 @@ function Header() {
                     <div className="d-flex justify-content-center align-items-center" onClick={() => setShowLeftSideOffcanvas(true)}>
                       <div className="user-profile">
 
-                        <img className="img-fluid mb-1 p-1" src={User} alt="user" style={{ width: "28px" }} />
+                        {/* <img className="img-fluid mb-1 p-1" src={User} alt="user" style={{ width: "28px" }} /> */}
+                        <i className="bi bi-person p-1" style={{fontSize:"22px"}}></i>
                       </div>
 
 
