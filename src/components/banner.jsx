@@ -27,7 +27,7 @@ export default function Banner() {
   }
   return (
     <>
-       <div className="container banner" style={{ marginTop: "30px", }}>
+       <div className="container " style={{ marginTop: "30px", }}>
         <Row>
           <div className="custom-bg ">
             <Col className="left-box ">
@@ -76,6 +76,7 @@ export default function Banner() {
         </Row>
       </div>
       <br />
+      
     </>
   );
 }

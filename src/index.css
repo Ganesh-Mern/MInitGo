@@ -309,7 +309,7 @@ p,
   height: 60vh;
   background-size: 1400% 100%;
   /* Define the keyframe animation for the background color wave effect */
-  /* border-left: 5.5px solid #7f7d86; */
+  border-left: 5.5px solid #7f7d86;
 }
 
 .right-box .imgs {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
@@ -26,6 +26,7 @@ import { CiLocationArrow1 } from "react-icons/ci";
 // import { BiCartAlt } from "react-icons/bi";
 import cartIcon from "../assets/cart-icon.svg";
 import { BiLogIn } from "react-icons/bi";
+import { BiUser } from "react-icons/bi";
 import { BiMenuAltRight } from "react-icons/bi";
 import Catlog from "./catlog.jsx";
 import Offcanvas from "react-bootstrap/Offcanvas"; // Import Offcanvas
@@ -51,6 +52,7 @@ import location from "../assets/redDot.png";
 import "./header.css";
 import ResetPassword from "./ResetPassword.jsx";
 import { toast } from "react-toastify";
+import TemperatureRegulator from "./TemperatureRegulator.jsx";
 
 function Header() {
   const [address, setAddress] = useState("");
@@ -61,7 +63,7 @@ function Header() {
   const signInData = localStorage.getItem("user");
   const parsedSignInData = JSON.parse(signInData);
   console.log("parsedSignInData", parsedSignInData);
-
+ 
   const handleSnackbarClose = () => {
     setShowSnackbar(false);
   };
@@ -273,7 +275,7 @@ function Header() {
               setTownDistrict(components.town || components.district || "");
               setState(components.state || "");
             }
-          } catch (error) { }
+          } catch (error) {}
         },
         (error) => {
           return;
@@ -287,6 +289,13 @@ function Header() {
   {
     /*code started by isha */
   }
+  const [temperature, setTemperature] = useState(null);
+  const circleRef = useRef(null);
+  
+
+  const radius = 90;
+  const circumference = Math.PI * radius;
+
   const [locationForWeather, setLocationForWeather] = useState({
     latitude: 17.385044,
     longitude: 78.486671,
@@ -296,6 +305,7 @@ function Header() {
   const API_KEY = "cdbf68f3afc557e674b97c9f52536ab6";
   const [weatherData, setWeatherData] = useState(null);
   const formattedWeatherData = Math.round(parseFloat(weatherData));
+  const formattedWeatherData1 = Math.round(parseFloat(temperature));
   useEffect(() => {
     if (locationForWeather.latitude && locationForWeather.longitude) {
       const fetchWeatherData = async () => {
@@ -308,6 +318,7 @@ function Header() {
           }
           const data = await response.json();
           setWeatherData((data?.main?.temp - 273.15).toFixed(2));
+          setTemperature((data?.main?.temp - 273.15).toFixed(2));
           setCityAccordingToLocation(data?.name);
         } catch (error) {
           setError(error.message);
@@ -341,14 +352,24 @@ function Header() {
       <div className="intial-profile1">{getInitials(fullName)}</div>
     </span>
   ) : (
-    <span>
-      <BiLogIn /> Signin
+    <span
+      className=""
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "5px",
+      
+      }}
+    >
+      {/* <BiLogIn /> */}
+      <BiUser size={20} color="black" style={{backgroundColor:"white",padding:"0.2rem",borderRadius:"50%"}} />
+      Signin
     </span>
   );
 
-
   const getInitial = (fullName) => {
-    return fullName ? fullName.charAt(0).toUpperCase() : '';
+    return fullName ? fullName.charAt(0).toUpperCase() : "";
   };
 
   // const formattedWeatherData = Math.round(parseFloat(weatherData));
@@ -378,7 +399,7 @@ function Header() {
 
             {/* <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between"> */}
 
-            <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between" >
+            <div className="mobile-menu-logo d-lg-none d-flex profile-data justify-content-between">
               {/* <span
                   className="profile align-items-centrer  d-flex flex-column "
                   onClick={() => setShowLeftSideOffcanvas(true)}
@@ -402,27 +423,26 @@ function Header() {
                   <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
                 )} */}
 
-              {
-                parsedSignInData ? (
-                  <span onClick={() => setShowLeftSideOffcanvas(true)}>
-                    <div className="intial-profile">
-                      {getInitial(fullName)}
-                    </div>
-                  </span>
-
-                ) : (
-                  <div className="h-100 w-100">
-                    <div className="d-flex flex-column" onClick={() => setShowLeftSideOffcanvas(true)}>
-                     
-                      <CgProfile className="profile-icon" style={{ width: "2.5rem", height: "1.4rem" }} />
-                      <span className="" style={{fontSize:"0.8rem"}}>Sign In</span>
-                    </div>
+              {parsedSignInData ? (
+                <span onClick={() => setShowLeftSideOffcanvas(true)}>
+                  <div className="intial-profile">{getInitial(fullName)}</div>
+                </span>
+              ) : (
+                <div className="h-100 w-100">
+                  <div
+                    className="d-flex flex-column"
+                    onClick={() => setShowLeftSideOffcanvas(true)}
+                  >
+                    <CgProfile
+                      className="profile-icon"
+                      style={{ width: "2.5rem", height: "1.4rem" }}
+                    />
+                    <span className="" style={{ fontSize: "0.8rem" }}>
+                      Sign In
+                    </span>
                   </div>
-
-                )
-              }
-
-
+                </div>
+              )}
             </div>
 
             {/* </div> */}
@@ -445,36 +465,79 @@ function Header() {
                 </div>
               </div>
             </div> */}
-            <div style={{ textAlign: 'center' }}>
+            {/* <div style={{ textAlign: "center" }}>
               <div
                 style={{
-                  position: 'relative',
-                  width: '55px',
-                  height: '33px',
-                  overflow: 'hidden',
-                  margin: '0 auto',
+                  position: "relative",
+                  width: "55px",
+                  height: "33px",
+                  overflow: "hidden",
+                  margin: "0 auto",
                 }}
               >
                 <div
                   style={{
-                    position: 'absolute',
-                    width: '40px',
-                    height: '40px',
-                    border: '3px solid white',
-                    borderRadius: '50%',
-                    borderBottom: 'none',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: '#fff',
-                    fontSize: '20px',
-                    fontWeight: 'bold',
+                    position: "absolute",
+                    width: "40px",
+                    height: "40px",
+                    border: "3px solid white",
+                    borderRadius: "50%",
+                    borderBottom: "none",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    color: "#fff",
+                    fontSize: "20px",
+                    fontWeight: "bold",
                   }}
                 >
                   {formattedWeatherData}
                 </div>
               </div>
-            </div>
+            </div> */}
+            <div className="regulator-container pt-2 ">
+                <svg
+                  width="70"
+                  height="40"
+                  viewBox="0 0 200 170"
+                  className="circular-slider pt-1"
+                  // onClick={handleSliderChange}
+                  
+                >
+                  <path
+                    d={`M 10,100 A ${radius},${radius} 0 0,1 190,100`}
+                    fill="transparent"
+                    //   stroke="#DDDDDD"
+                    stroke="white"
+                    strokeWidth="15"
+                  />
+                  <path
+                    ref={circleRef}
+                    d={`M 10,100 A ${radius},${radius} 0 0,1 190,100`}
+                    fill="transparent"
+                    //   stroke="#FF4B4B"
+                    strokeWidth="8"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={
+                      circumference - (temperature / 100) * circumference
+                    }
+                  />
+                  <circle
+                    cx={100 + radius * Math.cos((temperature / 100) * Math.PI)}
+                    cy={100 - radius * Math.sin((temperature / 100) * Math.PI)}
+                    r="10"
+                    fill="black"
+                    stroke="black"
+                    strokeWidth="2"
+                  />
+                </svg>
+                <div
+                  className="temperature-display"
+                  style={{ position: "absolute" ,top:"13px" ,fontSize:"10px"}}
+                >
+                  {formattedWeatherData}&deg;C
+                </div>
+              </div>
 
             {/* cart button */}
             {/* <Link to="/cart" className="px-2" style={{ color: "#000" }}> */}
@@ -510,7 +573,7 @@ function Header() {
               style={{
                 textDecoration: "none",
                 width: "35px",
-                height: "34px"
+                height: "34px",
               }}
             >
               <div className="bg-white p-1 rounded cart-head w-100 h-100  d-flex flex-column justify-content-center align-items-center">
@@ -527,7 +590,14 @@ function Header() {
                 <h6
                   className="   position-absolute text-center "
                   id="cartNo"
-                  style={{ width: "0.8rem", top: "0px", left: "13px", fontSize: "12px", backgroundColor: "orange", borderRadius: "50%" }}
+                  style={{
+                    width: "0.8rem",
+                    top: "0px",
+                    left: "13px",
+                    fontSize: "12px",
+                    backgroundColor: "orange",
+                    borderRadius: "50%",
+                  }}
                 >
                   {totalQuantity}
                 </h6>
@@ -540,6 +610,7 @@ function Header() {
               style={{ fontSize: "44px", paddingLeft: "5px", height: "35px" }}
             />
           </div>
+          
 
           <Navbar.Collapse id="responsive-navbar-nav ">
             <Nav className="me-auto  ">
@@ -554,7 +625,7 @@ function Header() {
                   marginLeft: "3px",
                   background: "#f2b057",
                 }}
-              // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
+                // style={{ border: "2.6px solid #d8dfab", borderRadius: "13px" }}
               >
                 <NavDropdown.Item
                   onClick={() => {
@@ -672,8 +743,8 @@ function Header() {
               {/* <Nav> */}
               <NavDropdown
                 title={login}
-              // id="collasible-nav-dropdown"
-              // className=" "
+                // id="collasible-nav-dropdown"
+                // className=" "
               >
                 {fullName && (
                   <>
@@ -764,7 +835,14 @@ function Header() {
                   <h6
                     className="  position-absolute text-center "
                     id="cartNo"
-                    style={{ width: "16px", top: "1px", left: "15px", fontSize: "14px", backgroundColor: "orange", borderRadius: "50%" }}
+                    style={{
+                      width: "16px",
+                      top: "1px",
+                      left: "15px",
+                      fontSize: "14px",
+                      backgroundColor: "orange",
+                      borderRadius: "50%",
+                    }}
                   >
                     {totalQuantity}
                   </h6>
@@ -781,32 +859,11 @@ function Header() {
                   <p style={{ fontSize: "10px" }}>{cityAccordingToLocation}</p>
                 </div>
               </div> */}
-              <div className="temp"  >
+              {/* <div className="temp"  >
                 <div className="inr-temp"
-                // style={{
-                //   position: "relative",
-                //   width: "55px",
-                //   height: "40px",
-                //   overflow: "hidden",
-                //   margin: "0 auto", // Center the half-circle
-                //   // marginBottom: '1rem', // Adjust spacing as needed
-                // }}
+                
                 >
                   <div className="temp-add"
-                  // style={{
-                  //   position: "absolute",
-                  //   width: "50px",
-                  //   height: "45px",
-                  //   border: "3px solid white",
-                  //   borderRadius: "50%",
-                  //   borderBottom: "none",
-                  //   display: "flex",
-                  //   justifyContent: "center",
-                  //   alignItems: "center",
-                  //   color: "#fff",
-                  //   fontSize: "15px",
-                  //   fontWeight: "bold",
-                  // }}
                   >
                     {formattedWeatherData}&deg;C
                   </div>
@@ -814,10 +871,51 @@ function Header() {
                     <p style={{ fontSize: "10px", position: "relative", top: "29px", zIndex: "2000", left: "-2px" }}>{cityAccordingToLocation}</p>
                   </div>
                 </div>
-                {/* <div style={{ fontSize: '10px' }}>
-                {cityAccordingToLocation}
+                
               </div> */}
+              <div className="regulator-container">
+                <svg
+                  width="70"
+                  height="50"
+                  viewBox="0 0 200 150"
+                  className="circular-slider"
+                  // onClick={handleSliderChange}
+                >
+                  <path
+                    d={`M 10,100 A ${radius},${radius} 0 0,1 190,100`}
+                    fill="transparent"
+                    //   stroke="#DDDDDD"
+                    stroke="white"
+                    strokeWidth="15"
+                  />
+                  <path
+                    ref={circleRef}
+                    d={`M 10,100 A ${radius},${radius} 0 0,1 190,100`}
+                    fill="transparent"
+                    //   stroke="#FF4B4B"
+                    strokeWidth="8"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={
+                      circumference - (temperature / 100) * circumference
+                    }
+                  />
+                  <circle
+                    cx={100 + radius * Math.cos((temperature / 100) * Math.PI)}
+                    cy={100 - radius * Math.sin((temperature / 100) * Math.PI)}
+                    r="10"
+                    fill="black"
+                    stroke="black"
+                    strokeWidth="2"
+                  />
+                </svg>
+                <div
+                  className="temperature-display"
+                  style={{ position: "absolute" ,top:"4px" ,fontSize:"15px"}}
+                >
+                  {formattedWeatherData}&deg;C
+                </div>
               </div>
+              {/* <TemperatureRegulator/> */}
             </div>
           </Navbar.Collapse>
         </Container>
@@ -937,7 +1035,7 @@ function Header() {
               width={100}
               // code start by ganesh
               height={30}
-            // code end by ganesh
+              // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -1193,7 +1291,7 @@ function Header() {
               width={100}
               // code start by ganesh
               height={30}
-            // code end by ganesh
+              // code end by ganesh
             />
           </Offcanvas.Title>
         </Offcanvas.Header>
