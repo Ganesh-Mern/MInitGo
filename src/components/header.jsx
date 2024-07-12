@@ -423,7 +423,7 @@ function Header() {
                   <span style={{ fontSize: "13px", marginLeft: '1px' }}>{fullName.length > 10 ? fullName.substring(0, 12) + '...' : fullName}</span>
                 )} */}
 
-              {parsedSignInData ? (
+              {/* {parsedSignInData ? (
                 <span onClick={() => setShowLeftSideOffcanvas(true)}>
                   <div className="intial-profile">{getInitial(fullName)}</div>
                 </span>
@@ -442,7 +442,32 @@ function Header() {
                     </span>
                   </div>
                 </div>
-              )}
+              )} */}
+                 {
+                parsedSignInData ? (
+                  <span onClick={() => setShowLeftSideOffcanvas(true)}>
+                    <div className="intial-profile">
+                      {getInitial(fullName)}
+                    </div>
+                  </span>
+
+                ) : (
+                  <div className="h-100 w-100">
+                    <div className="d-flex justify-content-center align-items-center" onClick={() => setShowLeftSideOffcanvas(true)}>
+                      <div className="user-profile">
+
+                        {/* <img className="img-fluid mb-1 p-1" src={User} alt="user" style={{ width: "28px" }} /> */}
+                        <i className="bi bi-person p-1" style={{fontSize:"22px"}}></i>
+                      </div>
+
+
+                      <span className="mt-1" style={{ fontSize: "0.8rem",paddingLeft:"4px" }}>Sign In</span>
+                    </div>
+                  </div>
+
+                )
+              }
+
             </div>
 
             {/* </div> */}
