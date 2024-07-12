@@ -71,11 +71,7 @@ function SignUp() {
     });
   }
 
-  function generateOTP() {
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    console.log("GENERATED OTP:", otp);
-    return otp.toString();
-  }
+ 
 
   function handleSendOTPAgain() {
     setSendOTPagain(true);
@@ -242,6 +238,18 @@ function SignUp() {
         });
     }
   }
+  //generating the otp
+
+  function generateOTP() {
+    
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    console.log("GENERATED OTP:", otp);
+   
+
+    return otp.toString();
+  }
+
+
   const handleUseCurrentLocation = () => {
     setButtonText("Fetching current location...");
     if (navigator.geolocation) {

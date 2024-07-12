@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Emailcheck from "./components/Emailcheck.jsx";
 import Mystate from "./components/context/MyState.jsx";
 // import LoadingSpinner from "./components/LoadingSpinner";
 import './App.css';
@@ -107,6 +108,7 @@ const App = () => {
           <Route exact path="*" element={<Notfound />} />
           <Route exact path="/cdashboard" element={<Clientdashboard />} />
           <Route exact path="/increase" element={<BecomePartner />} />
+          <Route exact path="/email" element={<Emailcheck />} />
           
         </Routes>
       </Suspense>
