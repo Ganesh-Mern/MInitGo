@@ -591,6 +591,7 @@ function Header() {
                   className="   position-absolute text-center "
                   id="cartNo"
                   style={{
+                    color:"black",
                     width: "0.8rem",
                     top: "0px",
                     left: "13px",

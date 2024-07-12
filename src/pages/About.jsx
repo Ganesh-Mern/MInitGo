@@ -9,15 +9,7 @@ function About() {
 
     return (
       <>
-        <div className='bg-dark bg-gradient text-light'>
-        
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        <div className='bg-dark bg-gradient text-light pt-3'>
     <div className="container">
         <div className="row">
             <div className="col-4">

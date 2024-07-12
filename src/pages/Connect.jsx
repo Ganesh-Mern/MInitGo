@@ -6,8 +6,8 @@ function Connect() {
   }, []);
 
   return (
-    <div className="d-flex flex-column justify-content-between py-5">
-      <main className=" d-flex justify-content-center w-100 pt-5">
+    <div className="d-flex flex-column justify-content-between py-3">
+      <main className=" d-flex justify-content-center w-100">
         <div
           className="  d-flex flex-column justify-content-between px-2"
           style={{ width: "700px" }}
